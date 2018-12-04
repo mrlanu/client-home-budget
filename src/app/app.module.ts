@@ -9,12 +9,16 @@ import {OperationsComponent} from './operations/operations.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ExpenseComponent } from './operations/expense/expense.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HeaderComponent} from './navigation/header/header.component';
+import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OperationsComponent,
-    ExpenseComponent
+    ExpenseComponent,
+    HeaderComponent,
+    SidenavListComponent
   ],
   imports: [
     MaterialModule,
