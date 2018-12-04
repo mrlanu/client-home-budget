@@ -11,6 +11,7 @@ import { ExpenseComponent } from './operations/expense/expense.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './navigation/header/header.component';
 import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.compo
     OperationsComponent,
     ExpenseComponent,
     HeaderComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    DashboardComponent
   ],
   imports: [
     MaterialModule,
