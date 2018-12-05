@@ -18,6 +18,8 @@ import {HttpPortalService} from './http-portal.service';
 import {SignupComponent} from './auth/signup/signup.component';
 import {LoginComponent} from './auth/login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import {UiService} from './shared/ui.service';
+import {AuthService} from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [HttpPortalService],
+  providers: [HttpPortalService, UiService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

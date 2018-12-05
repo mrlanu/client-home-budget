@@ -6,7 +6,6 @@
 
   <mat-sidenav-content>
     <app-header (sidenavToggle)="sidenav.toggle()" *ngIf="!isStart"></app-header>
-    <div style="height: 50px" *ngIf="!isStart"></div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 

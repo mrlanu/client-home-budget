@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../auth.service';
+import {UiService} from '../../shared/ui.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   dynamicOpacity = 0;
 
-  constructor() { }
+  constructor(private authService: AuthService, private uiService: UiService) { }
 
   transition(counter: number) {
     if (counter < 10) {
@@ -29,17 +31,17 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isLoading = true;
-    /*this.authService.registerUser({
+    this.authService.registerUser({
       username: this.signUpForm.value.username,
       password: this.signUpForm.value.password
-    });*/
+    });
   }
 
   ngOnInit() {
     this.transition(0);
-   /* this.componentSubs.push(this.uiService.isLoadingChanged.subscribe(result => {
+    this.componentSubs.push(this.uiService.isLoadingChanged.subscribe(result => {
       this.isLoading = result;
-    }));*/
+    }));
     this.signUpForm = new FormGroup({
       'username': new FormControl('', {validators: [Validators.required]}),
       'password': new FormControl('', {validators: [Validators.required]})

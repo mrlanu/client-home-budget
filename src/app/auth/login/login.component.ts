@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AuthService} from '../auth.service';
+import {UiService} from '../../shared/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +17,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
   dynamicOpacity = 0;
 
-  constructor() { }
+  constructor(private authService: AuthService, private uiService: UiService) { }
 
   ngOnInit() {
     this.transition(0);
-    /*this.componentSubs.push(this.uiService.isLoadingChanged
+    this.componentSubs.push(this.uiService.isLoadingChanged
       .subscribe(result => {
         this.isLoading = result;
-      }));*/
+      }));
     this.loginForm = new FormGroup({
       username: new FormControl('mrlanu',
         {validators: [Validators.required]}),
@@ -47,10 +49,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isLoading = true;
-   /* this.authService.login({
+    this.authService.login({
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
-    });*/
+    });
   }
 
   ngOnDestroy() {
