@@ -1,0 +1,47 @@
+<div class="formBack" [ngStyle]="{opacity: dynamicOpacity}">
+    <form fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="15px"
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()">
+
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Your username"
+          name="username"
+          required
+          formControlName="username">
+        <mat-hint>Please enter a username.</mat-hint>
+        <mat-error>Invalid or missing username.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="password"
+          matInput
+          placeholder="Your password"
+          name="password"
+          formControlName="password">
+        <mat-hint>Please enter your password.</mat-hint>
+        <mat-error>Missing password.</mat-error>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutGap="150px">
+        <div fxLayout="row" fxLayoutAlign="start" *ngIf="!isLoading">
+          <a style="margin-top: 15px; cursor:pointer;" (click)="onRegister()">Register</a>
+        </div>
+        <div *ngIf="!isLoading">
+          <button
+            *ngIf="!isLoading"
+            type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="loginForm.invalid">Login</button>
+        </div>
+        <div *ngIf="isLoading" style="padding-top: 10px">
+          <mat-spinner [diameter]="26"></mat-spinner>
+        </div>
+      </div>
+    </form>
+</div>

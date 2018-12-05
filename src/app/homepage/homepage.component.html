@@ -1,0 +1,8 @@
+<div class="background">
+  <div>Home Budget by Lanu<span>©</span></div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div style="height: 200px"></div>
+    <app-login *ngIf="isLogin" (clickRegister)="isLogin = false"></app-login>
+    <app-signup *ngIf="!isLogin" (clickLogin)="isLogin = true"></app-signup>
+  </div>
+</div>

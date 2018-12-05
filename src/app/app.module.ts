@@ -13,6 +13,11 @@ import {HeaderComponent} from './navigation/header/header.component';
 import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpPortalService} from './http-portal.service';
+import {SignupComponent} from './auth/signup/signup.component';
+import {LoginComponent} from './auth/login/login.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import { TransactionsListComponent } from './transactions-list/transactions-list
     HeaderComponent,
     SidenavListComponent,
     DashboardComponent,
-    TransactionsListComponent
+    TransactionsListComponent,
+    SignupComponent,
+    LoginComponent,
+    HomepageComponent
   ],
   imports: [
     MaterialModule,
@@ -30,9 +38,10 @@ import { TransactionsListComponent } from './transactions-list/transactions-list
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpPortalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
