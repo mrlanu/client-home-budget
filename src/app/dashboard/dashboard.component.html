@@ -1,5 +1,10 @@
 <div class="helper" style="height: 50px"></div>
-<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
-  <app-operations></app-operations>
-  <app-operations></app-operations>
+<div fxLayout="column" fxLayoutGap="50px">
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+    <app-operations></app-operations>
+    <app-operations></app-operations>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <app-transactions-list></app-transactions-list>
+  </div>
 </div>

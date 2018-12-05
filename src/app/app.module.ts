@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './navigation/header/header.component';
 import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ExpenseComponent,
     HeaderComponent,
     SidenavListComponent,
-    DashboardComponent
+    DashboardComponent,
+    TransactionsListComponent
   ],
   imports: [
     MaterialModule,
