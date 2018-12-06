@@ -13,13 +13,14 @@ import {HeaderComponent} from './navigation/header/header.component';
 import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpPortalService} from './http-portal.service';
 import {SignupComponent} from './auth/signup/signup.component';
 import {LoginComponent} from './auth/login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import {UiService} from './shared/ui.service';
 import {AuthService} from './auth/auth.service';
+import {AuthInterceptor} from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,11 @@ import {AuthService} from './auth/auth.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [HttpPortalService, UiService, AuthService],
+  providers: [
+    HttpPortalService, UiService,
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

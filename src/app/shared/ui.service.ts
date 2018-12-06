@@ -9,6 +9,7 @@ export class UiService {
 
   isHomePageChange = new Subject<boolean>();
   isLoadingChanged = new Subject<boolean>();
+  isLoginChanged = new Subject<boolean>();
 
   openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {

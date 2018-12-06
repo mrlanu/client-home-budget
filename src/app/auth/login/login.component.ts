@@ -11,7 +11,6 @@ import {UiService} from '../../shared/ui.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  @Output() clickRegister = new EventEmitter<void>();
   loginForm: FormGroup;
   isLoading = false;
   componentSubs: Subscription[] = [];
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onRegister() {
-    this.clickRegister.emit();
+    this.uiService.isLoginChanged.next(false);
   }
 
   onSubmit() {

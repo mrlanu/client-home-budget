@@ -11,7 +11,6 @@ import {UiService} from '../../shared/ui.service';
 })
 export class SignupComponent implements OnInit, OnDestroy {
 
-  @Output() clickLogin = new EventEmitter<void>();
   signUpForm: FormGroup;
   componentSubs: Subscription[] = [];
   isLoading = false;
@@ -49,7 +48,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onLogin() {
-    this.clickLogin.emit();
+    this.uiService.isLoginChanged.next(true);
   }
 
   ngOnDestroy() {

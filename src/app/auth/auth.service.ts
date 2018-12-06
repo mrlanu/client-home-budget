@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './user.model';
 import {AuthData} from './auth-data.model';
-import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {UiService} from '../shared/ui.service';
@@ -15,7 +14,6 @@ export class AuthService {
               private uiService: UiService) {}
 
   private user: User;
-  authChange = new Subject<boolean>();
   baseUrl = environment.baseUrl;
   private isAuthenticated = false;
 
@@ -30,7 +28,7 @@ export class AuthService {
     this.httpClient.post(this.baseUrl + '/signup', authData).subscribe(user => {
       this.uiService.isLoadingChanged.next(false);
       this.uiService.openSnackBar('Register successfully, please Login', null, 5000);
-      /*this.router.navigate(['/login']);*/
+      this.uiService.isLoginChanged.next(true);
     }, err => {
       this.uiService.openSnackBar(err.error.message, null, 5000);
       this.uiService.isLoadingChanged.next(false);
@@ -45,8 +43,8 @@ export class AuthService {
     this.user = null;
     this.isAuthenticated = false;
     localStorage.clear();
-    this.authChange.next(false);
-    this.router.navigate(['/login']);
+    this.uiService.isHomePageChange.next(true);
+    this.router.navigate(['/']);
   }
 
   isAuth() {
@@ -54,10 +52,10 @@ export class AuthService {
   }
 
   authSuccessfully() {
-    this.authChange.next(true);
     this.uiService.isLoadingChanged.next(false);
     this.isAuthenticated = true;
-    this.router.navigate(['/freights']);
+    this.uiService.isHomePageChange.next(false);
+    this.router.navigate(['/dashboard']);
   }
 
   getToken(authData: AuthData) {
@@ -83,5 +81,9 @@ export class AuthService {
         this.uiService.openSnackBar('Invalid username or password', null, 5000);
         this.uiService.isLoadingChanged.next(false);
       });
+  }
+
+  getLoggedInUser() {
+    return this.httpClient.get(this.baseUrl + '/user');
   }
 }
