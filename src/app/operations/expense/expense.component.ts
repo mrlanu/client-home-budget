@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {HttpService} from '../../http.service';
+import {Subscription} from 'rxjs';
+import {Account} from '../../models/account.model';
 
 @Component({
   selector: 'app-expense',
@@ -8,11 +11,12 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class ExpenseComponent implements OnInit {
 
+  componentSubs: Subscription[] = [];
   expenseForm: FormGroup;
   categories: string[] = ['first', 'second'];
-  accounts: string[] = ['first', 'second'];
+  accounts: Account[] = [];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
     this.initForm();
@@ -23,9 +27,25 @@ export class ExpenseComponent implements OnInit {
       date: new FormControl(new Date()),
       account: new FormControl(),
       category: new FormControl(),
+      type: new FormControl('EXPENSE'),
       description: new FormControl(),
       amount: new FormControl(0)
     });
+    this.componentSubs.push(this.httpService.getAllAccounts()
+      .subscribe((accounts: Account[]) => {
+        this.accounts = accounts;
+      }));
   }
 
+  onSubmit() {
+    const acc = this.accounts.find(account => {
+      return account.name === this.expenseForm.value.account;
+    });
+    this.expenseForm.patchValue({account: acc});
+    this.componentSubs.push(this.httpService.storeTransaction(this.expenseForm.value)
+      .subscribe(transaction => {
+        this.expenseForm.reset({'date': new Date()});
+        this.httpService.getAllTransactions();
+      }));
+  }
 }

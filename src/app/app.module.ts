@@ -21,6 +21,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import {UiService} from './shared/ui.service';
 import {AuthService} from './auth/auth.service';
 import {AuthInterceptor} from './auth/auth.interceptor';
+import {HttpService} from './http.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {AuthInterceptor} from './auth/auth.interceptor';
   providers: [
     HttpPortalService, UiService,
     AuthService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    HttpService
     ],
   bootstrap: [AppComponent]
 })

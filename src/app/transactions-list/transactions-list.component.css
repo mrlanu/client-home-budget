@@ -10,3 +10,7 @@ table {
   width: 1010px;
   margin: 1rem auto;
 }
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
