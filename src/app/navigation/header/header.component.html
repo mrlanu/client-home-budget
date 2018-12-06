@@ -1,16 +1,13 @@
 <div style="height: 50px">
   <mat-toolbar color="primary" class="my-toolbar">
     <div>
-      <button *ngIf="isAuth" mat-icon-button (click)="onSidenavToggle()">
+      <button mat-icon-button (click)="onSidenavToggle()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
     <div>Hello, {{ loggedInUserName | async }}</div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end">
       <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-        <li *ngIf="isAuth"><a style="cursor: pointer" (click)="onTasksEmployee()">
-          <span [matBadge]="myTasksCount" matBadgeColor="warn" [matBadgeHidden]="myTasksCount === 0">Tasks</span>
-        </a></li>
         <li><a style="cursor: pointer" (click)="onLogOut()">Logout</a></li>
       </ul>
     </div>
