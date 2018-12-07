@@ -18,6 +18,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
   expenseForm: FormGroup;
   categories: Category[] = [];
+  selectedCategoryId: number;
   subcategories: Subcategory[] = [];
   accounts: Account[] = [];
 
@@ -26,6 +27,20 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initForm();
+    this.componentSubs.push(this.httpService.getAllAccounts()
+      .subscribe((accounts: Account[]) => {
+        this.accounts = accounts;
+      }));
+    this.componentSubs.push(this.httpService.categoryChange
+      .subscribe((categories: Category[]) => {
+        this.categories = categories;
+      }));
+    this.componentSubs.push(this.httpService.subcategoryChange
+      .subscribe((subcategories: Subcategory[]) => {
+        this.subcategories = subcategories;
+      }));
+    this.httpService.getAllCategories();
+    this.httpService.getAllSubcategoriesByCategoryId(this.selectedCategoryId);
   }
 
   initForm() {
@@ -38,19 +53,12 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       category: new FormControl(),
       subCategory: new FormControl()
     });
-    this.componentSubs.push(this.httpService.getAllAccounts()
-      .subscribe((accounts: Account[]) => {
-        this.accounts = accounts;
-      }));
-    this.componentSubs.push(this.httpService.getAllCategories()
-      .subscribe((categories: Category[]) => {
-        this.categories = categories;
-      }));
   }
 
   onSelectCategory(categoryId) {
     // check if button hasn't been clicked
     if (categoryId) {
+      this.selectedCategoryId = categoryId;
       this.componentSubs.push(this.httpService.getAllSubcategoriesByCategoryId(categoryId)
         .subscribe((subcategories: Subcategory[]) => {
           this.subcategories = subcategories;
@@ -64,14 +72,21 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed()
       .subscribe(category => {
-        /*if (result) {
-          this.freight = result;
-          this.freightService.storeEditedFreight(this.freight)
-            .subscribe(res => {},
-              err => {
-                console.log(err);
-              });
-        }*/
+        if (category) {
+          this.httpService.createCategory(category);
+        }
+      });
+  }
+
+  onAddSubcategory() {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(subcategory => {
+        if (subcategory) {
+          this.httpService.createSubcategory(this.selectedCategoryId, subcategory);
+        }
       });
   }
 
