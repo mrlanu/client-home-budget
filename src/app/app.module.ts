@@ -22,6 +22,7 @@ import {UiService} from './shared/ui.service';
 import {AuthService} from './auth/auth.service';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {HttpService} from './http.service';
+import { CategoryDialogComponent } from './operations/category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {HttpService} from './http.service';
     TransactionsListComponent,
     SignupComponent,
     LoginComponent,
-    HomepageComponent
+    HomepageComponent,
+    CategoryDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -51,6 +53,7 @@ import {HttpService} from './http.service';
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     HttpService
     ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CategoryDialogComponent]
 })
 export class AppModule { }

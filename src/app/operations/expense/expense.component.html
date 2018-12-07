@@ -12,6 +12,11 @@
         <mat-option *ngFor="let category of categories" [value]="category.id">
           {{ category.name }}
         </mat-option>
+        <mat-option>
+          <div fxLayout="row" fxLayoutAlign="center" (click)="onAddCategory()">
+            <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
+          </div>
+        </mat-option>
       </mat-select>
     </mat-form-field>
 

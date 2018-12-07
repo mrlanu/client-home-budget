@@ -5,6 +5,8 @@ import {Subscription} from 'rxjs';
 import {Account} from '../../models/account.model';
 import {Category} from '../../models/category.model';
 import {Subcategory} from '../../models/subcategory.model';
+import {MatDialog} from '@angular/material';
+import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
 
 @Component({
   selector: 'app-expense',
@@ -19,7 +21,8 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   subcategories: Subcategory[] = [];
   accounts: Account[] = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.initForm();
@@ -46,10 +49,30 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   }
 
   onSelectCategory(categoryId) {
-    this.componentSubs.push(this.httpService.getAllSubcategoriesByCategoryId(categoryId)
-      .subscribe((subcategories: Subcategory[]) => {
-        this.subcategories = subcategories;
-      }));
+    // check if button hasn't been clicked
+    if (categoryId) {
+      this.componentSubs.push(this.httpService.getAllSubcategoriesByCategoryId(categoryId)
+        .subscribe((subcategories: Subcategory[]) => {
+          this.subcategories = subcategories;
+        }));
+    }
+  }
+
+  onAddCategory() {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(category => {
+        /*if (result) {
+          this.freight = result;
+          this.freightService.storeEditedFreight(this.freight)
+            .subscribe(res => {},
+              err => {
+                console.log(err);
+              });
+        }*/
+      });
   }
 
   onSubmit() {
