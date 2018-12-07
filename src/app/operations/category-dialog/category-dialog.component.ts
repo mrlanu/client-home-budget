@@ -10,11 +10,18 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class CategoryDialogComponent implements OnInit {
 
   categoryForm: FormGroup;
+  placeholder: string;
 
   constructor(public dialogRef: MatDialogRef<CategoryDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public passedData: any) { }
 
   ngOnInit() {
+    if (this.passedData === 'category') {
+      this.placeholder = 'New Category';
+    }
+    if (this.passedData === 'subcategory') {
+      this.placeholder = 'New Subcategory';
+    }
     this.categoryForm = new FormGroup({
       'name': new FormControl('', Validators.required)
     });

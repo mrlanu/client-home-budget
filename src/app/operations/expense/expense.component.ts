@@ -68,7 +68,8 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   onAddCategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      width: '400px'
+      width: '400px',
+      data: 'category'
     });
     dialogRef.afterClosed()
       .subscribe(category => {
@@ -80,12 +81,26 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   onAddSubcategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      width: '400px'
+      width: '400px',
+      data: 'subcategory'
     });
     dialogRef.afterClosed()
       .subscribe(subcategory => {
         if (subcategory) {
           this.httpService.createSubcategory(this.selectedCategoryId, subcategory);
+        }
+      });
+  }
+
+  onAddAccount() {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: 'account'
+    });
+    dialogRef.afterClosed()
+      .subscribe(account => {
+        if (account) {
+          this.httpService.createAccount(account);
         }
       });
   }
