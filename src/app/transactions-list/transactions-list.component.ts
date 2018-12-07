@@ -3,7 +3,6 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Transaction} from '../models/transaction.model';
 import {Subscription} from 'rxjs';
 import {HttpService} from '../http.service';
-import {transition} from '@angular/animations';
 
 @Component({
   selector: 'app-transactions-list',
@@ -11,7 +10,7 @@ import {transition} from '@angular/animations';
   styleUrls: ['./transactions-list.component.css']
 })
 export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ['date', 'account', 'amount'];
+  displayedColumns: string[] = ['date', 'category', 'account', 'description', 'amount'];
   dataSource = new MatTableDataSource<Transaction>();
   total = 0;
 
@@ -33,10 +32,6 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-  }
-
-  doFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   applyFilter(filterValue: string) {

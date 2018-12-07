@@ -24,6 +24,16 @@ export class HttpService {
     return this.httpClient.get(url);
   }
 
+  getAllCategories() {
+    const url = this.baseUrl + '/categories';
+    return this.httpClient.get(url);
+  }
+
+  getAllSubcategoriesByCategoryId(categoryId: number) {
+    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
+    return this.httpClient.get(url);
+  }
+
   storeTransaction(transaction: Transaction) {
     const url = this.baseUrl + '/transactions';
     return this.httpClient.post(url, transaction);

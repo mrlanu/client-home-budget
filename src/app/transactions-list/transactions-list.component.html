@@ -1,6 +1,6 @@
 <div class="container">
   <mat-form-field style="margin-left: 50px">
-    <input matInput (keyup)="doFilter($event.target.value)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
   <div>
@@ -10,7 +10,14 @@
       <ng-container matColumnDef="account">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Account </th>
         <td mat-cell *matCellDef="let row"> {{row.account.name}} </td>
-        <td mat-footer-cell *matFooterCellDef> Total </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Category Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td mat-cell *matCellDef="let row"> {{row.category.name}} / {{row.subCategory?.name}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <!-- Amount Column -->
@@ -18,6 +25,13 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
         <td mat-cell *matCellDef="let row"> {{row.amount | currency}} </td>
         <td mat-footer-cell *matFooterCellDef> {{total | currency}} </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        <td mat-footer-cell *matFooterCellDef> Total </td>
       </ng-container>
 
       <!-- Date Column -->
