@@ -23,6 +23,7 @@ import {AuthService} from './auth/auth.service';
 import {AuthInterceptor} from './auth/auth.interceptor';
 import {HttpService} from './http.service';
 import { CategoryDialogComponent } from './operations/category-dialog/category-dialog.component';
+import { LanuMonthPaginatorComponent } from './shared/lanu-month-paginator/lanu-month-paginator.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CategoryDialogComponent } from './operations/category-dialog/category-d
     SignupComponent,
     LoginComponent,
     HomepageComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    LanuMonthPaginatorComponent
   ],
   imports: [
     MaterialModule,

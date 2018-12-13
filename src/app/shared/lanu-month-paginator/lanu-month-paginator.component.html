@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+  <button mat-icon-button color="primary" (click)="onMonthChange('back')">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <p class="mat-body" style="width: 75px;">
+    {{ viewDate }}
+  </p>
+  <button mat-icon-button color="primary" (click)="onMonthChange('forward')" [disabled]="isCurrentMonth">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </button>
+</div>
