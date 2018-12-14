@@ -27,7 +27,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initForm();
-    this.componentSubs.push(this.httpService.getAllAccounts()
+    this.componentSubs.push(this.httpService.accountsChange
       .subscribe((accounts: Account[]) => {
         this.accounts = accounts;
       }));
@@ -40,7 +40,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
         this.subcategories = subcategories;
       }));
     this.httpService.getAllCategories();
-    this.httpService.getAllSubcategoriesByCategoryId(this.selectedCategoryId);
+    this.httpService.getAllAccounts();
   }
 
   initForm() {
@@ -55,17 +55,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSelectCategory(categoryId) {
-    // check if button hasn't been clicked
-    if (categoryId) {
-      this.selectedCategoryId = categoryId;
-      this.componentSubs.push(this.httpService.getAllSubcategoriesByCategoryId(categoryId)
-        .subscribe((subcategories: Subcategory[]) => {
-          this.subcategories = subcategories;
-        }));
-    }
-  }
-
   onAddCategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       width: '400px',
@@ -74,7 +63,12 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .subscribe(category => {
         if (category) {
-          this.httpService.createCategory(category);
+          this.componentSubs.push(this.httpService.createCategory(category)
+            .subscribe((newCategory: Category) => {
+              this.httpService.getAllCategories();
+              this.expenseForm.patchValue({'category': newCategory.id});
+              this.onSelectCategory(newCategory.id);
+            }));
         }
       });
   }
@@ -87,9 +81,21 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .subscribe(subcategory => {
         if (subcategory) {
-          this.httpService.createSubcategory(this.selectedCategoryId, subcategory);
+          this.componentSubs.push(this.httpService.createSubcategory(this.selectedCategoryId, subcategory)
+            .subscribe((newSubcategory: Subcategory) => {
+              this.httpService.getAllSubcategories(this.selectedCategoryId);
+              this.expenseForm.patchValue({'subCategory': newSubcategory.id});
+            }));
         }
       });
+  }
+
+  onSelectCategory(categoryId) {
+    // check if button hasn't been clicked
+    if (categoryId) {
+      this.selectedCategoryId = categoryId;
+      this.httpService.getAllSubcategories(categoryId);
+    }
   }
 
   onAddAccount() {
@@ -116,7 +122,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       return subcategory.id === this.expenseForm.value.subCategory;
     });
     this.expenseForm.patchValue({account: acc, category: cat, subCategory: subcat});
-    this.componentSubs.push(this.httpService.storeTransaction(this.expenseForm.value)
+    this.componentSubs.push(this.httpService.createTransaction(this.expenseForm.value)
       .subscribe(transaction => {
         this.httpService.getAllTransactions();
         this.httpService.getSummaryByCategories(this.expenseForm.value.date, 'EXPENSE');

@@ -6,18 +6,35 @@ import {Subject} from 'rxjs';
 import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
 import {Group} from './models/group.model';
+import {Account} from './models/account.model';
 
 @Injectable()
 export class HttpService {
 
+  transactionsChange = new Subject<Transaction[]>();
+  accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
 
   baseUrl = environment.baseUrl;
-  transactionsChange = new Subject<Transaction[]>();
   groupsChange = new Subject<Group[]>();
 
   constructor(private httpClient: HttpClient) {}
+
+  createTransaction(transaction: Transaction) {
+    const url = this.baseUrl + '/transactions';
+    return this.httpClient.post(url, transaction);
+  }
+
+  createCategory(category: Category) {
+    const url = this.baseUrl + '/categories';
+    return this.httpClient.post(url, category);
+  }
+
+  createSubcategory(categoryId: number, subcategory: Subcategory) {
+    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
+    return this.httpClient.post(url, subcategory);
+  }
 
   getAllTransactions() {
     const url = this.baseUrl + '/transactions';
@@ -28,23 +45,9 @@ export class HttpService {
 
   getAllAccounts() {
     const url = this.baseUrl + '/accounts';
-    return this.httpClient.get(url);
-  }
-
-  createCategory(category: Category) {
-    const url = this.baseUrl + '/categories';
-    this.httpClient.post(url, category)
-      .subscribe(newCategory => {
-        this.getAllCategories();
+    this.httpClient.get(url).subscribe((accounts: Account[]) => {
+      this.accountsChange.next(accounts);
     });
-  }
-
-  createSubcategory(categoryId: number, subcategory: Subcategory) {
-    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
-    this.httpClient.post(url, subcategory)
-      .subscribe(newSubcategory => {
-        this.getAllSubcategories(categoryId);
-      });
   }
 
   getAllCategories() {
@@ -61,16 +64,6 @@ export class HttpService {
       .subscribe((subcategories: Subcategory[]) => {
         this.subcategoryChange.next(subcategories);
       });
-  }
-
-  getAllSubcategoriesByCategoryId(categoryId: number) {
-    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
-    return this.httpClient.get(url);
-  }
-
-  storeTransaction(transaction: Transaction) {
-    const url = this.baseUrl + '/transactions';
-    return this.httpClient.post(url, transaction);
   }
 
   getSummaryByCategories(date: Date, type: string) {
