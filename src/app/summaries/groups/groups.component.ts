@@ -23,10 +23,12 @@ export class GroupsComponent implements OnInit, OnDestroy {
         this.groups = groups;
         this.totalSpent = 0;
         this.groups.forEach(group => {
-          this.totalSpent += group.spent;
+          group.groupSubcategoryList.forEach(subGroup => {
+            this.totalSpent += subGroup.spent;
+          });
         });
       }));
-    this.httpService.getSummaryByCategories(new Date(), this.typeOfTransactions);
+     this.httpService.getSummaryByCategories(new Date(), this.typeOfTransactions);
   }
 
   onMonthChange(date: Date) {

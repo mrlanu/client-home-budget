@@ -15,9 +15,9 @@ export class HttpService {
   accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
+  groupsChange = new Subject<Group[]>();
 
   baseUrl = environment.baseUrl;
-  groupsChange = new Subject<Group[]>();
 
   constructor(private httpClient: HttpClient) {}
 

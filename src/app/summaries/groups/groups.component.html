@@ -11,12 +11,12 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item *ngFor="let group of groups"
+          <a mat-list-item *ngFor="let subGroup of group.groupSubcategoryList"
              routerLink="/freights"
              (click)="onClose()">
             <div fxFlex fxLayout fxLayoutAlign="space-between">
-              <div style="margin-left: 15px">{{ group.name }}</div>
-              <div>{{ group.spent | currency }}</div>
+              <div style="margin-left: 15px">{{ subGroup.name }}</div>
+              <div>{{ subGroup.spent | currency }}</div>
             </div>
           </a>
         </mat-nav-list>
