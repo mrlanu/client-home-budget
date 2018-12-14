@@ -5,6 +5,7 @@ import {Transaction} from './models/transaction.model';
 import {Subject} from 'rxjs';
 import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
+import {Group} from './models/group.model';
 
 @Injectable()
 export class HttpService {
@@ -14,6 +15,7 @@ export class HttpService {
 
   baseUrl = environment.baseUrl;
   transactionsChange = new Subject<Transaction[]>();
+  groupsChange = new Subject<Group[]>();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -74,6 +76,8 @@ export class HttpService {
   getSummaryByCategories(date: Date, type: string) {
     const url = this.baseUrl + '/summaries';
     const params = new HttpParams().set('date', date.toDateString()).set('type', type);
-    return this.httpClient.get(url, { params });
+    this.httpClient.get(url, { params }).subscribe((groups: Group[]) => {
+      this.groupsChange.next(groups);
+    });
   }
 }

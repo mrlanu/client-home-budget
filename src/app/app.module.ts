@@ -25,6 +25,7 @@ import {HttpService} from './http.service';
 import { CategoryDialogComponent } from './operations/category-dialog/category-dialog.component';
 import { LanuMonthPaginatorComponent } from './shared/lanu-month-paginator/lanu-month-paginator.component';
 import { GroupsComponent } from './summaries/groups/groups.component';
+import { SummariesComponent } from './summaries/summaries.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GroupsComponent } from './summaries/groups/groups.component';
     HomepageComponent,
     CategoryDialogComponent,
     LanuMonthPaginatorComponent,
-    GroupsComponent
+    GroupsComponent,
+    SummariesComponent
   ],
   imports: [
     MaterialModule,
