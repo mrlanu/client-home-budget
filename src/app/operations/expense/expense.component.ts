@@ -7,6 +7,7 @@ import {Category} from '../../models/category.model';
 import {Subcategory} from '../../models/subcategory.model';
 import {MatDialog} from '@angular/material';
 import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
+import {AccountDialogComponent} from '../account-dialog/account-dialog.component';
 
 @Component({
   selector: 'app-expense',
@@ -55,6 +56,23 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     });
   }
 
+  onAddAccount() {
+    const dialogRef = this.dialog.open(AccountDialogComponent, {
+      width: '400px',
+      data: 'account'
+    });
+    dialogRef.afterClosed()
+      .subscribe(account => {
+        if (account) {
+          this.componentSubs.push(this.httpService.createAccount(account)
+            .subscribe((newAccount: Account) => {
+              this.httpService.getAllAccounts();
+              this.expenseForm.patchValue({'account': newAccount.id});
+            }));
+        }
+      });
+  }
+
   onAddCategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       width: '400px',
@@ -96,19 +114,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       this.selectedCategoryId = categoryId;
       this.httpService.getAllSubcategories(categoryId);
     }
-  }
-
-  onAddAccount() {
-    const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      width: '400px',
-      data: 'account'
-    });
-    dialogRef.afterClosed()
-      .subscribe(account => {
-        if (account) {
-          // this.httpService.createAccount(account);
-        }
-      });
   }
 
   onSubmit() {

@@ -12,3 +12,11 @@
   border-top: lightgray 1px solid;
   padding-top: 7px;
 }
+
+.wrapper > div {
+  padding-bottom: 1em;
+}
+
+.wrapper > div:nth-child(odd){
+  background: #ddd;
+}

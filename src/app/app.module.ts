@@ -26,6 +26,7 @@ import { CategoryDialogComponent } from './operations/category-dialog/category-d
 import { LanuMonthPaginatorComponent } from './shared/lanu-month-paginator/lanu-month-paginator.component';
 import { GroupsComponent } from './summaries/groups/groups.component';
 import { SummariesComponent } from './summaries/summaries.component';
+import { AccountDialogComponent } from './operations/account-dialog/account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SummariesComponent } from './summaries/summaries.component';
     CategoryDialogComponent,
     LanuMonthPaginatorComponent,
     GroupsComponent,
-    SummariesComponent
+    SummariesComponent,
+    AccountDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -60,6 +62,6 @@ import { SummariesComponent } from './summaries/summaries.component';
     HttpService
     ],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDialogComponent]
+  entryComponents: [CategoryDialogComponent, AccountDialogComponent]
 })
 export class AppModule { }

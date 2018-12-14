@@ -36,6 +36,11 @@ export class HttpService {
     return this.httpClient.post(url, subcategory);
   }
 
+  createAccount(account: Account) {
+    const url = this.baseUrl + '/accounts';
+    return this.httpClient.post(url, account);
+  }
+
   getAllTransactions() {
     const url = this.baseUrl + '/transactions';
     this.httpClient.get(url).subscribe((transaction: Transaction[]) => {
