@@ -1,0 +1,9 @@
+.list-container {
+  height: 400px;
+  overflow: auto;
+}
+
+.spent{
+  margin-left: 30px;
+  margin-top: 15px;
+}

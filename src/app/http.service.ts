@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {Transaction} from './models/transaction.model';
 import {Subject} from 'rxjs';
@@ -69,5 +69,11 @@ export class HttpService {
   storeTransaction(transaction: Transaction) {
     const url = this.baseUrl + '/transactions';
     return this.httpClient.post(url, transaction);
+  }
+
+  getSummaryByCategories(date: Date, type: string) {
+    const url = this.baseUrl + '/summaries';
+    const params = new HttpParams().set('date', date.toDateString()).set('type', type);
+    return this.httpClient.get(url, { params });
   }
 }

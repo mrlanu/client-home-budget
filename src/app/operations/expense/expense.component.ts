@@ -118,7 +118,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenseForm.patchValue({account: acc, category: cat, subCategory: subcat});
     this.componentSubs.push(this.httpService.storeTransaction(this.expenseForm.value)
       .subscribe(transaction => {
-        this.expenseForm.reset({'date': new Date()});
+        this.expenseForm.reset({'date': new Date(), 'type': 'EXPENSE'});
         this.httpService.getAllTransactions();
       }));
   }

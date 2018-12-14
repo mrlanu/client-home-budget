@@ -17,6 +17,8 @@ export class LanuMonthPaginatorComponent implements OnInit {
 
   ngOnInit() {
     this.myDate = new Date();
+    // every month has a 15 date
+    this.myDate.setDate(15);
     this.currentMonth = this.myDate.getMonth();
     this.viewDate = this.myDate
       .toLocaleDateString('en-US', {
