@@ -16,7 +16,11 @@ export class SummariesComponent implements OnInit {
   }
 
   onTabChange(event) {
-    this.httpService.getSummaryByCategories(new Date(), this.tabs[event]);
+    if (event === 0) {
+      this.httpService.getSummaryByAccounts();
+    } else {
+      this.httpService.getSummaryByCategories(new Date(), this.tabs[event]);
+    }
   }
 
 }

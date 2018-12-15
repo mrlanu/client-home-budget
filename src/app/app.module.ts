@@ -27,6 +27,7 @@ import { LanuMonthPaginatorComponent } from './shared/lanu-month-paginator/lanu-
 import { GroupsComponent } from './summaries/groups/groups.component';
 import { SummariesComponent } from './summaries/summaries.component';
 import { AccountDialogComponent } from './operations/account-dialog/account-dialog.component';
+import { AccountsListComponent } from './summaries/accounts-list/accounts-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AccountDialogComponent } from './operations/account-dialog/account-dial
     LanuMonthPaginatorComponent,
     GroupsComponent,
     SummariesComponent,
-    AccountDialogComponent
+    AccountDialogComponent,
+    AccountsListComponent
   ],
   imports: [
     MaterialModule,

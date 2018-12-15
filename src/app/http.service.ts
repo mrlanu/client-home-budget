@@ -7,6 +7,7 @@ import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
 import {Group} from './models/group.model';
 import {Account} from './models/account.model';
+import {GroupAccount} from './models/group-account.model';
 
 @Injectable()
 export class HttpService {
@@ -16,6 +17,7 @@ export class HttpService {
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
   groupsChange = new Subject<Group[]>();
+  accountsGroupsChange = new Subject<GroupAccount[]>();
 
   baseUrl = environment.baseUrl;
 
@@ -72,10 +74,17 @@ export class HttpService {
   }
 
   getSummaryByCategories(date: Date, type: string) {
-    const url = this.baseUrl + '/summaries';
+    const url = this.baseUrl + '/summaries/categories';
     const params = new HttpParams().set('date', date.toDateString()).set('type', type);
     this.httpClient.get(url, { params }).subscribe((groups: Group[]) => {
       this.groupsChange.next(groups);
+    });
+  }
+
+  getSummaryByAccounts(){
+    const url = this.baseUrl + '/summaries/accounts';
+    this.httpClient.get(url).subscribe((groups: GroupAccount[]) => {
+      this.accountsGroupsChange.next(groups);
     });
   }
 }

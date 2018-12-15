@@ -67,6 +67,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
           this.componentSubs.push(this.httpService.createAccount(account)
             .subscribe((newAccount: Account) => {
               this.httpService.getAllAccounts();
+              this.httpService.getSummaryByAccounts();
               this.expenseForm.patchValue({'account': newAccount.id});
             }));
         }
@@ -131,6 +132,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       .subscribe(transaction => {
         this.httpService.getAllTransactions();
         this.httpService.getSummaryByCategories(this.expenseForm.value.date, 'EXPENSE');
+        this.httpService.getSummaryByAccounts();
         this.expenseForm.reset({'date': new Date(), 'type': 'EXPENSE'});
       }));
   }

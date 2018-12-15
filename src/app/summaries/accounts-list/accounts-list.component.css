@@ -1,0 +1,19 @@
+mat-expansion-panel{
+  width: 95%;
+  margin: auto;
+}
+
+.list-container {
+  height: 385px;
+  overflow-y: auto;
+}
+
+.spent{
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+.footer {
+  border-top: lightgray 1px solid;
+  padding-top: 7px;
+}
