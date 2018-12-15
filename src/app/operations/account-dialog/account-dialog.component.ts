@@ -25,4 +25,8 @@ export class AccountDialogComponent implements OnInit {
     });
   }
 
+  onCancel() {
+    this.dialogRef.close();
+  }
+
 }

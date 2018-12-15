@@ -1,6 +1,11 @@
+mat-expansion-panel{
+  width: 95%;
+  margin: auto;
+}
+
 .list-container {
-  height: 400px;
-  overflow-y: scroll;
+  height: 385px;
+  overflow-y: auto;
 }
 
 .spent{
