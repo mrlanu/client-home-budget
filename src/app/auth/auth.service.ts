@@ -44,7 +44,7 @@ export class AuthService {
     this.isAuthenticated = false;
     localStorage.clear();
     this.uiService.isHomePageChange.next(true);
-    this.router.navigate(['/homepage']);
+    this.router.navigate(['/main', 'dashboard']);
   }
 
   isAuth() {
@@ -55,7 +55,7 @@ export class AuthService {
     this.uiService.isLoadingChanged.next(false);
     this.isAuthenticated = true;
     this.uiService.isHomePageChange.next(false);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/main', 'dashboard']);
   }
 
   getToken(authData: AuthData) {

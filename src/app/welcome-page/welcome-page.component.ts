@@ -3,11 +3,11 @@ import {Subscription} from 'rxjs';
 import {UiService} from '../shared/ui.service';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  selector: 'app-welcome-page',
+  templateUrl: './welcome-page.component.html',
+  styleUrls: ['./welcome-page.component.css']
 })
-export class HomepageComponent implements OnInit, OnDestroy {
+export class WelcomePageComponent implements OnInit, OnDestroy {
 
   componentSubs: Subscription[] = [];
   isLogin = true;

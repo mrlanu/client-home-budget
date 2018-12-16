@@ -17,7 +17,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpPortalService} from './http-portal.service';
 import {SignupComponent} from './auth/signup/signup.component';
 import {LoginComponent} from './auth/login/login.component';
-import { HomepageComponent } from './homepage/homepage.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import {UiService} from './shared/ui.service';
 import {AuthService} from './auth/auth.service';
 import {AuthInterceptor} from './auth/auth.interceptor';
@@ -28,6 +28,7 @@ import { GroupsComponent } from './summaries/groups/groups.component';
 import { SummariesComponent } from './summaries/summaries.component';
 import { AccountDialogComponent } from './operations/account-dialog/account-dialog.component';
 import { AccountsListComponent } from './summaries/accounts-list/accounts-list.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +41,14 @@ import { AccountsListComponent } from './summaries/accounts-list/accounts-list.c
     TransactionsListComponent,
     SignupComponent,
     LoginComponent,
-    HomepageComponent,
+    WelcomePageComponent,
     CategoryDialogComponent,
     LanuMonthPaginatorComponent,
     GroupsComponent,
     SummariesComponent,
     AccountDialogComponent,
-    AccountsListComponent
+    AccountsListComponent,
+    MainComponent
   ],
   imports: [
     MaterialModule,
