@@ -16,7 +16,7 @@ footer {
 }
 
 header {
-  background: #193446;
+  background: #37474F;
 }
 
 aside {
@@ -31,13 +31,13 @@ main {
 }
 
 footer {
-  background: #193446;
+  background: #37474F;
 }
 
 .logo {
   font-weight: bold;
-  border: 1px solid #193446;
-  background: #e9b071;
+  border: 1px solid #37474F;
+  background: #FFA726;
 }
 
 .main-1, .main-2 {
