@@ -19,7 +19,7 @@
           <a style="margin-top: 15px; cursor: pointer" (click)="onLogin()">Login</a>
         </div>
         <div *ngIf="!isLoading">
-          <button type="submit" mat-raised-button color="primary" [disabled]="signUpForm.invalid">Sign Up</button>
+          <button type="submit" mat-raised-button color="accent" [disabled]="signUpForm.invalid">Sign Up</button>
         </div>
         <div *ngIf="isLoading" style="padding-top: 10px">
           <mat-spinner [diameter]="26"></mat-spinner>

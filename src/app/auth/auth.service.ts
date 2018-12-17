@@ -44,7 +44,7 @@ export class AuthService {
     this.isAuthenticated = false;
     localStorage.clear();
     this.uiService.isHomePageChange.next(true);
-    this.router.navigate(['/main', 'dashboard']);
+    this.router.navigate(['/welcome-page']);
   }
 
   isAuth() {

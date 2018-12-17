@@ -8,7 +8,6 @@ section {
   margin: 0;
 }
 
-header,
 main,
 footer {
   padding: 16px;
@@ -17,6 +16,8 @@ footer {
 
 header {
   background: #37474F;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
 aside {
@@ -36,6 +37,7 @@ footer {
 
 .logo {
   font-weight: bold;
+  color: #37474F;
   border: 1px solid #37474F;
   background: #FFA726;
 }
@@ -43,6 +45,10 @@ footer {
 .main-1, .main-2 {
   background: #EBEFF0;
   padding: 16px;
+}
+
+.main-2 {
+  padding-left: 0;
 }
 
 .my-summary {

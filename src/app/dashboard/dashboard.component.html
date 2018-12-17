@@ -1,16 +1,19 @@
 <section
   gdColumns="230px 520px auto"
   gdRows="60px auto 60px"
-  gdAreas="logo hd hd| sidebar main-1 main-2 | sidebar footer footer">
+  gdAreas="logo hd hd| sidebar main-1 main-2 | logo-2 footer footer">
 
-  <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Home Budget</div>
+  <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Hello, {{ loggedInUserName | async }}</div>
 
   <header gdArea="hd">
-    <ul class="navigation-list" fxLayout fxLayoutAlign="center center">
+    <div fxLayout fxFlex fxLayoutAlign="end center">
+      <button mat-raised-button color="accent" (click)="onLogOut()">Logout</button>
+    </div>
+    <!--<ul class="navigation-list" fxLayout fxLayoutAlign="center center">
       <li class="navigation-item"><a href="#">Posts</a></li>
       <li class="navigation-item"><a href="#">Products</a></li>
       <li class="navigation-item"><a href="#">About Us</a></li>
-    </ul>
+    </ul>-->
   </header>
 
   <aside gdArea="sidebar">
@@ -36,6 +39,8 @@
   <div class="main-2" gdArea="main-2">
     <app-transactions-list></app-transactions-list>
   </div>
+
+  <div class="logo" gdArea="logo-2" fxLayout fxLayoutAlign="center center">Home Budget by Lanu<span>©</span></div>
 
   <footer gdArea="footer">
     <ul class="navigation-list" fxLayout fxLayoutAlign="center center">
