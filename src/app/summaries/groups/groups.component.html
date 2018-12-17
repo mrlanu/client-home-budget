@@ -25,10 +25,10 @@
   </div>
   <div class="footer" fxLayout="row" fxLayoutAlign="space-between">
     <div class="spent" *ngIf="typeOfTransactions === 'EXPENSE'">
-      Total spent: {{ totalSpent | currency}}
+      Total spent: <span class="total">{{ totalSpent | currency}}</span>
     </div>
     <div class="spent" *ngIf="typeOfTransactions === 'INCOME'">
-      Total income: {{ totalSpent | currency}}
+      Total income: <span class="total">{{ totalSpent | currency}}</span>
     </div>
     <app-lanu-month-paginator (monthChange)="onMonthChange($event)"></app-lanu-month-paginator>
   </div>

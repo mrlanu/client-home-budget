@@ -1,9 +1,40 @@
-<div class="container" fxLayout="column" fxLayoutGap="50px">
-  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+<section
+  gdColumns="230px 520px auto"
+  gdRows="60px auto 60px"
+  gdAreas="sidebar hd hd| sidebar main-1 main-2 | sidebar footer footer">
+  <header gdArea="hd">
+    <ul class="navigation-list" fxLayout fxLayoutAlign="center center">
+      <li class="navigation-item"><a href="#">Posts</a></li>
+      <li class="navigation-item"><a href="#">Products</a></li>
+      <li class="navigation-item"><a href="#">About Us</a></li>
+    </ul>
+  </header>
+  <aside gdArea="sidebar">
+    <mat-nav-list>
+      <a mat-list-item
+         routerLink="/freights"
+         (click)="onClose()">
+        <mat-icon>calendar_view_day</mat-icon>
+        <span class="nav-caption">List of freights</span>
+      </a>
+      <a mat-list-item
+         routerLink="/employees"
+         (click)="onClose()">
+        <mat-icon>people</mat-icon>
+        <span class="nav-caption">Employees</span>
+      </a>
+    </mat-nav-list>
+  </aside>
+  <main class="main-1" gdArea="main-1">
     <app-summaries></app-summaries>
-    <app-operations></app-operations>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="center">
+  </main>
+  <div class="main-2" gdArea="main-2">
     <app-transactions-list></app-transactions-list>
   </div>
-</div>
+  <footer gdArea="footer">
+    <ul class="navigation-list" fxLayout fxLayoutAlign="center center">
+      <li class="navigation-item"><a href="#">Terms of Use</a></li>
+      <li class="navigation-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+</section>

@@ -17,3 +17,7 @@ mat-expansion-panel{
   border-top: lightgray 1px solid;
   padding-top: 7px;
 }
+
+.total {
+  font-weight: bold;
+}

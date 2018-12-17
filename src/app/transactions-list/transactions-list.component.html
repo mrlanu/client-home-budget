@@ -1,9 +1,4 @@
-<div class="container">
-  <!--<mat-form-field style="margin-left: 50px">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>-->
-
-  <div>
+<div fxLayout="column">
     <table mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
 
       <!-- Account Column -->
@@ -47,6 +42,5 @@
     </table>
 
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-
 </div>
+

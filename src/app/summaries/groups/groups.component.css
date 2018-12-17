@@ -25,3 +25,7 @@ mat-expansion-panel{
 .wrapper > div:nth-child(odd){
   background: #ddd;
 }
+
+.total{
+  font-weight: bold;
+}

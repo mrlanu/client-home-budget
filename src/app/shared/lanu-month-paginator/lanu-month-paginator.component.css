@@ -1,0 +1,10 @@
+.container {
+  width: 155px;
+  color: #143846;
+}
+
+p{
+  font-size: 14px;
+  font-weight: bold;
+  padding-right: 4px;
+}
