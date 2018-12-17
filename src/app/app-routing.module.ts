@@ -4,11 +4,9 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {WelcomePageComponent} from './welcome-page/welcome-page.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MainComponent} from './main/main.component';
-import {TestViewComponent} from './test-view/test-view.component';
 
 const routes: Routes = [
   {path: 'welcome-page', component: WelcomePageComponent},
-  {path: 'test', component: TestViewComponent},
   {path: 'main', component: MainComponent, canActivateChild: [AuthGuard], children: [
     {path: 'dashboard', component: DashboardComponent},
     ]},
