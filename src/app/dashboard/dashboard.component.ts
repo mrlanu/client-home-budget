@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Observer, Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
   loggedInUserName: Observable<string>;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.componentSubs.push(this.authService.getLoggedInUser()
@@ -22,6 +23,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
       })
     );
+  }
+
+  onSummaries() {
+    this.router.navigate(['/main', 'dashboard', 'summaries']);
+  }
+
+  onOperations() {
+    this.router.navigate(['/main', 'dashboard', 'operations']);
   }
 
   onLogOut() {
