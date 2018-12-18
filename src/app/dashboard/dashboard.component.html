@@ -1,7 +1,7 @@
 <section
-  gdColumns="230px 520px auto"
+  gdColumns="230px auto"
   gdRows="60px auto 60px"
-  gdAreas="logo hd hd| sidebar main-1 main-2 | logo-2 footer footer">
+  gdAreas="logo hd | sidebar main | logo-2 footer">
 
   <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Hello, {{ loggedInUserName | async }}</div>
 
@@ -19,10 +19,9 @@
   <aside gdArea="sidebar">
     <mat-nav-list>
       <a mat-list-item
-         routerLink="/freights"
-         (click)="onClose()">
+         routerLink="/main/dashboard/summaries">
         <mat-icon>calendar_view_day</mat-icon>
-        <span class="nav-caption">List of freights</span>
+        <span class="nav-caption">Summaries</span>
       </a>
       <a mat-list-item
          routerLink="/employees"
@@ -33,14 +32,11 @@
     </mat-nav-list>
   </aside>
 
-  <main class="main-1" gdArea="main-1">
-    <app-summaries></app-summaries>
+  <main class="main-1" gdArea="main">
+    <router-outlet></router-outlet>
   </main>
-  <div class="main-2" gdArea="main-2">
-    <app-transactions-list></app-transactions-list>
-  </div>
 
-  <div class="logo" gdArea="logo-2" fxLayout fxLayoutAlign="center center">Home Budget by Lanu<span>©</span></div>
+  <div class="logo" id="logo" gdArea="logo-2" fxLayout fxLayoutAlign="center center">Home Budget by Lanu<span>©</span></div>
 
   <footer gdArea="footer">
     <ul class="navigation-list" fxLayout fxLayoutAlign="center center">

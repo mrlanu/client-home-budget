@@ -29,6 +29,7 @@ import {SummariesComponent} from './summaries/summaries.component';
 import {AccountDialogComponent} from './operations/account-dialog/account-dialog.component';
 import {AccountsListComponent} from './summaries/accounts-list/accounts-list.component';
 import {MainComponent} from './main/main.component';
+import { SummariesViewComponent } from './summaries/summaries-view/summaries-view.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {MainComponent} from './main/main.component';
     AccountDialogComponent,
     AccountsListComponent,
     MainComponent,
+    SummariesViewComponent,
   ],
   imports: [
     MaterialModule,

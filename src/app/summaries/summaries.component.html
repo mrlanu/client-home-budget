@@ -1,5 +1,5 @@
-<div class="container">
-  <mat-tab-group animationDuration="1000ms" (selectedIndexChange)="onTabChange($event)">
+<div class="container" fxLayout="column">
+  <mat-tab-group style="height: 100%" animationDuration="1000ms" (selectedIndexChange)="onTabChange($event)">
     <mat-tab label="Accounts"> <app-accounts-list></app-accounts-list></mat-tab>
     <mat-tab label="Expenses"> <app-groups typeOfTransactions="EXPENSE"></app-groups> </mat-tab>
     <mat-tab label="Incomes"> <app-groups typeOfTransactions="INCOME"></app-groups> </mat-tab>
