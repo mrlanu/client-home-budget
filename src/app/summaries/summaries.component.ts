@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SummaryService} from './summary.service';
 import {HttpService} from '../http.service';
 
 @Component({
@@ -10,17 +11,18 @@ export class SummariesComponent implements OnInit {
 
   tabs = ['ACCOUNTS', 'EXPENSE', 'INCOME'];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private summaryService: SummaryService, private httpService: HttpService) { }
 
   ngOnInit() {
   }
 
   onTabChange(event) {
-    if (event === 0) {
-      this.httpService.getSummaryByAccounts();
+    if (event === 1) {
+      this.summaryService.getSummaryByCategories(new Date(), this.tabs[event]);
+    } else if (event === 2) {
+      this.summaryService.getSummaryByCategories(new Date(), this.tabs[event]);
     } else {
-      this.httpService.getSummaryByCategories(new Date(), this.tabs[event]);
+      this.httpService.getSummaryByAccounts();
     }
   }
-
 }

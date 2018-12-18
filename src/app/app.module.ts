@@ -30,6 +30,7 @@ import {AccountDialogComponent} from './operations/account-dialog/account-dialog
 import {AccountsListComponent} from './summaries/accounts-list/accounts-list.component';
 import {MainComponent} from './main/main.component';
 import { SummariesViewComponent } from './summaries/summaries-view/summaries-view.component';
+import {SummaryService} from './summaries/summary.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { SummariesViewComponent } from './summaries/summaries-view/summaries-vie
   ],
   providers: [
     HttpPortalService, UiService,
-    AuthService,
+    AuthService, SummaryService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     HttpService
     ],

@@ -1,7 +1,7 @@
 <div class="groups-summary" fxLayout="column" fxLayoutAlign="space-between">
   <div class="list-container" style="margin-top: 15px">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let group of groupsAccount" style="margin-bottom: 1px">
+      <mat-expansion-panel *ngFor="let group of groupsAccount" style="margin-bottom: 1px" (opened)="onAccountTypeSelect(group.name)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <div fxFlex fxLayout fxLayoutAlign="space-between">
@@ -12,8 +12,7 @@
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item *ngFor="let acc of group.accountList"
-             routerLink="/freights"
-             (click)="onClose()">
+             (click)="onAccountSelect(acc.name)">
             <div fxFlex fxLayout fxLayoutAlign="space-between">
               <div style="margin-left: 15px">{{ acc.name }}</div>
               <div>{{ acc.balance | currency }}</div>

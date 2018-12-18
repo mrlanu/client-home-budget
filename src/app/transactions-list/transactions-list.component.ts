@@ -3,6 +3,8 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Transaction} from '../models/transaction.model';
 import {Subscription} from 'rxjs';
 import {HttpService} from '../http.service';
+import {TransactionView} from '../models/transaction-view.model';
+import {SummaryService} from '../summaries/summary.service';
 
 @Component({
   selector: 'app-transactions-list',
@@ -11,23 +13,22 @@ import {HttpService} from '../http.service';
 })
 export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = ['date', 'category', 'account', 'description', 'amount'];
-  dataSource = new MatTableDataSource<Transaction>();
+  dataSource = new MatTableDataSource<TransactionView>();
   total = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   componentSubs: Subscription[] = [];
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private summaryService: SummaryService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.componentSubs.push(this.httpService.transactionsChange
-      .subscribe((transactions: Transaction[]) => {
+    this.componentSubs.push(this.summaryService.transactionViewsChange
+      .subscribe((transactions: TransactionView[]) => {
         this.dataSource.data = transactions;
         this.total = this.getTotalCost();
       }));
-    this.httpService.getAllTransactions();
   }
 
   ngAfterViewInit() {

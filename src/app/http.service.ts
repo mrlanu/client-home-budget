@@ -5,7 +5,6 @@ import {Transaction} from './models/transaction.model';
 import {Subject} from 'rxjs';
 import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
-import {Group} from './models/group.model';
 import {Account} from './models/account.model';
 import {GroupAccount} from './models/group-account.model';
 
@@ -16,7 +15,6 @@ export class HttpService {
   accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
-  groupsChange = new Subject<Group[]>();
   accountsGroupsChange = new Subject<GroupAccount[]>();
 
   baseUrl = environment.baseUrl;
@@ -43,11 +41,10 @@ export class HttpService {
     return this.httpClient.post(url, account);
   }
 
-  getAllTransactions() {
+  getAllTransactions(date: Date) {
     const url = this.baseUrl + '/transactions';
-    this.httpClient.get(url).subscribe((transaction: Transaction[]) => {
-      this.transactionsChange.next(transaction);
-    });
+    const params = new HttpParams().set('date', date.toDateString());
+    return this.httpClient.get(url, { params });
   }
 
   getAllAccounts() {
@@ -76,12 +73,10 @@ export class HttpService {
   getSummaryByCategories(date: Date, type: string) {
     const url = this.baseUrl + '/summaries/categories';
     const params = new HttpParams().set('date', date.toDateString()).set('type', type);
-    this.httpClient.get(url, { params }).subscribe((groups: Group[]) => {
-      this.groupsChange.next(groups);
-    });
+    return this.httpClient.get(url, { params });
   }
 
-  getSummaryByAccounts(){
+  getSummaryByAccounts() {
     const url = this.baseUrl + '/summaries/accounts';
     this.httpClient.get(url).subscribe((groups: GroupAccount[]) => {
       this.accountsGroupsChange.next(groups);

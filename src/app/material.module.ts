@@ -8,7 +8,7 @@ import {
   MatListModule, MatTabsModule, MatCardModule, MatSelectModule,
   MatProgressSpinnerModule, MatDialogModule, MatTableModule, MatSortModule,
   MatPaginatorModule, MatSnackBarModule, MatAutocompleteModule, MatBadgeModule,
-  MatTooltipModule, MatGridListModule, MatRadioModule, MatDividerModule, MatDividerModule
+  MatTooltipModule, MatGridListModule, MatRadioModule, MatDividerModule
 } from '@angular/material';
 
 

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core'
 import {HttpService} from '../../http.service';
 import {Group} from '../../models/group.model';
 import {Subscription} from 'rxjs';
+import {SummaryService} from '../summary.service';
 
 @Component({
   selector: 'app-groups',
@@ -15,10 +16,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
   totalSpent: number;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private summaryService: SummaryService) { }
 
   ngOnInit() {
-    this.componentSubs.push(this.httpService.groupsChange
+    this.componentSubs.push(this.summaryService.groupsChange
       .subscribe((groups: Group[]) => {
         this.groups = groups;
         this.totalSpent = 0;
@@ -28,11 +29,19 @@ export class GroupsComponent implements OnInit, OnDestroy {
           });
         });
       }));
-     this.httpService.getSummaryByCategories(new Date(), this.typeOfTransactions);
+    // this.summaryService.getSummaryByCategories(new Date(), this.typeOfTransactions);
   }
 
   onMonthChange(date: Date) {
     this.httpService.getSummaryByCategories(date, this.typeOfTransactions);
+  }
+
+  onCategorySelect(categoryName: string) {
+    this.summaryService.filterTransactionsViewByCategory(categoryName, this.typeOfTransactions);
+  }
+
+  onSubcategorySelect(subcategoryName: string) {
+    this.summaryService.filterTransactionsViewBySubcategory(subcategoryName, this.typeOfTransactions);
   }
 
   ngOnDestroy(): void {
