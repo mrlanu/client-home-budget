@@ -33,7 +33,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   onMonthChange(date: Date) {
-    this.httpService.getSummaryByCategories(date, this.typeOfTransactions);
+    this.summaryService.getSummaryByCategories(date, this.typeOfTransactions);
   }
 
   onCategorySelect(categoryName: string) {

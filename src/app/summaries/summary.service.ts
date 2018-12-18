@@ -32,7 +32,7 @@ export class SummaryService {
       });
   }
 
-  mergeTransactionsViewFromGroups(groups: Group[]) {
+  private mergeTransactionsViewFromGroups(groups: Group[]) {
     let result: TransactionView[] = [];
     groups.forEach((gr: Group) => {
       gr.groupSubcategoryList.forEach((sbcl: GroupSubcategories) => {
@@ -57,16 +57,16 @@ export class SummaryService {
     this.transactionViewsChange.next(result);
   }
 
-  filterTransactionsViewByCategory(category: string) {
+  filterTransactionsViewByCategory(category: string, type: string) {
     const result: TransactionView[] = this.transactionViews.filter(transaction => {
-      return transaction.category === category;
+      return (transaction.category === category && transaction.type === type);
     });
     this.transactionViewsChange.next(result);
   }
 
-  filterTransactionsViewBySubcategory(category: string) {
+  filterTransactionsViewBySubcategory(category: string, type: string) {
     const result: TransactionView[] = this.transactionViews.filter(transaction => {
-      return transaction.subCategory === category;
+      return (transaction.subCategory === category && transaction.type === type);
     });
     this.transactionViewsChange.next(result);
   }
