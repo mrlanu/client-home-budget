@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import {Group} from '../models/group.model';
 import {GroupSubcategories} from '../models/group-subcategories.model';
 import {HttpService} from '../http.service';
+import {GroupAccount} from '../models/group-account.model';
 
 @Injectable()
 export class SummaryService {
@@ -11,6 +12,7 @@ export class SummaryService {
   private transactionViews: TransactionView[] = [];
   transactionViewsChange = new Subject<TransactionView[]>();
   groupsChange = new Subject<Group[]>();
+  accGroupsChange = new Subject<GroupAccount[]>();
 
 
   constructor(private httpService: HttpService) {}
@@ -23,6 +25,13 @@ export class SummaryService {
       });
   }
 
+  getSummaryByAccount() {
+    this.httpService.getSummaryByAccounts()
+      .subscribe((groups: GroupAccount[]) => {
+        this.accGroupsChange.next(groups);
+      });
+  }
+
   getSummaryByCategories(date: Date, type: string) {
     this.httpService.getSummaryByCategories(date, type)
       .subscribe((groups: Group[]) => {
@@ -30,17 +39,6 @@ export class SummaryService {
         this.mergeTransactionsViewFromGroups(groups);
         this.groupsChange.next(groups);
       });
-  }
-
-  private mergeTransactionsViewFromGroups(groups: Group[]) {
-    let result: TransactionView[] = [];
-    groups.forEach((gr: Group) => {
-      gr.groupSubcategoryList.forEach((sbcl: GroupSubcategories) => {
-        result = [...result, ...sbcl.transactionList];
-      });
-    });
-    this.transactionViews = result;
-    this.transactionViewsChange.next(result);
   }
 
   filterTransactionsViewByAccountType(accountType: string) {
@@ -68,6 +66,17 @@ export class SummaryService {
     const result: TransactionView[] = this.transactionViews.filter(transaction => {
       return (transaction.subCategory === category && transaction.type === type);
     });
+    this.transactionViewsChange.next(result);
+  }
+
+  private mergeTransactionsViewFromGroups(groups: Group[]) {
+    let result: TransactionView[] = [];
+    groups.forEach((gr: Group) => {
+      gr.groupSubcategoryList.forEach((sbcl: GroupSubcategories) => {
+        result = [...result, ...sbcl.transactionList];
+      });
+    });
+    this.transactionViews = result;
     this.transactionViewsChange.next(result);
   }
 }

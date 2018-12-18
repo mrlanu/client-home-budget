@@ -11,11 +11,9 @@ import {GroupAccount} from './models/group-account.model';
 @Injectable()
 export class HttpService {
 
-  transactionsChange = new Subject<Transaction[]>();
   accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
-  accountsGroupsChange = new Subject<GroupAccount[]>();
 
   baseUrl = environment.baseUrl;
 
@@ -39,12 +37,6 @@ export class HttpService {
   createAccount(account: Account) {
     const url = this.baseUrl + '/accounts';
     return this.httpClient.post(url, account);
-  }
-
-  getAllTransactions(date: Date) {
-    const url = this.baseUrl + '/transactions';
-    const params = new HttpParams().set('date', date.toDateString());
-    return this.httpClient.get(url, { params });
   }
 
   getAllAccounts() {
@@ -78,8 +70,12 @@ export class HttpService {
 
   getSummaryByAccounts() {
     const url = this.baseUrl + '/summaries/accounts';
-    this.httpClient.get(url).subscribe((groups: GroupAccount[]) => {
-      this.accountsGroupsChange.next(groups);
-    });
+    return this.httpClient.get(url);
+  }
+
+  getAllTransactions(date: Date) {
+    const url = this.baseUrl + '/transactions';
+    const params = new HttpParams().set('date', date.toDateString());
+    return this.httpClient.get(url, { params });
   }
 }

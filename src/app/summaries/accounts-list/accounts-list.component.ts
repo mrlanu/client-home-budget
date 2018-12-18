@@ -18,7 +18,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   constructor(private httpService: HttpService, private summaryService: SummaryService) { }
 
   ngOnInit() {
-    this.componentSubs.push(this.httpService.accountsGroupsChange
+    this.componentSubs.push(this.summaryService.accGroupsChange
       .subscribe((groups: GroupAccount[]) => {
         this.groupsAccount = groups;
         this.summaryService.getAllTransactions(new Date());
@@ -29,7 +29,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
           });
         });
       }));
-    this.httpService.getSummaryByAccounts();
+    this.summaryService.getSummaryByAccount();
   }
 
   onAccountTypeSelect(accountName: string) {
