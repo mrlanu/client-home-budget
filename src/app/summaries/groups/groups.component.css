@@ -4,7 +4,7 @@ mat-expansion-panel{
 }
 
 .list-container {
-  height: 385px;
+  height: 640px;
   overflow-y: auto;
 }
 
@@ -14,7 +14,6 @@ mat-expansion-panel{
 }
 
 .footer {
-  border-top: lightgray 1px solid;
   padding-top: 7px;
 }
 

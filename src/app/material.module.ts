@@ -8,7 +8,7 @@ import {
   MatListModule, MatTabsModule, MatCardModule, MatSelectModule,
   MatProgressSpinnerModule, MatDialogModule, MatTableModule, MatSortModule,
   MatPaginatorModule, MatSnackBarModule, MatAutocompleteModule, MatBadgeModule,
-  MatTooltipModule, MatGridListModule, MatRadioModule
+  MatTooltipModule, MatGridListModule, MatRadioModule, MatDividerModule, MatDividerModule
 } from '@angular/material';
 
 
@@ -19,7 +19,8 @@ import {
     MatToolbarModule, MatListModule, MatTabsModule, MatCardModule,
     MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatTableModule,
     MatSortModule, MatPaginatorModule, MatSnackBarModule, MatAutocompleteModule,
-    MatBadgeModule, MatTooltipModule, MatExpansionModule, MatGridListModule, MatRadioModule
+    MatBadgeModule, MatTooltipModule, MatExpansionModule, MatGridListModule, MatRadioModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule,
@@ -27,7 +28,8 @@ import {
     MatToolbarModule, MatListModule, MatTabsModule, MatCardModule,
     MatSelectModule, MatProgressSpinnerModule, MatDialogModule, MatTableModule,
     MatSortModule, MatPaginatorModule, MatSnackBarModule,
-    MatAutocompleteModule, MatBadgeModule, MatTooltipModule, MatExpansionModule, MatGridListModule, MatRadioModule
+    MatAutocompleteModule, MatBadgeModule, MatTooltipModule, MatExpansionModule, MatGridListModule,
+    MatRadioModule, MatDividerModule
   ]
 })
 export class MaterialModule {

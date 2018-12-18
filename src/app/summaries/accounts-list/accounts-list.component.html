@@ -1,4 +1,4 @@
-<div class="groups-summary" fxLayout="column">
+<div class="groups-summary" fxLayout="column" fxLayoutAlign="space-between">
   <div class="list-container" style="margin-top: 15px">
     <mat-accordion>
       <mat-expansion-panel *ngFor="let group of groupsAccount" style="margin-bottom: 1px">
@@ -23,6 +23,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
+  <mat-divider></mat-divider>
   <div class="footer" fxLayout="row" fxLayoutAlign="space-between">
     <div class="spent">
       Total: <span class="total">{{ total | currency }}</span>
