@@ -8,6 +8,7 @@ import {Subcategory} from '../../models/subcategory.model';
 import {MatDialog} from '@angular/material';
 import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
 import {AccountDialogComponent} from '../account-dialog/account-dialog.component';
+import {UiService} from '../../shared/ui.service';
 
 @Component({
   selector: 'app-expense',
@@ -24,7 +25,8 @@ export class ExpenseComponent implements OnInit, OnDestroy {
   accounts: Account[] = [];
 
   constructor(private httpService: HttpService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private uiService: UiService) { }
 
   ngOnInit() {
     this.initForm();
@@ -130,10 +132,8 @@ export class ExpenseComponent implements OnInit, OnDestroy {
     this.expenseForm.patchValue({account: acc, category: cat, subCategory: subcat});
     this.componentSubs.push(this.httpService.createTransaction(this.expenseForm.value)
       .subscribe(transaction => {
-        this.httpService.getAllTransactions();
-        this.httpService.getSummaryByCategories(this.expenseForm.value.date, 'EXPENSE');
-        this.httpService.getSummaryByAccounts();
         this.expenseForm.reset({'date': new Date(), 'type': 'EXPENSE'});
+        this.uiService.openSnackBar('Expense has been created', null, 5000);
       }));
   }
 

@@ -5,12 +5,14 @@ import {WelcomePageComponent} from './welcome-page/welcome-page.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MainComponent} from './main/main.component';
 import {SummariesViewComponent} from './summaries/summaries-view/summaries-view.component';
+import {OperationsComponent} from './operations/operations.component';
 
 const routes: Routes = [
   {path: 'welcome-page', component: WelcomePageComponent},
   {path: 'main', component: MainComponent, canActivateChild: [AuthGuard], children: [
     {path: 'dashboard', component: DashboardComponent, children: [
-        {path: 'summaries', component: SummariesViewComponent}
+        {path: 'summaries', component: SummariesViewComponent},
+        {path: 'operations', component: OperationsComponent}
       ]},
     ]},
   {path: '**', redirectTo: '/welcome-page'}

@@ -1,68 +1,69 @@
-<div>
-  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
-    <mat-form-field  style="margin-top: 20px">
-      <input name="date" placeholder="Date" formControlName="date" matInput required
-             [matDatepicker]="picker">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Add Expense</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div>
+      <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field  style="margin-top: 20px">
+          <input name="date" placeholder="Date" formControlName="date" matInput required
+                 [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select placeholder="Category" formControlName="category" (valueChange)="onSelectCategory($event)">
-        <mat-option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </mat-option>
-        <mat-option>
-          <div fxLayout="row" fxLayoutAlign="center" (click)="onAddCategory()">
-            <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Category" formControlName="category" (valueChange)="onSelectCategory($event)">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+            <mat-option>
+              <div fxLayout="row" fxLayoutAlign="center" (click)="onAddCategory()">
+                <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select placeholder="Subcategory" formControlName="subCategory">
-        <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
-          {{ subcategory.name }}
-        </mat-option>
-        <mat-option>
-          <div fxLayout="row" fxLayoutAlign="center" (click)="onAddSubcategory()">
-            <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Subcategory" formControlName="subCategory">
+            <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
+              {{ subcategory.name }}
+            </mat-option>
+            <mat-option>
+              <div fxLayout="row" fxLayoutAlign="center" (click)="onAddSubcategory()">
+                <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <!--<mat-form-field>
-      <input type="text" placeholder="Account" aria-label="Number" matInput formControlName="account" [matAutocomplete]="autoAccount">
-      <mat-autocomplete #autoAccount="matAutocomplete">
-        <mat-option *ngFor="let account of accounts" [value]="account.name">
-          {{ account.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>-->
+        <mat-form-field>
+          <mat-select placeholder="Account" formControlName="account">
+            <mat-option *ngFor="let account of accounts" [value]="account.id">
+              {{account.name}}
+            </mat-option>
+            <mat-option>
+              <div fxLayout="row" fxLayoutAlign="center" (click)="onAddAccount()">
+                <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select placeholder="Account" formControlName="account">
-        <mat-option *ngFor="let account of accounts" [value]="account.id">
-          {{account.name}}
-        </mat-option>
-        <mat-option>
-          <div fxLayout="row" fxLayoutAlign="center" (click)="onAddAccount()">
-            <a style="cursor: pointer"><mat-icon color="primary">add</mat-icon></a>
-          </div>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+          <input type="number" placeholder="Amount" formControlName="amount" matInput>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input type="number" placeholder="Amount" formControlName="amount" matInput>
-    </mat-form-field>
+        <mat-form-field>
+          <input type="text" placeholder="Description" formControlName="description" matInput>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input type="text" placeholder="Description" formControlName="description" matInput>
-    </mat-form-field>
-
-    <button type="submit" mat-raised-button color="primary">Save the expense</button>
-  </form>
-</div>
+        <div style="padding-top: 30px; padding-right: 15px" fxFlexAlign="end">
+          <button type="submit" mat-raised-button color="primary">Save the expense</button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

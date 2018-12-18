@@ -22,7 +22,7 @@ export class SummariesComponent implements OnInit {
     } else if (event === 2) {
       this.summaryService.getSummaryByCategories(new Date(), this.tabs[event]);
     } else {
-      this.httpService.getSummaryByAccounts();
+      this.summaryService.getSummaryByAccount();
     }
   }
 }

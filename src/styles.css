@@ -6,3 +6,11 @@ html, body {
 body {
   margin: 0;
 }
+
+.blue-snackbar {
+  color: #004F43;
+  text-align: center;
+  font-weight: bold;
+  background: #FF9F44;
+  margin-bottom: 500px;
+}

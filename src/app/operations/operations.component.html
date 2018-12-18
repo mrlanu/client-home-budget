@@ -1,7 +1,8 @@
-<div class="container">
-  <mat-tab-group animationDuration="2000ms">
-    <mat-tab label="Add Expense"> <app-expense></app-expense> </mat-tab>
-    <mat-tab label="Add Income"> Content 2 </mat-tab>
-    <mat-tab label="Transfer"> Content 3 </mat-tab>
-  </mat-tab-group>
+<div class="container"
+     gdColumns="auto auto auto"
+     gdRows="auto"
+     gdAreas="left middle right">
+  <app-expense class="items" gdArea="left"></app-expense>
+  <app-expense class="items" gdArea="middle"></app-expense>
+  <app-expense class="items" gdArea="right"></app-expense>
 </div>
