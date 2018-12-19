@@ -14,6 +14,11 @@ table {
   margin: auto;*/
 }
 
+.transaction:hover {
+  background: #FFE0B2;
+  cursor: pointer;
+}
+
 tr.mat-footer-row {
   font-weight: bold;
 }

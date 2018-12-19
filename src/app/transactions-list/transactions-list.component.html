@@ -40,7 +40,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="transaction" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectFreight(row)"></tr>
       <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
     </table>
 

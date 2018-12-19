@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Transaction} from '../models/transaction.model';
 import {Subscription} from 'rxjs';
 import {HttpService} from '../http.service';
 import {TransactionView} from '../models/transaction-view.model';
@@ -45,6 +44,10 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
 
   getTotalCost() {
     return this.dataSource.data.map(t => t.amount).reduce((acc, value) => acc + value, 0);
+  }
+
+  onSelectFreight(row) {
+    console.log(row);
   }
 
   ngOnDestroy(): void {
