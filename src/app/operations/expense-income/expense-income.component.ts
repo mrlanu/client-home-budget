@@ -137,6 +137,9 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
     const subcat = this.subcategories.find(subcategory => {
       return subcategory.id === this.expenseForm.value.subCategory;
     });
+    if (this.type === 'EXPENSE') {
+      this.expenseForm.patchValue({amount: -this.expenseForm.value.amount});
+    }
     this.expenseForm.patchValue({account: acc, category: cat, subCategory: subcat});
     this.componentSubs.push(this.httpService.createTransaction(this.expenseForm.value)
       .subscribe(transaction => {

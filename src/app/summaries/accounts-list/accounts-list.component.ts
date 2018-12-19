@@ -25,7 +25,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
         this.total = 0;
         this.groupsAccount.forEach(group => {
           group.accountList.forEach(acc => {
-            if (acc.includeInTotal) {this.total += acc.balance};
+            if (acc.includeInTotal) {this.total += acc.balance; }
           });
         });
       }));
