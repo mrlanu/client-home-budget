@@ -78,4 +78,10 @@ export class HttpService {
     const params = new HttpParams().set('date', date.toDateString());
     return this.httpClient.get(url, { params });
   }
+
+  getBrief() {
+    const url = this.baseUrl + '/summaries/brief';
+    const params = new HttpParams();
+    return this.httpClient.get(url);
+  }
 }

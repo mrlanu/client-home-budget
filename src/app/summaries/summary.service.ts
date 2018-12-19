@@ -5,6 +5,7 @@ import {Group} from '../models/group.model';
 import {GroupSubcategories} from '../models/group-subcategories.model';
 import {HttpService} from '../http.service';
 import {GroupAccount} from '../models/group-account.model';
+import {Brief} from '../models/brief';
 
 @Injectable()
 export class SummaryService {
@@ -13,6 +14,7 @@ export class SummaryService {
   transactionViewsChange = new Subject<TransactionView[]>();
   groupsChange = new Subject<Group[]>();
   accGroupsChange = new Subject<GroupAccount[]>();
+  briefChange = new Subject<Brief>();
 
 
   constructor(private httpService: HttpService) {}
@@ -78,5 +80,12 @@ export class SummaryService {
     });
     this.transactionViews = result;
     this.transactionViewsChange.next(result);
+  }
+
+  getBrief() {
+    this.httpService.getBrief()
+      .subscribe((brief: Brief) => {
+        this.briefChange.next(brief);
+      });
   }
 }

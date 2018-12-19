@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {SummaryService} from '../summary.service';
+import {Brief} from '../../models/brief';
 
 @Component({
   selector: 'app-brief',
@@ -9,13 +10,17 @@ import {SummaryService} from '../summary.service';
 })
 export class BriefComponent implements OnInit {
 
-  totalAccount = 0;
-  totalSpent = 0;
+  brief: Brief;
   componentSubs: Subscription[] = [];
 
   constructor(private summaryService: SummaryService) { }
 
   ngOnInit() {
+    this.componentSubs.push(this.summaryService.briefChange
+      .subscribe((brief: Brief) => {
+        this.brief = brief;
+      }));
+    this.summaryService.getBrief();
   }
 
 }
