@@ -16,14 +16,14 @@ export class CategoryDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public passedData: any) { }
 
   ngOnInit() {
-    if (this.passedData === 'category') {
+    if (this.passedData.kind === 'category') {
       this.placeholder = 'New Category';
       this.categoryForm = new FormGroup({
         'name': new FormControl('', Validators.required),
-        'type': new FormControl('EXPENSE')
+        'type': new FormControl(this.passedData.type)
       });
     }
-    if (this.passedData === 'subcategory') {
+    if (this.passedData.kind === 'subcategory') {
       this.placeholder = 'New Subcategory';
       this.categoryForm = new FormGroup({
         'name': new FormControl('', Validators.required),

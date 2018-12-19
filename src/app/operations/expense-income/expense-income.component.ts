@@ -82,7 +82,10 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
   onAddCategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       width: '400px',
-      data: 'category'
+      data: {
+        'kind': 'category',
+        'type': this.type
+      }
     });
     dialogRef.afterClosed()
       .subscribe(category => {
@@ -100,7 +103,9 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
   onAddSubcategory() {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
       width: '400px',
-      data: 'subcategory'
+      data: {
+        'kind': 'subcategory'
+      }
     });
     dialogRef.afterClosed()
       .subscribe(subcategory => {
