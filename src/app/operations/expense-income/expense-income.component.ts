@@ -11,11 +11,11 @@ import {AccountDialogComponent} from '../account-dialog/account-dialog.component
 import {UiService} from '../../shared/ui.service';
 
 @Component({
-  selector: 'app-expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.css']
+  selector: 'app-expense-income',
+  templateUrl: './expense-income.component.html',
+  styleUrls: ['./expense-income.component.css']
 })
-export class ExpenseComponent implements OnInit, OnDestroy {
+export class ExpenseIncomeComponent implements OnInit, OnDestroy {
 
   componentSubs: Subscription[] = [];
   expenseForm: FormGroup;
