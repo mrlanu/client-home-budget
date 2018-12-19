@@ -1,22 +1,7 @@
-.container{
-  /*border: 1px solid grey;*/
-  /*border-radius: 10px;*/
-  /*background-color: #F6F6FF;*/
-  height: 100%;
-  background: white;
- /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding-bottom: 10px;*/
-}
-
 table {
   /*background-color: #F6F6FF;*/
   /*width: 1010px;
   margin: auto;*/
-}
-
-.transaction:hover {
-  background: #FFE0B2;
-  cursor: pointer;
 }
 
 tr.mat-footer-row {
@@ -26,3 +11,32 @@ tr.mat-footer-row {
 th.mat-header-cell {
   font-weight: bold;
 }
+
+.container{
+  /*border: 1px solid grey;*/
+  /*border-radius: 10px;*/
+  /*background-color: #F6F6FF;*/
+  height: 100%;
+  background: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   padding-bottom: 10px;*/
+}
+
+.transaction:hover {
+  background: #FFE0B2;
+  cursor: pointer;
+}
+
+.amount-expense, .amount-income {
+  background: #FFAB91;
+  text-align: center;
+  width: 90px;
+  border-radius: 15px;
+  padding: 3px 7px;
+}
+
+.amount-income {
+  background: #80CBC4;
+}
+
+
