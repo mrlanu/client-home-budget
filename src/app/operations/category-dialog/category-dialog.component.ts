@@ -18,13 +18,17 @@ export class CategoryDialogComponent implements OnInit {
   ngOnInit() {
     if (this.passedData === 'category') {
       this.placeholder = 'New Category';
+      this.categoryForm = new FormGroup({
+        'name': new FormControl('', Validators.required),
+        'type': new FormControl('EXPENSE')
+      });
     }
     if (this.passedData === 'subcategory') {
       this.placeholder = 'New Subcategory';
+      this.categoryForm = new FormGroup({
+        'name': new FormControl('', Validators.required),
+      });
     }
-    this.categoryForm = new FormGroup({
-      'name': new FormControl('', Validators.required)
-    });
   }
 
   onCancel() {

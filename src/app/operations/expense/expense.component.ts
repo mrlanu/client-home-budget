@@ -36,7 +36,9 @@ export class ExpenseComponent implements OnInit, OnDestroy {
       }));
     this.componentSubs.push(this.httpService.categoryChange
       .subscribe((categories: Category[]) => {
-        this.categories = categories;
+        this.categories = categories.filter(category => {
+          return category.type === 'EXPENSE';
+        });
       }));
     this.componentSubs.push(this.httpService.subcategoryChange
       .subscribe((subcategories: Subcategory[]) => {
