@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HttpService} from '../../http.service';
 import {Subscription} from 'rxjs';
@@ -17,6 +17,7 @@ import {UiService} from '../../shared/ui.service';
 })
 export class ExpenseIncomeComponent implements OnInit, OnDestroy {
 
+  @Input() type = '';
   componentSubs: Subscription[] = [];
   expenseForm: FormGroup;
   categories: Category[] = [];
@@ -37,7 +38,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
     this.componentSubs.push(this.httpService.categoryChange
       .subscribe((categories: Category[]) => {
         this.categories = categories.filter(category => {
-          return category.type === 'EXPENSE';
+          return category.type === this.type;
         });
       }));
     this.componentSubs.push(this.httpService.subcategoryChange
@@ -51,7 +52,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
   initForm() {
     this.expenseForm = new FormGroup({
       date: new FormControl(new Date()),
-      type: new FormControl('EXPENSE'),
+      type: new FormControl(this.type),
       description: new FormControl(),
       amount: new FormControl(0),
       account: new FormControl(),
@@ -134,8 +135,12 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
     this.expenseForm.patchValue({account: acc, category: cat, subCategory: subcat});
     this.componentSubs.push(this.httpService.createTransaction(this.expenseForm.value)
       .subscribe(transaction => {
-        this.expenseForm.reset({'date': new Date(), 'type': 'EXPENSE'});
-        this.uiService.openSnackBar('Expense has been created', null, 5000);
+        this.expenseForm.reset({'date': new Date(), 'type': this.type});
+        if (this.type === 'EXPENSE') {
+          this.uiService.openSnackBar('Expense has been created', null, 5000);
+        } else if (this.type === 'INCOME') {
+          this.uiService.openSnackBar('Income has been created', null, 5000);
+        }
       }));
   }
 

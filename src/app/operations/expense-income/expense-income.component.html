@@ -1,6 +1,9 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <mat-card-title>Add Expense</mat-card-title>
+    <mat-card-title>
+      <div *ngIf="type === 'EXPENSE'">Add Expense</div>
+      <div *ngIf="type === 'INCOME'">Add Income</div>
+    </mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
@@ -61,7 +64,10 @@
         </mat-form-field>
 
         <div style="padding-top: 30px; padding-right: 15px" fxFlexAlign="end">
-          <button type="submit" mat-raised-button color="primary">Save the expense</button>
+          <button type="submit" mat-raised-button color="primary">
+            <div *ngIf="type === 'EXPENSE'">Save the expense</div>
+            <div *ngIf="type === 'INCOME'">Save the income</div>
+          </button>
         </div>
       </form>
     </div>
