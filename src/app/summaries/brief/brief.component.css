@@ -1,0 +1,16 @@
+.container {
+  background: #FFA726;
+  color: #004D40;
+  font-weight: bold;
+  height: 100%;
+  width: 600px;
+  font-size: 18px;
+  margin-left: 150px;
+  border: 1px solid #004F43;
+}
+
+.item:hover {
+  font-size: 26px;
+  cursor: none;
+}
+

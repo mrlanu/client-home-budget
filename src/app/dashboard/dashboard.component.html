@@ -6,6 +6,7 @@
   <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Hello, {{ loggedInUserName | async }}</div>
 
   <header gdArea="hd">
+    <app-brief></app-brief>
     <div fxLayout fxFlex fxLayoutAlign="end center">
       <button mat-raised-button color="accent" (click)="onLogOut()">Logout</button>
     </div>

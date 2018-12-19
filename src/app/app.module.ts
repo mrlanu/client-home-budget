@@ -31,6 +31,7 @@ import {AccountsListComponent} from './summaries/accounts-list/accounts-list.com
 import {MainComponent} from './main/main.component';
 import { SummariesViewComponent } from './summaries/summaries-view/summaries-view.component';
 import {SummaryService} from './summaries/summary.service';
+import { BriefComponent } from './summaries/brief/brief.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {SummaryService} from './summaries/summary.service';
     AccountsListComponent,
     MainComponent,
     SummariesViewComponent,
+    BriefComponent,
   ],
   imports: [
     MaterialModule,
