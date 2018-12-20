@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpService} from '../../http.service';
 import {Subscription} from 'rxjs';
 import {Account} from '../../models/account.model';
@@ -56,7 +56,10 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
       date: new FormControl(new Date()),
       type: new FormControl(this.type),
       description: new FormControl(),
-      amount: new FormControl(0),
+      amount: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^[1-9]+[0-9]*$/)
+      ]),
       account: new FormControl(),
       category: new FormControl(),
       subCategory: new FormControl()

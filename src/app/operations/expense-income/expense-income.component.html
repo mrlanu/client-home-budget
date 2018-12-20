@@ -17,7 +17,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Category" formControlName="category" (valueChange)="onSelectCategory($event)">
+          <mat-select placeholder="Category" formControlName="category" (valueChange)="onSelectCategory($event)" required>
             <mat-option *ngFor="let category of categories" [value]="category.id">
               {{ category.name }}
             </mat-option>
@@ -30,7 +30,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Subcategory" formControlName="subCategory">
+          <mat-select placeholder="Subcategory" formControlName="subCategory" required>
             <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.id">
               {{ subcategory.name }}
             </mat-option>
@@ -43,7 +43,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Account" formControlName="account">
+          <mat-select placeholder="Account" formControlName="account" required>
             <mat-option *ngFor="let account of accounts" [value]="account.id">
               {{account.name}}
             </mat-option>
@@ -56,7 +56,10 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input type="number" placeholder="Amount" formControlName="amount" matInput>
+          <input type="number" placeholder="Amount" formControlName="amount" matInput required>
+          <mat-error *ngIf="expenseForm.hasError('required')">
+            Amount is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -64,7 +67,7 @@
         </mat-form-field>
 
         <div style="padding-top: 30px; padding-right: 15px" fxFlexAlign="end">
-          <button type="submit" mat-raised-button color="primary">
+          <button type="submit" mat-raised-button color="primary" [disabled]="expenseForm.invalid || expenseForm.untouched">
             <div *ngIf="type === 'EXPENSE'">Save the expense</div>
             <div *ngIf="type === 'INCOME'">Save the income</div>
           </button>
