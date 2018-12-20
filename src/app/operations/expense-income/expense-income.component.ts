@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
 import {AccountDialogComponent} from '../account-dialog/account-dialog.component';
 import {UiService} from '../../shared/ui.service';
+import {SummaryService} from '../../summaries/summary.service';
 
 @Component({
   selector: 'app-expense-income',
@@ -26,6 +27,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
   accounts: Account[] = [];
 
   constructor(private httpService: HttpService,
+              private summaryService: SummaryService,
               private dialog: MatDialog,
               private uiService: UiService) { }
 
@@ -149,6 +151,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
         } else if (this.type === 'INCOME') {
           this.uiService.openSnackBar('Income has been created', null, 5000);
         }
+        this.summaryService.getBrief();
       }));
   }
 
