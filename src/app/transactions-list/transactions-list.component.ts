@@ -6,6 +6,8 @@ import {TransactionView} from '../models/transaction-view.model';
 import {SummaryService} from '../summaries/summary.service';
 import {DeleteConfirmComponent} from '../shared/delete-confirm.component';
 import {UiService} from '../shared/ui.service';
+import {EditTransactionDialogComponent} from '../operations/edit-transaction-dialog/edit-transaction-dialog.component';
+import {Transaction} from '../models/transaction.model';
 
 @Component({
   selector: 'app-transactions-list',
@@ -54,9 +56,32 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   onSelectTransaction(row) {
-    if (!this.isDeleteButtonClicked) {
-      console.log(row);
+    if (this.isDeleteButtonClicked) {
+      return;
     }
+
+    this.componentSubs.push(this.httpService.getTransaction(row.id)
+      .subscribe((transaction: Transaction) => {
+        const dialogRef = this.dialog.open(EditTransactionDialogComponent, {
+          width: '500px',
+          data: transaction
+        });
+        dialogRef.afterClosed()
+          .subscribe(editedTransaction => {
+            if (editedTransaction) {
+              /*this.httpService.deleteTransaction(transaction.id).subscribe(response => {
+                this.uiService.openSnackBar('Transaction has been deleted', null, 5000);
+                this.summaryService.getBrief();
+                this.summaryService.getSummaryByAccount();
+                this.summaryService.getSummaryByCategories(new Date(), transaction.type);
+              }, error1 => {
+                this.uiService.openSnackBar(error1, null, 5000);
+              });*/
+              console.log(editedTransaction);
+            }
+            this.isDeleteButtonClicked = false;
+          });
+      }));
   }
 
   onDeleteTransaction(transaction: TransactionView) {
@@ -76,6 +101,7 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
             this.uiService.openSnackBar(error1, null, 5000);
           });
         }
+        this.isDeleteButtonClicked = false;
       });
   }
 

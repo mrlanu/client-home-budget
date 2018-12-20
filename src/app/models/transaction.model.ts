@@ -10,5 +10,5 @@ export interface Transaction {
   amount: number;
   account: Account;
   category: Category;
-  subcategory: Subcategory;
+  subCategory: Subcategory;
 }

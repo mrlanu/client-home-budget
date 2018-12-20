@@ -33,6 +33,7 @@ import { SummariesViewComponent } from './summaries/summaries-view/summaries-vie
 import {SummaryService} from './summaries/summary.service';
 import { BriefComponent } from './summaries/brief/brief.component';
 import {DeleteConfirmComponent} from './shared/delete-confirm.component';
+import { EditTransactionDialogComponent } from './operations/edit-transaction-dialog/edit-transaction-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {DeleteConfirmComponent} from './shared/delete-confirm.component';
     MainComponent,
     SummariesViewComponent,
     BriefComponent,
-    DeleteConfirmComponent
+    DeleteConfirmComponent,
+    EditTransactionDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -73,6 +75,6 @@ import {DeleteConfirmComponent} from './shared/delete-confirm.component';
     HttpService
     ],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDialogComponent, AccountDialogComponent, DeleteConfirmComponent]
+  entryComponents: [CategoryDialogComponent, AccountDialogComponent, DeleteConfirmComponent, EditTransactionDialogComponent]
 })
 export class AppModule { }
