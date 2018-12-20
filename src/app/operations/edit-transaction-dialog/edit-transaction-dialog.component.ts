@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Transaction} from '../../models/transaction.model';
 import {Account} from '../../models/account.model';
@@ -52,10 +52,16 @@ export class EditTransactionDialogComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.expenseForm = new FormGroup({
+      id: new FormControl(this.passedData.id),
       date: new FormControl(this.passedData.date),
       type: new FormControl(this.passedData.type),
       description: new FormControl(this.passedData.description),
-      amount: new FormControl(this.passedData.amount),
+      amount: new FormControl(
+        (this.passedData.amount < 0) ? this.passedData.amount * -1 : this.passedData.amount,
+        [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ]),
       account: new FormControl(this.passedData.account.id),
       category: new FormControl(this.passedData.category.id),
       subCategory: new FormControl(this.passedData.subCategory.id)

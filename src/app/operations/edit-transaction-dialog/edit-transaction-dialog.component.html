@@ -40,7 +40,7 @@
     </mat-form-field>
 
     <div style="padding-top: 30px; padding-right: 15px" fxFlexAlign="end">
-      <button type="submit" mat-raised-button color="primary" [disabled]="expenseForm.untouched">
+      <button type="submit" mat-raised-button color="primary" [disabled]="expenseForm.invalid || expenseForm.untouched">
         <div *ngIf="type === 'EXPENSE'">Save the expense</div>
         <div *ngIf="type === 'INCOME'">Save the income</div>
       </button>

@@ -28,6 +28,11 @@ export class HttpService {
     return this.httpClient.get(url);
   }
 
+  editTransaction(transaction: Transaction) {
+    const url = this.baseUrl + '/transactions';
+    return this.httpClient.put(url, transaction);
+  }
+
   deleteTransaction(transactionId: number) {
     const url = this.baseUrl + '/transactions';
     const params = new HttpParams().set('transactionId', transactionId.toString());

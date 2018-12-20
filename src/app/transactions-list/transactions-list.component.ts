@@ -69,15 +69,14 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
         dialogRef.afterClosed()
           .subscribe(editedTransaction => {
             if (editedTransaction) {
-              /*this.httpService.deleteTransaction(transaction.id).subscribe(response => {
-                this.uiService.openSnackBar('Transaction has been deleted', null, 5000);
+              this.httpService.editTransaction(editedTransaction).subscribe(tr => {
+                this.uiService.openSnackBar('Transaction has been edited', null, 5000);
                 this.summaryService.getBrief();
                 this.summaryService.getSummaryByAccount();
                 this.summaryService.getSummaryByCategories(new Date(), transaction.type);
               }, error1 => {
                 this.uiService.openSnackBar(error1, null, 5000);
-              });*/
-              console.log(editedTransaction);
+              });
             }
             this.isDeleteButtonClicked = false;
           });
