@@ -32,6 +32,7 @@ import {MainComponent} from './main/main.component';
 import { SummariesViewComponent } from './summaries/summaries-view/summaries-view.component';
 import {SummaryService} from './summaries/summary.service';
 import { BriefComponent } from './summaries/brief/brief.component';
+import {DeleteConfirmComponent} from './shared/delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { BriefComponent } from './summaries/brief/brief.component';
     MainComponent,
     SummariesViewComponent,
     BriefComponent,
+    DeleteConfirmComponent
   ],
   imports: [
     MaterialModule,
@@ -71,6 +73,6 @@ import { BriefComponent } from './summaries/brief/brief.component';
     HttpService
     ],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDialogComponent, AccountDialogComponent]
+  entryComponents: [CategoryDialogComponent, AccountDialogComponent, DeleteConfirmComponent]
 })
 export class AppModule { }

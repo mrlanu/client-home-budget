@@ -23,6 +23,12 @@ export class HttpService {
     return this.httpClient.post(url, transaction);
   }
 
+  deleteTransaction(transactionId: number) {
+    const url = this.baseUrl + '/transactions';
+    const params = new HttpParams().set('transactionId', transactionId.toString());
+    return this.httpClient.delete(url, {params});
+  }
+
   createCategory(category: Category) {
     const url = this.baseUrl + '/categories';
     return this.httpClient.post(url, category);

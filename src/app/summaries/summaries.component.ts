@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {SummaryService} from './summary.service';
-import {HttpService} from '../http.service';
 
 @Component({
   selector: 'app-summaries',
@@ -11,7 +10,7 @@ export class SummariesComponent implements OnInit {
 
   tabs = ['ACCOUNTS', 'EXPENSE', 'INCOME'];
 
-  constructor(private summaryService: SummaryService, private httpService: HttpService) { }
+  constructor(private summaryService: SummaryService) { }
 
   ngOnInit() {
   }

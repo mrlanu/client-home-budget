@@ -1,9 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
 import {HttpService} from '../http.service';
 import {TransactionView} from '../models/transaction-view.model';
 import {SummaryService} from '../summaries/summary.service';
+import {DeleteConfirmComponent} from '../shared/delete-confirm.component';
+import {UiService} from '../shared/ui.service';
 
 @Component({
   selector: 'app-transactions-list',
@@ -11,15 +13,20 @@ import {SummaryService} from '../summaries/summary.service';
   styleUrls: ['./transactions-list.component.css']
 })
 export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestroy {
-  displayedColumns: string[] = ['date', 'category', 'account', 'description', 'amount'];
+  displayedColumns: string[] = ['date', 'category', 'account', 'description', 'amount', 'delete_button'];
   dataSource = new MatTableDataSource<TransactionView>();
   total = 0;
+
+  isDeleteButtonClicked = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   componentSubs: Subscription[] = [];
 
-  constructor(private httpService: HttpService, private summaryService: SummaryService) {}
+  constructor(private httpService: HttpService,
+              private summaryService: SummaryService,
+              private dialog: MatDialog,
+              private uiService: UiService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -46,8 +53,30 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
     return this.dataSource.data.map(t => t.amount).reduce((acc, value) => acc + value, 0);
   }
 
-  onSelectFreight(row) {
-    console.log(row);
+  onSelectTransaction(row) {
+    if (!this.isDeleteButtonClicked) {
+      console.log(row);
+    }
+  }
+
+  onDeleteTransaction(transaction: TransactionView) {
+    this.isDeleteButtonClicked = true;
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(decision => {
+        if (decision) {
+          this.httpService.deleteTransaction(transaction.id).subscribe(response => {
+            this.uiService.openSnackBar('Transaction has been deleted', null, 5000);
+            this.summaryService.getBrief();
+            this.summaryService.getSummaryByAccount();
+            this.summaryService.getSummaryByCategories(new Date(), transaction.type);
+          }, error1 => {
+            this.uiService.openSnackBar(error1, null, 5000);
+          });
+        }
+      });
   }
 
   ngOnDestroy(): void {
