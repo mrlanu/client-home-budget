@@ -15,8 +15,6 @@ import {HttpService} from '../../http.service';
 })
 export class EditTransactionDialogComponent implements OnInit, OnDestroy {
 
-  expenseForm: FormGroup;
-
   componentSubs: Subscription[] = [];
   expenseForm: FormGroup;
   categories: Category[] = [];

@@ -34,6 +34,7 @@ import {SummaryService} from './summaries/summary.service';
 import { BriefComponent } from './summaries/brief/brief.component';
 import {DeleteConfirmComponent} from './shared/delete-confirm.component';
 import { EditTransactionDialogComponent } from './operations/edit-transaction-dialog/edit-transaction-dialog.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { EditTransactionDialogComponent } from './operations/edit-transaction-di
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [
     HttpPortalService, UiService,
