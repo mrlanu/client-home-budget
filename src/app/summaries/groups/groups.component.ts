@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../http.service';
 import {Group} from '../../models/group.model';
 import {Subscription} from 'rxjs';
 import {SummaryService} from '../summary.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-groups',
@@ -16,7 +17,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
   totalSpent: number;
 
-  constructor(private httpService: HttpService, private summaryService: SummaryService) { }
+  constructor(private httpService: HttpService, private summaryService: SummaryService, private router: Router) { }
 
   ngOnInit() {
     this.componentSubs.push(this.summaryService.groupsChange
@@ -42,6 +43,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   onSubcategorySelect(subcategoryName: string) {
     this.summaryService.filterTransactionsViewBySubcategory(subcategoryName, this.typeOfTransactions);
+  }
+
+  onAdd() {
+    this.router.navigate(['/main', 'dashboard', 'operations']);
   }
 
   ngOnDestroy(): void {
