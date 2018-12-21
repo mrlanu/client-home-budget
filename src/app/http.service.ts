@@ -18,6 +18,12 @@ export class HttpService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getSumsByMonth(transactionType: string) {
+    const url = this.baseUrl + '/summaries/sums-by-month';
+    const params = new HttpParams().set('type', transactionType);
+    return this.httpClient.get(url, { params });
+  }
+
   createTransaction(transaction: Transaction) {
     const url = this.baseUrl + '/transactions';
     return this.httpClient.post(url, transaction);

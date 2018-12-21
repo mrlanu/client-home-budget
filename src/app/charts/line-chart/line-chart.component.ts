@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpService} from '../../http.service';
+import {YearMonthSum} from '../../models/year-month-sum';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,9 +11,9 @@ export class LineChartComponent implements OnInit {
 
   // lineChart
   public lineChartData: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
+    {data: [], label: 'Expenses'}
   ];
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Array<any> = [];
   public lineChartOptions: any = {
     responsive: true
   };
@@ -44,9 +46,15 @@ export class LineChartComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.httpService.getSumsByMonth('EXPENSE')
+      .subscribe((result: YearMonthSum) => {
+      this.lineChartData[0].data = result.sum;
+      this.lineChartLabels = result.date;
+      console.log(result);
+    });
   }
 
 }
