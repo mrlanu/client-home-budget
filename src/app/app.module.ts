@@ -35,7 +35,7 @@ import { BriefComponent } from './summaries/brief/brief.component';
 import {DeleteConfirmComponent} from './shared/delete-confirm.component';
 import { EditTransactionDialogComponent } from './operations/edit-transaction-dialog/edit-transaction-dialog.component';
 import {ChartsModule} from 'ng2-charts';
-import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
     BriefComponent,
     DeleteConfirmComponent,
     EditTransactionDialogComponent,
-    LineChartComponent
+    BarChartComponent
   ],
   imports: [
     MaterialModule,

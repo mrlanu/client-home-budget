@@ -5,17 +5,17 @@ import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  templateUrl: './bar-chart.component.html',
+  styleUrls: ['./bar-chart.component.css']
 })
-export class LineChartComponent implements OnInit, OnDestroy {
+export class BarChartComponent implements OnInit, OnDestroy {
 
   componentSubs: Subscription[] = [];
 
   // lineChart
   public lineChartData: Array<any> = [
-    {data: [], label: 'Expenses'},
-    {data: [], label: 'Income'}
+    {data: [], label: 'Incomes'},
+    {data: [], label: 'Expenses'}
   ];
   public lineChartLabels: Array<any> = [];
   public lineChartOptions: any = {
@@ -23,17 +23,17 @@ export class LineChartComponent implements OnInit, OnDestroy {
   };
   public lineChartColors: Array<any> = [
     { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      backgroundColor: 'rgba(0,79,67,0.6)',
+      borderColor: 'rgba(0,79,67,1)',
+      pointBackgroundColor: 'rgba(0,79,67,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
     { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
+      backgroundColor: 'rgba(255,76,53,0.6)',
+      borderColor: 'rgba(230,58,41,1)',
+      pointBackgroundColor: 'rgba(255,76,53,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
@@ -48,20 +48,17 @@ export class LineChartComponent implements OnInit, OnDestroy {
     }
   ];
   public lineChartLegend = true;
-  public lineChartType = 'line';
+  public lineChartType = 'bar';
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.httpService.getSumsByMonth('EXPENSE')
-      .subscribe((result: YearMonthSum) => {
-      this.lineChartData[0].data = result.sum;
-      this.lineChartLabels = result.date;
-      });
-    this.httpService.getSumsByMonth('INCOME')
-      .subscribe((result: YearMonthSum) => {
-        this.lineChartData[1].data = result.sum;
-      });
+    this.componentSubs.push(this.httpService.getSumsOfIncomesExpensesForYearByMonth()
+      .subscribe((result: YearMonthSum[]) => {
+      this.lineChartData[0].data = result[0].sum;
+        this.lineChartData[1].data = result[1].sum;
+      this.lineChartLabels = result[0].date;
+      }));
   }
 
   ngOnDestroy() {
