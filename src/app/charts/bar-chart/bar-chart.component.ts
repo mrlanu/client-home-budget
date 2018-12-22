@@ -13,15 +13,15 @@ export class BarChartComponent implements OnInit, OnDestroy {
   componentSubs: Subscription[] = [];
 
   // lineChart
-  public lineChartData: Array<any> = [
+  public barChartData: Array<any> = [
     {data: [], label: 'Incomes'},
     {data: [], label: 'Expenses'}
   ];
-  public lineChartLabels: Array<any> = [];
-  public lineChartOptions: any = {
+  public barChartLabels: Array<any> = [];
+  public barChartOptions: any = {
     responsive: true
   };
-  public lineChartColors: Array<any> = [
+  public barChartColors: Array<any> = [
     { // grey
       backgroundColor: 'rgba(0,79,67,0.6)',
       borderColor: 'rgba(0,79,67,1)',
@@ -47,17 +47,17 @@ export class BarChartComponent implements OnInit, OnDestroy {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
-  public lineChartLegend = true;
-  public lineChartType = 'bar';
+  public barChartLegend = true;
+  public barChartType = 'bar';
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
     this.componentSubs.push(this.httpService.getSumsOfIncomesExpensesForYearByMonth()
       .subscribe((result: YearMonthSum[]) => {
-      this.lineChartData[0].data = result[0].sum;
-        this.lineChartData[1].data = result[1].sum;
-      this.lineChartLabels = result[0].date;
+        this.barChartData[0].data = result[0].sum;
+        this.barChartData[1].data = result[1].sum;
+        this.barChartLabels = result[0].date;
       }));
   }
 
