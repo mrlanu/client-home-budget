@@ -23,6 +23,12 @@ export class HttpService {
     return this.httpClient.get(url);
   }
 
+  getSpentMonthToMonthByCategory(categoryId: number) {
+    const url = this.baseUrl + '/charts/spentMonthToMonthByCategory';
+    const params = new HttpParams().set('categoryId', categoryId.toString());
+    return this.httpClient.get(url, {params});
+  }
+
   createTransaction(transaction: Transaction) {
     const url = this.baseUrl + '/transactions';
     return this.httpClient.post(url, transaction);

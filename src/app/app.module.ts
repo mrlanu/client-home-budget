@@ -38,6 +38,7 @@ import {ChartsModule} from 'ng2-charts';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
 import { ChartsComponent } from './charts/charts.component';
+import { LineChartComponent } from './charts/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ChartsComponent } from './charts/charts.component';
     EditTransactionDialogComponent,
     BarChartComponent,
     DoughnutChartComponent,
-    ChartsComponent
+    ChartsComponent,
+    LineChartComponent
   ],
   imports: [
     MaterialModule,
