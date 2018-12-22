@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onCharts() {
-    this.router.navigate(['/main', 'dashboard', 'line-chart']);
+    this.router.navigate(['/main', 'dashboard', 'charts']);
   }
 
   onLogOut() {

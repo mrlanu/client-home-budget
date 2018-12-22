@@ -4,7 +4,7 @@ import {YearMonthSum} from '../../models/year-month-sum';
 import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-line-chart',
+  selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.css']
 })

@@ -36,6 +36,8 @@ import {DeleteConfirmComponent} from './shared/delete-confirm.component';
 import { EditTransactionDialogComponent } from './operations/edit-transaction-dialog/edit-transaction-dialog.component';
 import {ChartsModule} from 'ng2-charts';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
+import { ChartsComponent } from './charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
     BriefComponent,
     DeleteConfirmComponent,
     EditTransactionDialogComponent,
-    BarChartComponent
+    BarChartComponent,
+    DoughnutChartComponent,
+    ChartsComponent
   ],
   imports: [
     MaterialModule,
