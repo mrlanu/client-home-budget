@@ -10,11 +10,11 @@ import {LineChartComponent} from './charts/line-chart/line-chart.component';
 
 const routes: Routes = [
   {path: 'welcome-page', component: WelcomePageComponent},
-  {path: 'line-chart', component: LineChartComponent},
   {path: 'main', component: MainComponent, canActivateChild: [AuthGuard], children: [
     {path: 'dashboard', component: DashboardComponent, children: [
         {path: 'summaries', component: SummariesViewComponent},
-        {path: 'operations', component: OperationsComponent}
+        {path: 'operations', component: OperationsComponent},
+        {path: 'line-chart', component: LineChartComponent}
       ]},
     ]},
   {path: '**', redirectTo: '/welcome-page'}
