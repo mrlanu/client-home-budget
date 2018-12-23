@@ -13,7 +13,8 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   componentSubs: Subscription[] = [];
   categories: Category[] = [];
-  chart = false;
+  selectedCategoryId: number;
+  category = 'Nothing';
 
   // lineChart
   public lineChartData: Array<any> = [
@@ -49,15 +50,17 @@ export class LineChartComponent implements OnInit, OnDestroy {
       .subscribe((result: YearMonthSum) => {
         this.lineChartData[0].data = result.sum;
         this.lineChartLabels = result.date;
-        this.chart = true;
+        this.category = this.categories.find(c => {
+          return c.id === this.selectedCategoryId;
+        }).name;
       }));
     this.httpService.getAllCategories();
     this.httpService.getSpentMonthToMonthByCategory(-1);
   }
 
   onSelectCategory(event) {
-    console.log(event);
     this.httpService.getSpentMonthToMonthByCategory(event);
+    this.selectedCategoryId = event;
   }
 
   ngOnDestroy() {
