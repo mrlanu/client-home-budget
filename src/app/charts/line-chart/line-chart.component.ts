@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {HttpService} from '../../http.service';
 import {YearMonthSum} from '../../models/year-month-sum';
+import {Category} from '../../models/category.model';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,7 +10,10 @@ import {YearMonthSum} from '../../models/year-month-sum';
   styleUrls: ['./line-chart.component.css']
 })
 export class LineChartComponent implements OnInit, OnDestroy {
+
   componentSubs: Subscription[] = [];
+  categories: Category[] = [];
+  chart = false;
 
   // lineChart
   public lineChartData: Array<any> = [
@@ -20,29 +24,13 @@ export class LineChartComponent implements OnInit, OnDestroy {
     responsive: true
   };
   public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(0,79,67,0.6)',
-      borderColor: 'rgba(0,79,67,1)',
-      pointBackgroundColor: 'rgba(0,79,67,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(255,76,53,0.6)',
+    { // red grey
+      backgroundColor: 'rgba(255,76,53,0.3)',
       borderColor: 'rgba(230,58,41,1)',
       pointBackgroundColor: 'rgba(255,76,53,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
   public lineChartLegend = true;
@@ -51,12 +39,25 @@ export class LineChartComponent implements OnInit, OnDestroy {
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
-    this.componentSubs.push(this.httpService.getSpentMonthToMonthByCategory(1)
+    this.componentSubs.push(this.httpService.categoryChange
+      .subscribe((categories: Category[]) => {
+        this.categories = categories.filter(category => {
+          return category.type === 'EXPENSE';
+        });
+      }));
+    this.componentSubs.push(this.httpService.spentMonthToMonthByCategoryChange
       .subscribe((result: YearMonthSum) => {
         this.lineChartData[0].data = result.sum;
         this.lineChartLabels = result.date;
-        console.log(result);
+        this.chart = true;
       }));
+    this.httpService.getAllCategories();
+    this.httpService.getSpentMonthToMonthByCategory(-1);
+  }
+
+  onSelectCategory(event) {
+    console.log(event);
+    this.httpService.getSpentMonthToMonthByCategory(event);
   }
 
   ngOnDestroy() {

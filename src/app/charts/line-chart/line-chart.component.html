@@ -1,6 +1,6 @@
-<div class="container" style="display: block;">
+<div class="container" fxLayout="column" fxFlexAlign="center" fxLayoutGap="20px">
   <div>
-    Name of Chart
+    Spent for Category
   </div>
   <canvas baseChart width="400" height="200"
           [datasets]="lineChartData"
@@ -10,5 +10,16 @@
           [legend]="lineChartLegend"
           [chartType]="lineChartType"
           (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+          (chartClick)="chartClicked($event)">
+
+  </canvas>
+  <div fxLayout fxLayoutAlign="center">
+    <mat-form-field>
+      <mat-select placeholder="Category" (valueChange)="onSelectCategory($event)">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>

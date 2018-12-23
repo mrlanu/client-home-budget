@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
 import {Account} from './models/account.model';
+import {YearMonthSum} from './models/year-month-sum';
 
 @Injectable()
 export class HttpService {
@@ -13,6 +14,7 @@ export class HttpService {
   accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
+  spentMonthToMonthByCategoryChange = new Subject<YearMonthSum>();
 
   baseUrl = environment.baseUrl;
 
@@ -26,7 +28,9 @@ export class HttpService {
   getSpentMonthToMonthByCategory(categoryId: number) {
     const url = this.baseUrl + '/charts/spentMonthToMonthByCategory';
     const params = new HttpParams().set('categoryId', categoryId.toString());
-    return this.httpClient.get(url, {params});
+    this.httpClient.get(url, {params}).subscribe((res: YearMonthSum) => {
+      this.spentMonthToMonthByCategoryChange.next(res);
+    });
   }
 
   createTransaction(transaction: Transaction) {
