@@ -39,6 +39,7 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.component';
 import { ChartsComponent } from './charts/charts.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
+import { TransferComponent } from './operations/transfer/transfer.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
     BarChartComponent,
     DoughnutChartComponent,
     ChartsComponent,
-    LineChartComponent
+    LineChartComponent,
+    TransferComponent
   ],
   imports: [
     MaterialModule,

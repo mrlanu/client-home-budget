@@ -1,0 +1,47 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div>Transfer</div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div style="height: 425px">
+      <form [formGroup]="transferForm" (ngSubmit)="onSubmit(rt)" fxLayout="column" fxLayoutAlign="center center">
+
+        <mat-form-field>
+          <mat-select placeholder="From Account" formControlName="fromAccount" required #first>
+            <mat-option *ngFor="let account of accounts" [value]="account.id">
+              {{account.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="To Account" formControlName="toAccount" required #second>
+            <mat-option *ngFor="let account of accounts" [value]="account.id" [disabled]="first.value === account.id">
+              {{account.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="number" placeholder="Amount" formControlName="amount" matInput required>
+          <mat-error *ngIf="transferForm.hasError('required')">
+            Amount is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div fxFlexAlign="end">
+          <button type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="transferForm.invalid || transferForm.untouched || first.value === second.value">
+            <div>Transfer</div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+

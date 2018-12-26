@@ -114,4 +114,14 @@ export class HttpService {
     const params = new HttpParams();
     return this.httpClient.get(url);
   }
+
+  createTransfer(accFromId: number, accToId: number, amount: number) {
+    const url = this.baseUrl + '/transfers';
+    const params = new HttpParams()
+      .set('accFromId', accFromId.toString())
+      .set('accToId', accToId.toString())
+      .set('amount', amount.toString());
+
+    return this.httpClient.post(url, null, {params});
+  }
 }
