@@ -38,6 +38,28 @@ a:hover {
   font-size: 20px;
 }
 
+.tree {
+  width: 150px;
+}
+
+.snowman {
+  width: 180px;
+}
+
+.snowman-container {
+  position: absolute;
+  bottom: 1px;
+  right: 100px;
+}
+
+.tree-container {
+  width: 150px;
+  position: relative;
+  top: 280px;
+  left: 45px;
+}
+
+
 .active{
   font-size: 20px;
   border-bottom: #004F43 1px solid;
