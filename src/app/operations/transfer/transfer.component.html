@@ -7,7 +7,14 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <div style="height: 425px">
-      <form [formGroup]="transferForm" (ngSubmit)="onSubmit(rt)" fxLayout="column" fxLayoutAlign="center center">
+      <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+
+        <mat-form-field  style="margin-top: 20px">
+          <input name="date" placeholder="Date" formControlName="date" matInput required
+                 [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
         <mat-form-field>
           <mat-select placeholder="From Account" formControlName="fromAccount" required #first>
@@ -31,7 +38,7 @@
             Amount is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-
+        <div style="height: 145px"></div>
         <div fxFlexAlign="end">
           <button type="submit"
                   mat-raised-button

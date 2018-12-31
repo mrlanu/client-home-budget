@@ -60,6 +60,10 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
       return;
     }
 
+    if (row.type === 'TRANSFER') {
+      return;
+    }
+
     this.componentSubs.push(this.httpService.getTransaction(row.id)
       .subscribe((transaction: Transaction) => {
         const dialogRef = this.dialog.open(EditTransactionDialogComponent, {
@@ -71,9 +75,7 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
             if (editedTransaction) {
               this.httpService.editTransaction(editedTransaction).subscribe(tr => {
                 this.uiService.openSnackBar('Transaction has been edited', null, 5000);
-                this.summaryService.getBrief();
-                this.summaryService.getSummaryByAccount();
-                this.summaryService.getSummaryByCategories(new Date(), transaction.type);
+                this.refreshAllSummaries(transaction.type);
               }, error1 => {
                 this.uiService.openSnackBar(error1, null, 5000);
               });
@@ -93,15 +95,19 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
         if (decision) {
           this.httpService.deleteTransaction(transaction.id).subscribe(response => {
             this.uiService.openSnackBar('Transaction has been deleted', null, 5000);
-            this.summaryService.getBrief();
-            this.summaryService.getSummaryByAccount();
-            this.summaryService.getSummaryByCategories(new Date(), transaction.type);
+            this.refreshAllSummaries(transaction.type);
           }, error1 => {
             this.uiService.openSnackBar(error1, null, 5000);
           });
         }
         this.isDeleteButtonClicked = false;
       });
+  }
+
+  refreshAllSummaries(transactionType: string) {
+    this.summaryService.getBrief();
+    this.summaryService.getSummaryByAccount();
+    this.summaryService.getSummaryByCategories(new Date(), transactionType);
   }
 
   ngOnDestroy(): void {

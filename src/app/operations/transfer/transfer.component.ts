@@ -30,6 +30,7 @@ export class TransferComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.transferForm = new FormGroup({
+      date: new FormControl(new Date()),
       fromAccount: new FormControl(null, [Validators.required]),
       toAccount: new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [
@@ -41,8 +42,14 @@ export class TransferComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const val = this.transferForm.value;
-    this.componentSubs.push(this.httpService.createTransfer(val.fromAccount, val.toAccount, val.amount)
-      .subscribe(result => console.log(result)));
+    this.componentSubs.push(this.httpService.createTransfer(
+      {
+              accFromId: val.fromAccount,
+              accToId: val.toAccount,
+              amount: val.amount,
+              date: val.date
+              })
+      .subscribe(result => {}));
   }
 
   ngOnDestroy(): void {

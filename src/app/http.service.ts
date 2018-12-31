@@ -7,6 +7,7 @@ import {Category} from './models/category.model';
 import {Subcategory} from './models/subcategory.model';
 import {Account} from './models/account.model';
 import {YearMonthSum} from './models/year-month-sum';
+import {Transfer} from './models/transfer.model';
 
 @Injectable()
 export class HttpService {
@@ -94,7 +95,7 @@ export class HttpService {
 
   getSummaryByCategories(date: Date, type: string) {
     const url = this.baseUrl + '/summaries/categories';
-    const params = new HttpParams().set('date', date.toDateString()).set('type', type);
+    const params = new HttpParams().set('date', date.toString()).set('type', type);
     return this.httpClient.get(url, { params });
   }
 
@@ -105,23 +106,22 @@ export class HttpService {
 
   getAllTransactions(date: Date) {
     const url = this.baseUrl + '/transactions';
-    const params = new HttpParams().set('date', date.toDateString());
+    const params = new HttpParams().set('date', date.toString());
     return this.httpClient.get(url, { params });
   }
 
   getBrief() {
     const url = this.baseUrl + '/summaries/brief';
-    const params = new HttpParams();
     return this.httpClient.get(url);
   }
 
-  createTransfer(accFromId: number, accToId: number, amount: number) {
+  createTransfer(transfer: Transfer) {
     const url = this.baseUrl + '/transfers';
     const params = new HttpParams()
-      .set('accFromId', accFromId.toString())
-      .set('accToId', accToId.toString())
-      .set('amount', amount.toString());
-
+      .set('date', transfer.date.toString())
+      .set('accFromId', transfer.accFromId.toString())
+      .set('accToId', transfer.accToId.toString())
+      .set('amount', transfer.amount.toString());
     return this.httpClient.post(url, null, {params});
   }
 }
