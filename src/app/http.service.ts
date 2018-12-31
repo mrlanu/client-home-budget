@@ -124,4 +124,9 @@ export class HttpService {
       .set('amount', transfer.amount.toString());
     return this.httpClient.post(url, null, {params});
   }
+
+  getTransfer(transferId: number) {
+    const url = this.baseUrl + '/transfers/' + transferId;
+    return this.httpClient.get(url);
+  }
 }

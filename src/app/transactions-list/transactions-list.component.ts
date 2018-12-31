@@ -8,6 +8,7 @@ import {DeleteConfirmComponent} from '../shared/delete-confirm.component';
 import {UiService} from '../shared/ui.service';
 import {EditTransactionDialogComponent} from '../operations/edit-transaction-dialog/edit-transaction-dialog.component';
 import {Transaction} from '../models/transaction.model';
+import {EditTransferDialogComponent} from '../operations/edit-transfer-dialog/edit-transfer-dialog.component';
 
 @Component({
   selector: 'app-transactions-list',
@@ -61,28 +62,46 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     if (row.type === 'TRANSFER') {
-      return;
-    }
-
-    this.componentSubs.push(this.httpService.getTransaction(row.id)
-      .subscribe((transaction: Transaction) => {
-        const dialogRef = this.dialog.open(EditTransactionDialogComponent, {
-          width: '500px',
-          data: transaction
-        });
-        dialogRef.afterClosed()
-          .subscribe(editedTransaction => {
-            if (editedTransaction) {
-              this.httpService.editTransaction(editedTransaction).subscribe(tr => {
-                this.uiService.openSnackBar('Transaction has been edited', null, 5000);
-                this.refreshAllSummaries(transaction.type);
-              }, error1 => {
-                this.uiService.openSnackBar(error1, null, 5000);
-              });
-            }
-            this.isDeleteButtonClicked = false;
+      this.componentSubs.push(this.httpService.getTransfer(row.id)
+        .subscribe((transfer: any) => {
+          const dialogRef = this.dialog.open(EditTransferDialogComponent, {
+            width: '500px',
+            data: transfer
           });
-      }));
+          dialogRef.afterClosed()
+            .subscribe(editedTransaction => {
+              /*if (editedTransaction) {
+                this.httpService.editTransaction(editedTransaction).subscribe(tr => {
+                  this.uiService.openSnackBar('Transaction has been edited', null, 5000);
+                  this.refreshAllSummaries(transaction.type);
+                }, error1 => {
+                  this.uiService.openSnackBar(error1, null, 5000);
+                });
+              }
+              this.isDeleteButtonClicked = false;*/
+            });
+        }));
+    } else {
+      this.componentSubs.push(this.httpService.getTransaction(row.id)
+        .subscribe((transaction: Transaction) => {
+          const dialogRef = this.dialog.open(EditTransactionDialogComponent, {
+            width: '500px',
+            data: transaction
+          });
+          dialogRef.afterClosed()
+            .subscribe(editedTransaction => {
+              if (editedTransaction) {
+                this.httpService.editTransaction(editedTransaction).subscribe(tr => {
+                  this.uiService.openSnackBar('Transaction has been edited', null, 5000);
+                  this.refreshAllSummaries(transaction.type);
+                }, error1 => {
+                  this.uiService.openSnackBar(error1, null, 5000);
+                });
+              }
+              this.isDeleteButtonClicked = false;
+            });
+        }));
+    }
   }
 
   onDeleteTransaction(transaction: TransactionView) {

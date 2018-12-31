@@ -49,7 +49,9 @@ export class TransferComponent implements OnInit, OnDestroy {
               amount: val.amount,
               date: val.date
               })
-      .subscribe(result => {}));
+      .subscribe(result => {
+        this.transferForm.reset({'date': new Date()});
+      }));
   }
 
   ngOnDestroy(): void {

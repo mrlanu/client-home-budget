@@ -40,6 +40,7 @@ import { DoughnutChartComponent } from './charts/doughnut-chart/doughnut-chart.c
 import { ChartsComponent } from './charts/charts.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { TransferComponent } from './operations/transfer/transfer.component';
+import { EditTransferDialogComponent } from './operations/edit-transfer-dialog/edit-transfer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TransferComponent } from './operations/transfer/transfer.component';
     DoughnutChartComponent,
     ChartsComponent,
     LineChartComponent,
-    TransferComponent
+    TransferComponent,
+    EditTransferDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -87,6 +89,11 @@ import { TransferComponent } from './operations/transfer/transfer.component';
     HttpService
     ],
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDialogComponent, AccountDialogComponent, DeleteConfirmComponent, EditTransactionDialogComponent]
+  entryComponents: [
+    CategoryDialogComponent,
+    AccountDialogComponent,
+    DeleteConfirmComponent,
+    EditTransactionDialogComponent,
+    EditTransferDialogComponent]
 })
 export class AppModule { }
