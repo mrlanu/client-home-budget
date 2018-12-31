@@ -1,6 +1,7 @@
 export interface Transfer {
-  accFromId: number;
-  accToId: number;
+  id: number;
+  fromAccount: Account;
+  toAccount: Account;
   amount: number;
   date: Date;
 }

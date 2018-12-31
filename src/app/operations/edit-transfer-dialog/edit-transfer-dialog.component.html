@@ -1,4 +1,4 @@
-<div style="height: 460px">
+<div style="height: 450px">
       <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
 
         <mat-form-field  style="margin-top: 20px">
@@ -35,7 +35,7 @@
           <button type="submit"
                   mat-raised-button
                   color="primary"
-                  [disabled]="transferForm.invalid || transferForm.untouched || first.value === second.value">
+                  [disabled]="transferForm.invalid || transferForm.untouched || transferForm.value.fromAccount === transferForm.value.toAccount">
             <div>Save the Transfer</div>
           </button>
         </div>

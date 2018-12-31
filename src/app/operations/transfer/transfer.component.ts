@@ -41,14 +41,15 @@ export class TransferComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const val = this.transferForm.value;
-    this.componentSubs.push(this.httpService.createTransfer(
-      {
-              accFromId: val.fromAccount,
-              accToId: val.toAccount,
-              amount: val.amount,
-              date: val.date
-              })
+    this.transferForm.patchValue({
+      'fromAccount': this.accounts.find(acc => {
+        return acc.id === this.transferForm.value.fromAccount;
+      }),
+      'toAccount': this.accounts.find(acc => {
+        return acc.id === this.transferForm.value.toAccount;
+      })
+    });
+    this.componentSubs.push(this.httpService.createTransfer(this.transferForm.value)
       .subscribe(result => {
         this.transferForm.reset({'date': new Date()});
       }));

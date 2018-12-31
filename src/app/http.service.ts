@@ -117,12 +117,12 @@ export class HttpService {
 
   createTransfer(transfer: Transfer) {
     const url = this.baseUrl + '/transfers';
-    const params = new HttpParams()
-      .set('date', transfer.date.toString())
-      .set('accFromId', transfer.accFromId.toString())
-      .set('accToId', transfer.accToId.toString())
-      .set('amount', transfer.amount.toString());
-    return this.httpClient.post(url, null, {params});
+    return this.httpClient.post(url, transfer);
+  }
+
+  editTransfer(transfer: Transfer) {
+    const url = this.baseUrl + '/transfers';
+    return this.httpClient.put(url, transfer);
   }
 
   getTransfer(transferId: number) {

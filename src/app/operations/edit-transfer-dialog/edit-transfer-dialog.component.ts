@@ -31,6 +31,7 @@ export class EditTransferDialogComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.transferForm = new FormGroup({
+      id: new FormControl(this.passedData.id),
       date: new FormControl(this.passedData.date),
       fromAccount: new FormControl(this.passedData.fromAccount.id, [Validators.required]),
       toAccount: new FormControl(this.passedData.toAccount.id, [Validators.required]),
@@ -39,6 +40,18 @@ export class EditTransferDialogComponent implements OnInit, OnDestroy {
         Validators.pattern(/^[1-9]+[0-9]*$/)
       ]),
     });
+  }
+
+  onSubmit() {
+    this.transferForm.patchValue({
+      'fromAccount': this.accounts.find(acc => {
+        return acc.id === this.transferForm.value.fromAccount;
+      }),
+      'toAccount': this.accounts.find(acc => {
+        return acc.id === this.transferForm.value.toAccount;
+      })
+    });
+    this.dialogRef.close(this.transferForm.value);
   }
 
   ngOnDestroy(): void {
