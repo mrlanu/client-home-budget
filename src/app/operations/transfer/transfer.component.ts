@@ -51,6 +51,7 @@ export class TransferComponent implements OnInit, OnDestroy {
     });
     this.componentSubs.push(this.httpService.createTransfer(this.transferForm.value)
       .subscribe(result => {
+        this.uiService.openSnackBar('Transfer has been done', null, 5000);
         this.transferForm.reset({'date': new Date()});
       }));
   }

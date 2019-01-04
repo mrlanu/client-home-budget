@@ -74,7 +74,7 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
               if (editedTransfer) {
                 this.httpService.editTransfer(editedTransfer).subscribe(tr => {
                   this.uiService.openSnackBar('Transfer has been edited', null, 5000);
-                  // this.refreshAllSummaries(transaction.type);
+                  this.refreshAllSummaries(null);
                 }, error1 => {
                   this.uiService.openSnackBar(error1, null, 5000);
                 });
@@ -128,7 +128,9 @@ export class TransactionsListComponent implements OnInit, AfterViewInit, OnDestr
   refreshAllSummaries(transactionType: string) {
     this.summaryService.getBrief();
     this.summaryService.getSummaryByAccount();
-    this.summaryService.getSummaryByCategories(new Date(), transactionType);
+    if (transactionType) {
+      this.summaryService.getSummaryByCategories(new Date(), transactionType);
+    }
   }
 
   ngOnDestroy(): void {
