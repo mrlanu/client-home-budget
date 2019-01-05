@@ -19,7 +19,7 @@
         <mat-form-field>
           <mat-select placeholder="From Account" formControlName="fromAccount" required #first>
             <mat-option *ngFor="let account of accounts" [value]="account.id">
-              {{account.name}}
+              {{account.type}} / {{account.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -27,7 +27,7 @@
         <mat-form-field>
           <mat-select placeholder="To Account" formControlName="toAccount" required #second>
             <mat-option *ngFor="let account of accounts" [value]="account.id" [disabled]="first.value === account.id">
-              {{account.name}}
+              {{account.type}} / {{account.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>

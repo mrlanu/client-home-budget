@@ -45,7 +45,7 @@
         <mat-form-field>
           <mat-select placeholder="Account" formControlName="account" required>
             <mat-option *ngFor="let account of accounts" [value]="account.id">
-              {{account.name}}
+              {{account.type}} / {{account.name}}
             </mat-option>
             <mat-option>
               <div fxLayout="row" fxLayoutAlign="center" (click)="onAddAccount()">
