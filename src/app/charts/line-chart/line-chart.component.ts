@@ -55,7 +55,6 @@ export class LineChartComponent implements OnInit, OnDestroy {
         }).name;
       }));
     this.httpService.getAllCategories();
-    this.httpService.getSpentMonthToMonthByCategory(-1);
   }
 
   onSelectCategory(event) {
