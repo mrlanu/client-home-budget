@@ -55,6 +55,12 @@ export class HttpService {
     return this.httpClient.delete(url, {params});
   }
 
+  deleteTransfer(transferId: number) {
+    const url = this.baseUrl + '/transfers';
+    const params = new HttpParams().set('transferId', transferId.toString());
+    return this.httpClient.delete(url, {params});
+  }
+
   createCategory(category: Category) {
     const url = this.baseUrl + '/categories';
     return this.httpClient.post(url, category);
