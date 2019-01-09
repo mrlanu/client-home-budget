@@ -1,0 +1,16 @@
+<div fxLayout fxLayoutAlign="center" style="margin-top: 200px">
+  <mat-card style="width: 600px; padding: 30px">
+    <mat-card-content>
+      <div class="select-budget-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+        <h3>Please select the Budget</h3>
+        <mat-form-field>
+          <mat-select placeholder="Budget name" (selectionChange)="onBudgetSelect($event)">
+            <mat-option *ngFor="let budget of budgets" [value]="budget.id">
+              {{budget.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

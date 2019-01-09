@@ -41,6 +41,7 @@ import { ChartsComponent } from './charts/charts.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { TransferComponent } from './operations/transfer/transfer.component';
 import { EditTransferDialogComponent } from './operations/edit-transfer-dialog/edit-transfer-dialog.component';
+import { SelectBudgetComponent } from './dashboard/select-budget/select-budget.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { EditTransferDialogComponent } from './operations/edit-transfer-dialog/e
     ChartsComponent,
     LineChartComponent,
     TransferComponent,
-    EditTransferDialogComponent
+    EditTransferDialogComponent,
+    SelectBudgetComponent
   ],
   imports: [
     MaterialModule,

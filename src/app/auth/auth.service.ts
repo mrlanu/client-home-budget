@@ -5,17 +5,19 @@ import {AuthData} from './auth-data.model';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {UiService} from '../shared/ui.service';
+import {Subject} from 'rxjs';
+import {UserInfo} from '../models/user-info.model';
 
 @Injectable()
 export class AuthService {
 
+  baseUrl = environment.baseUrl;
+  userChange = new Subject<UserInfo>();
+  private isAuthenticated = false;
+
   constructor(private router: Router,
               private httpClient: HttpClient,
               private uiService: UiService) {}
-
-  private user: User;
-  baseUrl = environment.baseUrl;
-  private isAuthenticated = false;
 
   static saveToken(token) {
     const expireDate = new Date().getTime() + (1000 * token.expires_in);
@@ -40,7 +42,6 @@ export class AuthService {
   }
 
   logout() {
-    this.user = null;
     this.isAuthenticated = false;
     localStorage.clear();
     this.uiService.isHomePageChange.next(true);
@@ -84,6 +85,9 @@ export class AuthService {
   }
 
   getLoggedInUser() {
-    return this.httpClient.get(this.baseUrl + '/user');
+    this.httpClient.get(this.baseUrl + '/users')
+      .subscribe((user: UserInfo) => {
+      this.userChange.next(user);
+    });
   }
 }

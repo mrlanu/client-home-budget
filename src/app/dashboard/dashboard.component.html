@@ -3,11 +3,12 @@
   gdRows="60px auto 60px"
   gdAreas="logo hd | sidebar main | logo-2 footer">
 
-  <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Hello, {{ loggedInUserName | async }}</div>
+  <div gdArea="logo" fxLayout fxLayoutAlign="center center" class="logo">Hello, {{ userName }}</div>
 
   <header gdArea="hd">
-    <app-brief></app-brief>
-    <div fxLayout fxFlex fxLayoutAlign="end center">
+    <app-brief *ngIf="isBudgetSelected"></app-brief>
+    <div fxLayout fxFlex fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button *ngIf="isBudgetSelected" mat-raised-button color="accent" (click)="onChangeBudget()">Budget</button>
       <button mat-raised-button color="accent" (click)="onLogOut()">Logout</button>
     </div>
     <!--<ul class="navigation-list" fxLayout fxLayoutAlign="center center">
@@ -18,7 +19,7 @@
   </header>
 
   <aside gdArea="sidebar">
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isBudgetSelected">
       <a mat-list-item
          routerLink="/main/dashboard/charts"
          routerLinkActive="active">
@@ -46,16 +47,17 @@
         <span class="nav-caption">&nbsp;&nbsp;Accounts</span>
       </a>
     </mat-nav-list>
-    <div class="tree-container">
+    <!--<div class="tree-container">
       <img class="tree" src="/assets/img/christmas_tree.png">
-    </div>
+    </div>-->
   </aside>
 
   <main class="main-1" gdArea="main">
-    <router-outlet></router-outlet>
-    <div class="snowman-container">
+    <router-outlet *ngIf="isBudgetSelected"></router-outlet>
+    <app-select-budget *ngIf="!isBudgetSelected" (budgetSelected)="budgetSelected($event)"></app-select-budget>
+    <!--<div class="snowman-container">
       <img class="snowman" src="/assets/img/snowman.png">
-    </div>
+    </div>-->
   </main>
 
   <div class="logo" id="logo" gdArea="logo-2" fxLayout fxLayoutAlign="center center">Home Budget by Lanu<span>©</span></div>
