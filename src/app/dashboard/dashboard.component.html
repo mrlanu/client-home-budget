@@ -8,7 +8,7 @@
   <header gdArea="hd">
     <app-brief *ngIf="isBudgetSelected"></app-brief>
     <div fxLayout fxFlex fxLayoutAlign="end center" fxLayoutGap="10px">
-      <button *ngIf="isBudgetSelected" mat-raised-button color="accent" (click)="onChangeBudget()">Budget</button>
+      <button *ngIf="isBudgetSelected" mat-raised-button color="accent" (click)="onChangeBudget()">My Budgets</button>
       <button mat-raised-button color="accent" (click)="onLogOut()">Logout</button>
     </div>
     <!--<ul class="navigation-list" fxLayout fxLayoutAlign="center center">

@@ -85,7 +85,7 @@ export class AuthService {
   }
 
   getLoggedInUser() {
-    this.httpClient.get(this.baseUrl + '/users')
+    this.httpClient.get(this.baseUrl + '/user')
       .subscribe((user: UserInfo) => {
       this.userChange.next(user);
     });

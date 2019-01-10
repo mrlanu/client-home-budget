@@ -1,7 +1,9 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 export class AuthInterceptor implements HttpInterceptor {
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // requesting signup
@@ -12,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
     // requesting any other resources
     if (req.headers.keys().length === 0) {
       const newReq = req.clone({
-        headers: req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
+        headers: req.headers.append('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
+        params: req.params.append('budgetId', environment.budgetId.toString())
       });
       return next.handle(newReq);
     }

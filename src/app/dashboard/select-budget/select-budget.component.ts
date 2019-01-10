@@ -4,11 +4,7 @@ import {HttpService} from '../../http.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../auth/auth.service';
 import {UserInfo} from '../../models/user-info.model';
-
-export interface Food {
-  value: number;
-  viewValue: string;
-}
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-select-budget',
@@ -28,12 +24,12 @@ export class SelectBudgetComponent implements OnInit, OnDestroy {
     this.componentSubs.push(this.authService.userChange
       .subscribe((user: UserInfo) => {
         this.budgets = user.budgets;
-        console.log(this.budgets);
       }));
     this.authService.getLoggedInUser();
   }
 
-  onBudgetSelect(budgetId: any){
+  onBudgetSelect(budgetId: any) {
+    environment.budgetId = budgetId.value;
     this.budgetSelected.emit(budgetId.value);
   }
 

@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Observer, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {HttpService} from '../http.service';
-import {User} from '../auth/user.model';
 import {UserInfo} from '../models/user-info.model';
 
 @Component({
@@ -14,7 +13,6 @@ import {UserInfo} from '../models/user-info.model';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   componentSubs: Subscription[] = [];
-  loggedInUserName: Observable<string>;
   isBudgetSelected = false;
   userName = '';
 
@@ -28,7 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  budgetSelected(budgetId: number){
+  budgetSelected(budgetId: number) {
     this.isBudgetSelected = true;
   }
 
