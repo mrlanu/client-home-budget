@@ -7,7 +7,6 @@ export class UiService {
 
   constructor(private snackBar: MatSnackBar) {}
 
-  isHomePageChange = new Subject<boolean>();
   isLoadingChanged = new Subject<boolean>();
   isLoginChanged = new Subject<boolean>();
 

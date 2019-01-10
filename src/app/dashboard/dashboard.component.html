@@ -8,7 +8,6 @@
   <header gdArea="hd">
     <app-brief *ngIf="isBudgetSelected"></app-brief>
     <div fxLayout fxFlex fxLayoutAlign="end center" fxLayoutGap="10px">
-      <button *ngIf="isBudgetSelected" mat-raised-button color="accent" (click)="onChangeBudget()">My Budgets</button>
       <button mat-raised-button color="accent" (click)="onLogOut()">Logout</button>
     </div>
     <!--<ul class="navigation-list" fxLayout fxLayoutAlign="center center">
@@ -20,6 +19,12 @@
 
   <aside gdArea="sidebar">
     <mat-nav-list *ngIf="isBudgetSelected">
+      <a mat-list-item
+         (click)="onChangeBudget()"
+         routerLinkActive="active">
+        <mat-icon>bar_chart</mat-icon>
+        <span class="nav-caption">&nbsp;&nbsp;My Budgets</span>
+      </a>
       <a mat-list-item
          routerLink="/main/dashboard/charts"
          routerLinkActive="active">
