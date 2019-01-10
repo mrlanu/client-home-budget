@@ -1,7 +1,20 @@
-mat-form-field{
+mat-form-field {
   width: 300px;
 }
 
-.select-budget-container{
-  font-family: 'Roboto', sans-serif;
+.formBack {
+  border-radius: 15px;
+  width: 330px;
+  padding: 30px;
+  background: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a{
+  text-decoration: none;
+  color: #ff6e06;
+}
+
+a:hover, a:active{
+  color: #FFA726;
 }

@@ -2,7 +2,8 @@
   <div id="logo">Home Budget by Lanu<span>©</span></div>
   <div fxLayout="column" fxLayoutAlign="center center">
     <div style="height: 200px"></div>
-    <app-login *ngIf="isLogin"></app-login>
-    <app-signup *ngIf="!isLogin"></app-signup>
+    <app-login *ngIf="isLogin && !isShowBudgetSelect"></app-login>
+    <app-signup *ngIf="!isLogin && !isShowBudgetSelect"></app-signup>
+    <app-select-budget *ngIf="isShowBudgetSelect"></app-select-budget>
   </div>
 </div>

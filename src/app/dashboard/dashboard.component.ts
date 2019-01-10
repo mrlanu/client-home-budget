@@ -4,6 +4,7 @@ import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {HttpService} from '../http.service';
 import {UserInfo} from '../models/user-info.model';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +20,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router, private httpService: HttpService) { }
 
   ngOnInit() {
-    this.componentSubs.push(this.authService.userChange
-      .subscribe((user: UserInfo) => {
-        this.userName = user.username;
-      })
-    );
+    this.userName = this.authService.loggedUser.username;
+  }
+
+  selectedBudget(): string {
+    const selectedBudget = this.authService.loggedUser.budgets.find(budg => {
+      return budg.id === environment.budgetId;
+    });
+    return selectedBudget.name;
   }
 
   budgetSelected(budgetId: number) {

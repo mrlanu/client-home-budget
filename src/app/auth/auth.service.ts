@@ -14,6 +14,7 @@ export class AuthService {
   baseUrl = environment.baseUrl;
   userChange = new Subject<UserInfo>();
   private isAuthenticated = false;
+  loggedUser: UserInfo;
 
   constructor(private router: Router,
               private httpClient: HttpClient,
@@ -54,7 +55,8 @@ export class AuthService {
   authSuccessfully() {
     this.uiService.isLoadingChanged.next(false);
     this.isAuthenticated = true;
-    this.router.navigate(['/main', 'dashboard', 'summaries']);
+    this.uiService.isShowBudgetSelectChanged.next(true);
+    this.uiService.openSnackBar('Logging successfully, please select your Budget', null, 5000);
   }
 
   getToken(authData: AuthData) {
@@ -85,6 +87,7 @@ export class AuthService {
   getLoggedInUser() {
     this.httpClient.get(this.baseUrl + '/user')
       .subscribe((user: UserInfo) => {
+        this.loggedUser = user;
       this.userChange.next(user);
     });
   }
