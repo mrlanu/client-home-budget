@@ -2,7 +2,7 @@
   <div class="groups-summary" fxLayout="column">
     <div class="list-container" style="margin-top: 15px">
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let budget of budgets" style="margin-bottom: 1px" (opened)="onBudgetSelect(budget.id)">
+        <mat-expansion-panel *ngFor="let budget of budgets" style="margin-bottom: 1px" (opened)="onBudgetOpened(budget.id)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div fxFlex fxLayout fxLayoutAlign="space-between">
@@ -23,7 +23,7 @@
           </mat-nav-list>
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="end" style="padding-top: 8px">
-            <button mat-icon-button color="primary" matTooltip="SELECT THIS BUDGET" (click)="onAddUser()">
+            <button mat-icon-button color="primary" matTooltip="SELECT THIS BUDGET" (click)="onSelectBudget(budget.id)">
               <mat-icon>touch_app</mat-icon>
             </button>
             <button mat-icon-button color="primary" matTooltip="ADD USER" (click)="onAddUser()">
