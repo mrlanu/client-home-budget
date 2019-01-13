@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="groups-summary" fxLayout="column">
+    <div class="list-container" style="margin-top: 15px">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let budget of budgets" style="margin-bottom: 1px" (opened)="onBudgetSelect(budget.id)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div fxFlex fxLayout fxLayoutAlign="space-between">
+                <div style="margin-left: 15px">{{ budget.name }}</div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <p>Users: </p>
+          <mat-nav-list>
+            <a mat-list-item *ngFor="let user of users"
+               (click)="onSubcategorySelect(subGroup.name)">
+              <div fxFlex fxLayout fxLayoutAlign="space-between">
+                <div style="margin-left: 15px">{{ user.username }}</div>
+                <!--<div>{{ subGroup.spent | currency }}</div>-->
+              </div>
+            </a>
+          </mat-nav-list>
+          <mat-divider></mat-divider>
+          <div fxLayout="row" fxLayoutAlign="end" style="padding-top: 8px">
+            <button mat-icon-button color="primary" matTooltip="SELECT THIS BUDGET" (click)="onAddUser()">
+              <mat-icon>touch_app</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="ADD USER" (click)="onAddUser()">
+              <mat-icon>face</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="EDIT BUDGET" (click)="onAddUser()">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="DELETE BUDGET" (click)="onDeleteBudget(row)" color="warn">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div class="button-container" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" matTooltip="NEW BUDGET" (click)="onAdd()">
+          <mat-icon>create_new_folder</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+  </div>
+</div>

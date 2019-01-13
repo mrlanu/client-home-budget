@@ -21,6 +21,11 @@ export class HttpService {
 
   constructor(private httpClient: HttpClient) {}
 
+  getUsersByBudgetId(budgetId: number){
+    const url = this.baseUrl + '/budgets/' + budgetId + '/users';
+    return this.httpClient.get(url);
+  }
+
   getSumsOfIncomesExpensesForYearByMonth() {
     const url = this.baseUrl + '/charts/sumsOfIncomesExpensesForYearByMonth';
     return this.httpClient.get(url);

@@ -7,6 +7,7 @@ import {MainComponent} from './main/main.component';
 import {SummariesViewComponent} from './main/dashboard/summaries/summaries-view/summaries-view.component';
 import {OperationsComponent} from './main/dashboard/operations/operations.component';
 import {ChartsComponent} from './main/dashboard/charts/charts.component';
+import {BudgetsComponent} from './main/dashboard/budgets/budgets.component';
 
 const routes: Routes = [
   {path: 'welcome-page', component: WelcomePageComponent},
@@ -15,7 +16,7 @@ const routes: Routes = [
         {path: 'summaries', component: SummariesViewComponent},
         {path: 'operations', component: OperationsComponent},
         {path: 'charts', component: ChartsComponent},
-        {path: 'budgets', component: ChartsComponent}
+        {path: 'budgets', component: BudgetsComponent}
       ]},
     ]},
   {path: '**', redirectTo: '/welcome-page'}

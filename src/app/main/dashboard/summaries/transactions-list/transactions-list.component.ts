@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Subscription} from 'rxjs';
-import {HttpService} from '../../../http.service';
-import {TransactionView} from '../../../models/transaction-view.model';
-import {SummaryService} from '../summaries/summary.service';
-import {DeleteConfirmComponent} from '../../../shared/delete-confirm.component';
-import {UiService} from '../../../shared/ui.service';
-import {EditTransactionDialogComponent} from '../operations/edit-transaction-dialog/edit-transaction-dialog.component';
-import {Transaction} from '../../../models/transaction.model';
-import {EditTransferDialogComponent} from '../operations/edit-transfer-dialog/edit-transfer-dialog.component';
-import {Transfer} from '../../../models/transfer.model';
+import {HttpService} from '../../../../http.service';
+import {TransactionView} from '../../../../models/transaction-view.model';
+import {SummaryService} from '../summary.service';
+import {DeleteConfirmComponent} from '../../../../shared/delete-confirm.component';
+import {UiService} from '../../../../shared/ui.service';
+import {EditTransactionDialogComponent} from '../../operations/edit-transaction-dialog/edit-transaction-dialog.component';
+import {Transaction} from '../../../../models/transaction.model';
+import {EditTransferDialogComponent} from '../../operations/edit-transfer-dialog/edit-transfer-dialog.component';
+import {Transfer} from '../../../../models/transfer.model';
 
 @Component({
   selector: 'app-transactions-list',

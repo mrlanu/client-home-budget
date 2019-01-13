@@ -12,7 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './navigation/header/header.component';
 import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import {DashboardComponent} from './main/dashboard/dashboard.component';
-import {TransactionsListComponent} from './main/dashboard/transactions-list/transactions-list.component';
+import {TransactionsListComponent} from './main/dashboard/summaries/transactions-list/transactions-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HttpPortalService} from './http-portal.service';
 import {SignupComponent} from './auth/signup/signup.component';
@@ -42,6 +42,7 @@ import { LineChartComponent } from './main/dashboard/charts/line-chart/line-char
 import { TransferComponent } from './main/dashboard/operations/transfer/transfer.component';
 import { EditTransferDialogComponent } from './main/dashboard/operations/edit-transfer-dialog/edit-transfer-dialog.component';
 import { SelectBudgetComponent } from './main/dashboard/select-budget/select-budget.component';
+import { BudgetsComponent } from './main/dashboard/budgets/budgets.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { SelectBudgetComponent } from './main/dashboard/select-budget/select-bud
     LineChartComponent,
     TransferComponent,
     EditTransferDialogComponent,
-    SelectBudgetComponent
+    SelectBudgetComponent,
+    BudgetsComponent
   ],
   imports: [
     MaterialModule,
