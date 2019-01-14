@@ -26,6 +26,12 @@ export class HttpService {
     return this.httpClient.get(url);
   }
 
+  addUserToBudget(budgetId: number, userName: string) {
+    const url = this.baseUrl + '/budgets/' + budgetId;
+    const params = new HttpParams().set('userName', userName);
+    return this.httpClient.get(url, {params});
+  }
+
   getSumsOfIncomesExpensesForYearByMonth() {
     const url = this.baseUrl + '/charts/sumsOfIncomesExpensesForYearByMonth';
     return this.httpClient.get(url);
