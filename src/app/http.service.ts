@@ -9,6 +9,7 @@ import {Account} from './models/account.model';
 import {YearMonthSum} from './models/year-month-sum';
 import {Transfer} from './models/transfer.model';
 import {UserInfo} from './models/user-info.model';
+import {Budget} from './models/budget.model';
 
 @Injectable()
 export class HttpService {
@@ -22,6 +23,11 @@ export class HttpService {
   baseUrl = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {}
+
+  createBudget(budget: Budget) {
+    const url = this.baseUrl + '/budgets';
+    return this.httpClient.post(url, budget);
+  }
 
   getUsersByBudgetId(budgetId: number){
     const url = this.baseUrl + '/budgets/' + budgetId + '/users';

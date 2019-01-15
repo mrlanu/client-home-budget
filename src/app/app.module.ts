@@ -44,6 +44,7 @@ import { EditTransferDialogComponent } from './main/dashboard/operations/edit-tr
 import { SelectBudgetComponent } from './main/dashboard/select-budget/select-budget.component';
 import { BudgetsComponent } from './main/dashboard/budgets/budgets.component';
 import { AddUserDialogComponent } from './main/dashboard/budgets/add-user-dialog/add-user-dialog.component';
+import { BudgetDialogComponent } from './main/dashboard/budgets/budget-dialog/budget-dialog.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AddUserDialogComponent } from './main/dashboard/budgets/add-user-dialog
     EditTransferDialogComponent,
     SelectBudgetComponent,
     BudgetsComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    BudgetDialogComponent
   ],
   imports: [
     MaterialModule,
@@ -101,6 +103,7 @@ import { AddUserDialogComponent } from './main/dashboard/budgets/add-user-dialog
     DeleteConfirmComponent,
     EditTransactionDialogComponent,
     EditTransferDialogComponent,
-    AddUserDialogComponent]
+    AddUserDialogComponent,
+    BudgetDialogComponent]
 })
 export class AppModule { }

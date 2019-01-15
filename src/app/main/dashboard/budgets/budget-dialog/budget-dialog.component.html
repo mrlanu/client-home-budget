@@ -1,0 +1,17 @@
+<div>
+  <form [formGroup]="budgetForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+    <mat-form-field>
+      <input type="text" placeholder="Budget name" formControlName="name" matInput required>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-mini-fab color="primary" (click)="onCancel()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button type="submit" [mat-dialog-close]="budgetForm.value"
+              mat-mini-fab color="primary"
+              [disabled]="budgetForm.invalid || budgetForm.untouched">
+        <mat-icon>save_alt</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import {AddUserDialogComponent} from './add-user-dialog/add-user-dialog.component';
 import {Subscription} from 'rxjs';
 import {DeleteConfirmComponent} from '../../../shared/delete-confirm.component';
+import {BudgetDialogComponent} from './budget-dialog/budget-dialog.component';
 
 @Component({
   selector: 'app-budgets',
@@ -95,6 +96,19 @@ export class BudgetsComponent implements OnInit, OnDestroy {
             this.httpService.getUsersByBudgetId(budgetId);
           });
         }
+      });
+  }
+
+  onNewBudget() {
+    const dialogRef = this.dialog.open(BudgetDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed()
+      .subscribe((budget: Budget) => {
+          this.httpService.createBudget(budget)
+            .subscribe(budg => {
+            });
       });
   }
 
