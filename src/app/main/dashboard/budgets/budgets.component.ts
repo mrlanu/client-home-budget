@@ -17,9 +17,11 @@ import {Subscription} from 'rxjs';
 })
 export class BudgetsComponent implements OnInit, OnDestroy {
 
+  loggedUser: UserInfo;
   budgets: Budget[] = [];
   users: UserInfo[] = [];
   componentSubs: Subscription[] = [];
+  isDeleteButtonClicked = false;
 
   constructor(private authService: AuthService,
               private httpService: HttpService,
@@ -29,12 +31,15 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.budgets = this.authService.loggedUser.budgets;
+    this.loggedUser = this.authService.loggedUser;
+    this.componentSubs.push(this.httpService.budgetUsersChange
+      .subscribe((users: UserInfo[]) => {
+      this.users = users;
+    }));
   }
 
   onBudgetOpened(budgetId: number) {
-    this.httpService.getUsersByBudgetId(budgetId).subscribe((users: UserInfo[]) => {
-      this.users = users;
-    });
+    this.httpService.getUsersByBudgetId(budgetId);
   }
 
   onSelectBudget(budgetId: number) {
@@ -56,11 +61,28 @@ export class BudgetsComponent implements OnInit, OnDestroy {
           this.componentSubs.push(this.httpService.addUserToBudget(budgetId, username.username)
             .subscribe(response => {
               this.uiService.openSnackBar('User ' + username.username + ' has been added to Budget', null, 5000);
+              this.httpService.getUsersByBudgetId(budgetId);
           }, error1 => {
               this.uiService.openSnackBar('User ' + username.username + ' not found.', null, 5000);
           }));
         }
       });
+  }
+
+  onDeleteBudget() {}
+
+  onUserClick() {
+    if (this.isDeleteButtonClicked) {
+      this.isDeleteButtonClicked = false;
+      return;
+    }
+  }
+
+  onDeleteUser(budgetId: number, username: string) {
+    this.isDeleteButtonClicked = true;
+    this.httpService.removeUserFromBudget(budgetId, username).subscribe(resp => {
+      this.httpService.getUsersByBudgetId(budgetId);
+    });
   }
 
   ngOnDestroy(): void {

@@ -8,6 +8,7 @@ import {Subcategory} from './models/subcategory.model';
 import {Account} from './models/account.model';
 import {YearMonthSum} from './models/year-month-sum';
 import {Transfer} from './models/transfer.model';
+import {UserInfo} from './models/user-info.model';
 
 @Injectable()
 export class HttpService {
@@ -15,6 +16,7 @@ export class HttpService {
   accountsChange = new Subject<Account[]>();
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
+  budgetUsersChange = new Subject<UserInfo[]>();
   spentMonthToMonthByCategoryChange = new Subject<YearMonthSum>();
 
   baseUrl = environment.baseUrl;
@@ -23,11 +25,20 @@ export class HttpService {
 
   getUsersByBudgetId(budgetId: number){
     const url = this.baseUrl + '/budgets/' + budgetId + '/users';
-    return this.httpClient.get(url);
+    this.httpClient.get(url)
+      .subscribe((users: UserInfo[]) => {
+      this.budgetUsersChange.next(users);
+    });
   }
 
   addUserToBudget(budgetId: number, userName: string) {
     const url = this.baseUrl + '/budgets/' + budgetId;
+    const params = new HttpParams().set('userName', userName);
+    return this.httpClient.get(url, {params});
+  }
+
+  removeUserFromBudget(budgetId: number, userName: string) {
+    const url = this.baseUrl + '/budgets/' + budgetId + '/removeUser';
     const params = new HttpParams().set('userName', userName);
     return this.httpClient.get(url, {params});
   }
