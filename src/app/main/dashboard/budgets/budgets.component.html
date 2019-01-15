@@ -28,7 +28,9 @@
           </mat-nav-list>
           <mat-divider></mat-divider>
           <div fxLayout="row" fxLayoutAlign="end" style="padding-top: 8px">
-            <button mat-icon-button color="primary" matTooltip="SELECT THIS BUDGET" (click)="onSelectBudget(budget.id)">
+            <button mat-icon-button color="primary" matTooltip="SELECT THIS BUDGET"
+                    [disabled]="currentBudgetId === budget.id"
+                    (click)="onSelectBudget(budget.id)">
               <mat-icon>touch_app</mat-icon>
             </button>
             <button mat-icon-button color="primary" matTooltip="ADD USER" (click)="onAddUser(budget.id)">
@@ -37,7 +39,9 @@
             <button mat-icon-button color="primary" matTooltip="EDIT BUDGET" (click)="onAddUser()">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button matTooltip="DELETE BUDGET" (click)="onDeleteBudget()" color="warn">
+            <button mat-icon-button matTooltip="DELETE BUDGET"
+                    [disabled]="budgets.length === 1"
+                    (click)="onDeleteBudget()" color="warn">
               <mat-icon>highlight_off</mat-icon>
             </button>
           </div>

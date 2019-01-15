@@ -9,6 +9,7 @@ import {UiService} from '../../../shared/ui.service';
 import {MatDialog} from '@angular/material';
 import {AddUserDialogComponent} from './add-user-dialog/add-user-dialog.component';
 import {Subscription} from 'rxjs';
+import {DeleteConfirmComponent} from '../../../shared/delete-confirm.component';
 
 @Component({
   selector: 'app-budgets',
@@ -18,6 +19,7 @@ import {Subscription} from 'rxjs';
 export class BudgetsComponent implements OnInit, OnDestroy {
 
   loggedUser: UserInfo;
+  currentBudgetId: number;
   budgets: Budget[] = [];
   users: UserInfo[] = [];
   componentSubs: Subscription[] = [];
@@ -30,6 +32,7 @@ export class BudgetsComponent implements OnInit, OnDestroy {
               private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.currentBudgetId = environment.budgetId;
     this.budgets = this.authService.loggedUser.budgets;
     this.loggedUser = this.authService.loggedUser;
     this.componentSubs.push(this.httpService.budgetUsersChange
@@ -44,6 +47,7 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
   onSelectBudget(budgetId: number) {
     environment.budgetId = budgetId;
+    this.currentBudgetId = budgetId;
     this.summaryService.getBrief();
     this.uiService.openSnackBar('Budget has been selected.', null, 5000);
   }
@@ -80,9 +84,18 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
   onDeleteUser(budgetId: number, username: string) {
     this.isDeleteButtonClicked = true;
-    this.httpService.removeUserFromBudget(budgetId, username).subscribe(resp => {
-      this.httpService.getUsersByBudgetId(budgetId);
+
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px'
     });
+    dialogRef.afterClosed()
+      .subscribe(decision => {
+        if (decision) {
+          this.httpService.removeUserFromBudget(budgetId, username).subscribe(resp => {
+            this.httpService.getUsersByBudgetId(budgetId);
+          });
+        }
+      });
   }
 
   ngOnDestroy(): void {
