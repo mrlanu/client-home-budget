@@ -31,6 +31,11 @@ export class HttpService {
     return this.httpClient.post(url, budget);
   }
 
+  deleteBudget(budgetId: number) {
+    const url = this.baseUrl + '/budgets/' + budgetId;
+    return this.httpClient.delete(url);
+  }
+
   getBudgetsByUser() {
     const url = this.baseUrl + '/budgets';
     this.httpClient.get(url).subscribe((budgets: Budget[]) => {

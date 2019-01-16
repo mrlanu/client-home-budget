@@ -41,7 +41,7 @@
             </button>
             <button mat-icon-button matTooltip="DELETE BUDGET"
                     [disabled]="budgets.length === 1"
-                    (click)="onDeleteBudget()" color="warn">
+                    (click)="onDeleteBudget(budget.id)" color="warn">
               <mat-icon>highlight_off</mat-icon>
             </button>
           </div>

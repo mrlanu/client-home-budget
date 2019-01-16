@@ -78,8 +78,6 @@ export class BudgetsComponent implements OnInit, OnDestroy {
       });
   }
 
-  onDeleteBudget() {}
-
   onUserClick() {
     if (this.isDeleteButtonClicked) {
       this.isDeleteButtonClicked = false;
@@ -110,10 +108,27 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .subscribe((budget: Budget) => {
+        if (budget){
           this.httpService.createBudget(budget)
             .subscribe(budg => {
               this.httpService.getBudgetsByUser();
             });
+        }
+      });
+  }
+
+  onDeleteBudget(budgetId: number) {
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(decision => {
+        if (decision) {
+          this.httpService.deleteBudget(budgetId)
+            .subscribe(resp => {
+            this.httpService.getBudgetsByUser();
+          });
+        }
       });
   }
 
