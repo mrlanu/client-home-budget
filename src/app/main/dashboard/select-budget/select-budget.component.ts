@@ -26,11 +26,12 @@ export class SelectBudgetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.transition(0);
-    this.componentSubs.push(this.authService.userChange
-      .subscribe((user: UserInfo) => {
-        this.budgets = user.budgets;
+    this.componentSubs.push(this.httpService.budgetsChange
+      .subscribe((budgets: Budget[]) => {
+        this.budgets = budgets;
       }));
     this.authService.getLoggedInUser();
+    this.httpService.getBudgetsByUser();
   }
 
   transition(counter: number) {

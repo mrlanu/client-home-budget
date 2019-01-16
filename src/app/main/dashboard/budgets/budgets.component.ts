@@ -34,12 +34,16 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentBudgetId = environment.budgetId;
-    this.budgets = this.authService.loggedUser.budgets;
     this.loggedUser = this.authService.loggedUser;
     this.componentSubs.push(this.httpService.budgetUsersChange
       .subscribe((users: UserInfo[]) => {
       this.users = users;
     }));
+    this.componentSubs.push(this.httpService.budgetsChange
+      .subscribe((budgets: Budget[]) => {
+        this.budgets = budgets;
+      }));
+    this.httpService.getBudgetsByUser();
   }
 
   onBudgetOpened(budgetId: number) {
@@ -108,6 +112,7 @@ export class BudgetsComponent implements OnInit, OnDestroy {
       .subscribe((budget: Budget) => {
           this.httpService.createBudget(budget)
             .subscribe(budg => {
+              this.httpService.getBudgetsByUser();
             });
       });
   }

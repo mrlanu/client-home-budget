@@ -18,6 +18,8 @@ export class HttpService {
   categoryChange = new Subject<Category[]>();
   subcategoryChange = new Subject<Subcategory[]>();
   budgetUsersChange = new Subject<UserInfo[]>();
+  budgetsChange = new Subject<Budget[]>();
+  budgets: Budget[];
   spentMonthToMonthByCategoryChange = new Subject<YearMonthSum>();
 
   baseUrl = environment.baseUrl;
@@ -29,7 +31,15 @@ export class HttpService {
     return this.httpClient.post(url, budget);
   }
 
-  getUsersByBudgetId(budgetId: number){
+  getBudgetsByUser() {
+    const url = this.baseUrl + '/budgets';
+    this.httpClient.get(url).subscribe((budgets: Budget[]) => {
+      this.budgets = budgets;
+      this.budgetsChange.next(budgets);
+    });
+  }
+
+  getUsersByBudgetId(budgetId: number) {
     const url = this.baseUrl + '/budgets/' + budgetId + '/users';
     this.httpClient.get(url)
       .subscribe((users: UserInfo[]) => {
