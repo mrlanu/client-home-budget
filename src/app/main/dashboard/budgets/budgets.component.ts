@@ -101,6 +101,26 @@ export class BudgetsComponent implements OnInit, OnDestroy {
       });
   }
 
+  onEditBudget(budgetId: number) {
+    const budgetForEdit = this.budgets.find(b => {
+      return b.id === budgetId;
+    });
+    const dialogRef = this.dialog.open(BudgetDialogComponent, {
+      width: '400px',
+      data: budgetForEdit
+    });
+
+    dialogRef.afterClosed()
+      .subscribe((budget: Budget) => {
+        if (budget) {
+          this.httpService.updateBudget(budget)
+            .subscribe(budg => {
+              this.httpService.getBudgetsByUser();
+            });
+        }
+      });
+  }
+
   onNewBudget() {
     const dialogRef = this.dialog.open(BudgetDialogComponent, {
       width: '400px'

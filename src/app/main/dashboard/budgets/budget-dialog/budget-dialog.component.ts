@@ -16,8 +16,12 @@ export class BudgetDialogComponent implements OnInit {
 
   ngOnInit() {
     this.budgetForm = new FormGroup({
+      'id': new FormControl(null),
       'name': new FormControl('', Validators.required)
     });
+    if (this.passedData) {
+      this.budgetForm.patchValue(this.passedData);
+    }
   }
 
   onCancel() {
