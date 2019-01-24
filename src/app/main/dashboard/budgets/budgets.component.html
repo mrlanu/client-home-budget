@@ -44,7 +44,7 @@
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button matTooltip="DELETE BUDGET"
-                    [disabled]="budgets.length === 1 || budget.ownerUsername !== loggedUser.username"
+                    [disabled]="budgets.length === 1 || budget.ownerUsername !== loggedUser.username || currentBudgetId === budget.id"
                     (click)="onDeleteBudget(budget.id)" color="warn">
               <mat-icon>highlight_off</mat-icon>
             </button>
