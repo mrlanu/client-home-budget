@@ -9,8 +9,6 @@ import {OperationsComponent} from './main/dashboard/operations/operations.compon
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ExpenseIncomeComponent} from './main/dashboard/operations/expense-income/expense-income.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HeaderComponent} from './navigation/header/header.component';
-import {SidenavListComponent} from './navigation/sidenav-list/sidenav-list.component';
 import {DashboardComponent} from './main/dashboard/dashboard.component';
 import {TransactionsListComponent} from './main/dashboard/summaries/transactions-list/transactions-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -51,8 +49,6 @@ import { BudgetDialogComponent } from './main/dashboard/budgets/budget-dialog/bu
     AppComponent,
     OperationsComponent,
     ExpenseIncomeComponent,
-    HeaderComponent,
-    SidenavListComponent,
     DashboardComponent,
     TransactionsListComponent,
     SignupComponent,

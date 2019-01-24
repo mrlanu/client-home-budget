@@ -18,7 +18,7 @@
               <div fxFlex fxLayout fxLayoutGap="10px">
                 <button mat-icon-button matTooltip="REMOVE USER"
                         (click)="onDeleteUser(budget.id, user.username)"
-                        [disabled]="user.username === loggedUser.username"
+                        [disabled]="user.username === loggedUser.username || budget.ownerUsername !== loggedUser.username"
                         color="warn">
                   <mat-icon>highlight_off</mat-icon>
                 </button>
@@ -33,14 +33,18 @@
                     (click)="onSelectBudget(budget.id)">
               <mat-icon>touch_app</mat-icon>
             </button>
-            <button mat-icon-button color="primary" matTooltip="ADD USER" (click)="onAddUser(budget.id)">
+            <button mat-icon-button color="primary" matTooltip="ADD USER"
+                    [disabled]="budget.ownerUsername !== loggedUser.username"
+                    (click)="onAddUser(budget.id)">
               <mat-icon>face</mat-icon>
             </button>
-            <button mat-icon-button color="primary" matTooltip="EDIT BUDGET" (click)="onEditBudget(budget.id)">
+            <button mat-icon-button color="primary" matTooltip="EDIT BUDGET"
+                    [disabled]="budget.ownerUsername !== loggedUser.username"
+                    (click)="onEditBudget(budget.id)">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button matTooltip="DELETE BUDGET"
-                    [disabled]="budgets.length === 1"
+                    [disabled]="budgets.length === 1 || budget.ownerUsername !== loggedUser.username"
                     (click)="onDeleteBudget(budget.id)" color="warn">
               <mat-icon>highlight_off</mat-icon>
             </button>

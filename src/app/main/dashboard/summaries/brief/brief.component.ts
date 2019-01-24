@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {SummaryService} from '../summary.service';
-import {Brief} from '../../../models/brief';
+import {Brief} from '../../../../models/brief';
 
 @Component({
   selector: 'app-brief',
