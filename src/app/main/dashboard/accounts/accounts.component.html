@@ -16,7 +16,7 @@
                (click)="onEditAccount(acc.id)">
               <div fxFlex fxLayout fxLayoutGap="10px">
                 <button mat-icon-button matTooltip="DELETE"
-                        (click)="onDeleteUser(budget.id, user.username)"
+                        (click)="onDeleteAccount(acc.id)"
                         color="warn">
                   <mat-icon>highlight_off</mat-icon>
                 </button>
@@ -28,7 +28,7 @@
       </mat-accordion>
       <div class="button-container" fxLayout="row" fxLayoutAlign="end">
         <button mat-icon-button color="primary" matTooltip="NEW ACCOUNT" (click)="onNewAccount()">
-          <mat-icon>create_new_folder</mat-icon>
+          <mat-icon>account_balance</mat-icon>
         </button>
       </div>
     </div>

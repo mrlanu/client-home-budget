@@ -129,6 +129,11 @@ export class HttpService {
     return this.httpClient.put(url, account);
   }
 
+  deleteAccount(accountId: number) {
+    const url = this.baseUrl + '/accounts/' + accountId;
+    return this.httpClient.delete(url);
+  }
+
   getAllAccounts() {
     const url = this.baseUrl + '/accounts';
     this.httpClient.get(url).subscribe((accounts: Account[]) => {
