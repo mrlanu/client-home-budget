@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="groups-summary" fxLayout="column">
+    <div class="list-container" style="margin-top: 15px">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let type of groupsAccount" style="margin-bottom: 1px">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div fxFlex fxLayout fxLayoutAlign="space-between">
+                <div style="margin-left: 15px">{{ type.name }}</div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <mat-nav-list>
+            <a mat-list-item *ngFor="let acc of type.accountList"
+               (click)="onEditAccount(acc.id)">
+              <div fxFlex fxLayout fxLayoutGap="10px">
+                <button mat-icon-button matTooltip="DELETE"
+                        (click)="onDeleteUser(budget.id, user.username)"
+                        color="warn">
+                  <mat-icon>highlight_off</mat-icon>
+                </button>
+                <div style="padding-top: 10px">{{ acc.name }}</div>
+              </div>
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div class="button-container" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button color="primary" matTooltip="NEW ACCOUNT" (click)="onNewAccount()">
+          <mat-icon>create_new_folder</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

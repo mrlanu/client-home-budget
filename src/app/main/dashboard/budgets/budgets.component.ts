@@ -128,7 +128,7 @@ export class BudgetsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .subscribe((budget: Budget) => {
-        if (budget){
+        if (budget) {
           this.httpService.createBudget(budget)
             .subscribe(budg => {
               this.httpService.getBudgetsByUser();

@@ -2,6 +2,11 @@ mat-form-field{
   width: 300px;
 }
 
+.container{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .radio-container{
   padding-top: 15px;
   padding-bottom: 20px;

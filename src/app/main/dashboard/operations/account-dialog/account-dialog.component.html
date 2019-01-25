@@ -1,13 +1,17 @@
-<div>
-  <form [formGroup]="accountForm" fxLayout="column" fxLayoutAlign="center center">
+<div class="container">
+  <form [formGroup]="accountForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
 
     <mat-form-field>
       <input type="text" placeholder="Name" formControlName="name" matInput>
+      <mat-hint>My Wallet, Chase, Mom's credit card, etc.</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
       <input type="text" placeholder="Type" formControlName="type" matInput>
+      <mat-hint>Checking, Cash, Credit, etc.</mat-hint>
     </mat-form-field>
+
+    <mat-divider></mat-divider>
 
     <mat-form-field>
       <mat-select placeholder="Currency" formControlName="currency">
@@ -18,7 +22,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" placeholder="Balance" formControlName="balance" matInput>
+      <input type="number" placeholder="Initial Balance" formControlName="initialBalance" matInput>
     </mat-form-field>
 
     <div class="radio-container" fxLayout="row" fxLayoutGap="10px">

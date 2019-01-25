@@ -17,12 +17,17 @@ export class AccountDialogComponent implements OnInit {
 
   ngOnInit() {
     this.accountForm = new FormGroup({
+      'id': new FormControl(null),
       'name': new FormControl(),
       'type': new FormControl(),
       'currency': new FormControl('USD'),
       'balance': new FormControl(0.00),
+      'initialBalance': new FormControl(0.00),
       'includeInTotal': new FormControl(true)
     });
+    if (this.passedData) {
+      this.accountForm.patchValue(this.passedData);
+    }
   }
 
   onCancel() {

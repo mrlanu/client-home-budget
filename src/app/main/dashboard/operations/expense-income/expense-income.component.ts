@@ -77,7 +77,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
           this.componentSubs.push(this.httpService.createAccount(account)
             .subscribe((newAccount: Account) => {
               this.httpService.getAllAccounts();
-              this.httpService.getSummaryByAccounts();
+              this.summaryService.getBrief();
               this.expenseForm.patchValue({'account': newAccount.id});
             }));
         }

@@ -124,6 +124,11 @@ export class HttpService {
     return this.httpClient.post(url, account);
   }
 
+  editAccount(account: Account) {
+    const url = this.baseUrl + '/accounts';
+    return this.httpClient.put(url, account);
+  }
+
   getAllAccounts() {
     const url = this.baseUrl + '/accounts';
     this.httpClient.get(url).subscribe((accounts: Account[]) => {

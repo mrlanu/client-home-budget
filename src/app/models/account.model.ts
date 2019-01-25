@@ -4,5 +4,6 @@ export interface Account {
   type: string;
   currency: string;
   balance: number;
+  initialBalance: number;
   includeInTotal: boolean;
 }
