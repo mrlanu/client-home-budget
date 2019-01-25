@@ -7,6 +7,7 @@ import {SummaryService} from '../summaries/summary.service';
 import {AccountDialogComponent} from '../operations/account-dialog/account-dialog.component';
 import {MatDialog} from '@angular/material';
 import {UiService} from '../../../shared/ui.service';
+import {DeleteConfirmComponent} from '../../../shared/delete-confirm.component';
 
 @Component({
   selector: 'app-accounts',
@@ -86,12 +87,20 @@ export class AccountsComponent implements OnInit, OnDestroy {
 
   onDeleteAccount(accId: number) {
     this.isDeleteButtonClicked = true;
-    this.componentSubs.push(this.httpService.deleteAccount(accId).subscribe(response => {
-      this.refreshAccounts();
-      this.uiService.openSnackBar(`The Account has been deleted`, null, 5000);
-    }, error1 => {
-      this.uiService.openSnackBar(`Unavailable to delete this Account. The Account has transactions.`, null, 5000);
-    }));
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(decision => {
+        if (decision) {
+          this.componentSubs.push(this.httpService.deleteAccount(accId).subscribe(response => {
+            this.refreshAccounts();
+            this.uiService.openSnackBar(`The Account has been deleted`, null, 5000);
+          }, error1 => {
+            this.uiService.openSnackBar(`Unavailable to delete this Account. The Account has transactions.`, null, 5000);
+          }));
+        }
+      });
   }
 
   ngOnDestroy(): void {
