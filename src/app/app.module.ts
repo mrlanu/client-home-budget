@@ -44,6 +44,7 @@ import { BudgetsComponent } from './main/dashboard/budgets/budgets.component';
 import { AddUserDialogComponent } from './main/dashboard/budgets/add-user-dialog/add-user-dialog.component';
 import { BudgetDialogComponent } from './main/dashboard/budgets/budget-dialog/budget-dialog.component';
 import { AccountsComponent } from './main/dashboard/accounts/accounts.component';
+import { CategoriesComponent } from './main/dashboard/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AccountsComponent } from './main/dashboard/accounts/accounts.component'
     BudgetsComponent,
     AddUserDialogComponent,
     BudgetDialogComponent,
-    AccountsComponent
+    AccountsComponent,
+    CategoriesComponent
   ],
   imports: [
     MaterialModule,

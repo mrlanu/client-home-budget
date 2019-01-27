@@ -10,6 +10,7 @@ import {YearMonthSum} from './models/year-month-sum';
 import {Transfer} from './models/transfer.model';
 import {UserInfo} from './models/user-info.model';
 import {Budget} from './models/budget.model';
+import {ListSubCategoryByCategory} from './main/dashboard/categories/categories.component';
 
 @Injectable()
 export class HttpService {
@@ -19,6 +20,7 @@ export class HttpService {
   subcategoryChange = new Subject<Subcategory[]>();
   budgetUsersChange = new Subject<UserInfo[]>();
   budgetsChange = new Subject<Budget[]>();
+  listSubcategoriesByCategoryChange = new Subject<ListSubCategoryByCategory[]>();
   budgets: Budget[];
   spentMonthToMonthByCategoryChange = new Subject<YearMonthSum>();
 
@@ -27,22 +29,22 @@ export class HttpService {
   constructor(private httpClient: HttpClient) {}
 
   createBudget(budget: Budget) {
-    const url = this.baseUrl + '/budgets';
+    const url = `${this.baseUrl}/budgets`;
     return this.httpClient.post(url, budget);
   }
 
   updateBudget(budget: Budget) {
-    const url = this.baseUrl + '/budgets';
+    const url = `${this.baseUrl}/budgets`;
     return this.httpClient.put(url, budget);
   }
 
   deleteBudget(budgetId: number) {
-    const url = this.baseUrl + '/budgets/' + budgetId;
+    const url = `${this.baseUrl}/budgets/${budgetId}`;
     return this.httpClient.delete(url);
   }
 
   getBudgetsByUser() {
-    const url = this.baseUrl + '/budgets';
+    const url = `${this.baseUrl}/budgets`;
     this.httpClient.get(url).subscribe((budgets: Budget[]) => {
       this.budgets = budgets;
       this.budgetsChange.next(budgets);
@@ -50,7 +52,7 @@ export class HttpService {
   }
 
   getUsersByBudgetId(budgetId: number) {
-    const url = this.baseUrl + '/budgets/' + budgetId + '/users';
+    const url = `${this.baseUrl}/budgets/${budgetId}/users`;
     this.httpClient.get(url)
       .subscribe((users: UserInfo[]) => {
       this.budgetUsersChange.next(users);
@@ -58,24 +60,24 @@ export class HttpService {
   }
 
   addUserToBudget(budgetId: number, userName: string) {
-    const url = this.baseUrl + '/budgets/' + budgetId;
+    const url = `${this.baseUrl}/budgets/${budgetId}`;
     const params = new HttpParams().set('userName', userName);
     return this.httpClient.get(url, {params});
   }
 
   removeUserFromBudget(budgetId: number, userName: string) {
-    const url = this.baseUrl + '/budgets/' + budgetId + '/removeUser';
+    const url = `${this.baseUrl}/budgets/${budgetId}/removeUser`;
     const params = new HttpParams().set('userName', userName);
     return this.httpClient.get(url, {params});
   }
 
   getSumsOfIncomesExpensesForYearByMonth() {
-    const url = this.baseUrl + '/charts/sumsOfIncomesExpensesForYearByMonth';
+    const url = `${this.baseUrl}/charts/sumsOfIncomesExpensesForYearByMonth`;
     return this.httpClient.get(url);
   }
 
   getSpentMonthToMonthByCategory(categoryId: number) {
-    const url = this.baseUrl + '/charts/spentMonthToMonthByCategory';
+    const url = `${this.baseUrl}/charts/spentMonthToMonthByCategory`;
     const params = new HttpParams().set('categoryId', categoryId.toString());
     this.httpClient.get(url, {params}).subscribe((res: YearMonthSum) => {
       this.spentMonthToMonthByCategoryChange.next(res);
@@ -83,66 +85,73 @@ export class HttpService {
   }
 
   createTransaction(transaction: Transaction) {
-    const url = this.baseUrl + '/transactions';
+    const url = `${this.baseUrl}/transactions`;
     return this.httpClient.post(url, transaction);
   }
 
   getTransaction(transactionId: number) {
-    const url = this.baseUrl + '/transactions/' + transactionId;
+    const url = `${this.baseUrl}/transactions/${transactionId}`;
     return this.httpClient.get(url);
   }
 
   editTransaction(transaction: Transaction) {
-    const url = this.baseUrl + '/transactions';
+    const url = `${this.baseUrl}/transactions`;
     return this.httpClient.put(url, transaction);
   }
 
   deleteTransaction(transactionId: number) {
-    const url = this.baseUrl + '/transactions';
+    const url = `${this.baseUrl}/transactions`;
     const params = new HttpParams().set('transactionId', transactionId.toString());
     return this.httpClient.delete(url, {params});
   }
 
   deleteTransfer(transferId: number) {
-    const url = this.baseUrl + '/transfers';
+    const url = `${this.baseUrl}/transfers`;
     const params = new HttpParams().set('transferId', transferId.toString());
     return this.httpClient.delete(url, {params});
   }
 
   createCategory(category: Category) {
-    const url = this.baseUrl + '/categories';
+    const url = `${this.baseUrl}/categories`;
     return this.httpClient.post(url, category);
   }
 
+  getSubCategoriesGroupedByCategory() {
+    const url = `${this.baseUrl}/categories/getGroups`;
+    this.httpClient.get(url).subscribe((response: ListSubCategoryByCategory[]) => {
+      this.listSubcategoriesByCategoryChange.next(response);
+    });
+  }
+
   createSubcategory(categoryId: number, subcategory: Subcategory) {
-    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
+    const url = `${this.baseUrl}/categories/${categoryId}/subcategories`;
     return this.httpClient.post(url, subcategory);
   }
 
   createAccount(account: Account) {
-    const url = this.baseUrl + '/accounts';
+    const url = `${this.baseUrl}/accounts`;
     return this.httpClient.post(url, account);
   }
 
   editAccount(account: Account) {
-    const url = this.baseUrl + '/accounts';
+    const url = `${this.baseUrl}/accounts`;
     return this.httpClient.put(url, account);
   }
 
   deleteAccount(accountId: number) {
-    const url = this.baseUrl + '/accounts/' + accountId;
+    const url = `${this.baseUrl}/accounts/${accountId}`;
     return this.httpClient.delete(url);
   }
 
   getAllAccounts() {
-    const url = this.baseUrl + '/accounts';
+    const url = `${this.baseUrl}/accounts`;
     this.httpClient.get(url).subscribe((accounts: Account[]) => {
       this.accountsChange.next(accounts);
     });
   }
 
   getAllCategories() {
-    const url = this.baseUrl + '/categories';
+    const url = `${this.baseUrl}/categories`;
     this.httpClient.get(url)
       .subscribe((categories: Category[]) => {
         this.categoryChange.next(categories);
@@ -150,7 +159,7 @@ export class HttpService {
   }
 
   getAllSubcategories(categoryId: number) {
-    const url = this.baseUrl + '/categories/' + categoryId + '/subcategories';
+    const url = `${this.baseUrl}/categories/${categoryId}/subcategories`;
     this.httpClient.get(url)
       .subscribe((subcategories: Subcategory[]) => {
         this.subcategoryChange.next(subcategories);
@@ -158,39 +167,39 @@ export class HttpService {
   }
 
   getSummaryByCategories(date: Date, type: string) {
-    const url = this.baseUrl + '/summaries/categories';
+    const url = `${this.baseUrl}/summaries/categories`;
     const params = new HttpParams().set('date', date.toString()).set('type', type);
     return this.httpClient.get(url, { params });
   }
 
   getSummaryByAccounts() {
-    const url = this.baseUrl + '/summaries/accounts';
+    const url = `${this.baseUrl}/summaries/accounts`;
     return this.httpClient.get(url);
   }
 
   getAllTransactions(date: Date) {
-    const url = this.baseUrl + '/transactions';
+    const url = `${this.baseUrl}/transactions`;
     const params = new HttpParams().set('date', date.toString());
     return this.httpClient.get(url, { params });
   }
 
   getBrief() {
-    const url = this.baseUrl + '/summaries/brief';
+    const url = `${this.baseUrl}/summaries/brief`;
     return this.httpClient.get(url);
   }
 
   createTransfer(transfer: Transfer) {
-    const url = this.baseUrl + '/transfers';
+    const url = `${this.baseUrl}/transfers`;
     return this.httpClient.post(url, transfer);
   }
 
   editTransfer(transfer: Transfer) {
-    const url = this.baseUrl + '/transfers';
+    const url = `${this.baseUrl}/transfers`;
     return this.httpClient.put(url, transfer);
   }
 
   getTransfer(transferId: number) {
-    const url = this.baseUrl + '/transfers/' + transferId;
+    const url = `${this.baseUrl}/transfers/${transferId}`;
     return this.httpClient.get(url);
   }
 }

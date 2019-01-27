@@ -9,6 +9,7 @@ import {OperationsComponent} from './main/dashboard/operations/operations.compon
 import {ChartsComponent} from './main/dashboard/charts/charts.component';
 import {BudgetsComponent} from './main/dashboard/budgets/budgets.component';
 import {AccountsComponent} from './main/dashboard/accounts/accounts.component';
+import {CategoriesComponent} from './main/dashboard/categories/categories.component';
 
 const routes: Routes = [
   {path: 'welcome-page', component: WelcomePageComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
         {path: 'operations', component: OperationsComponent},
         {path: 'charts', component: ChartsComponent},
         {path: 'budgets', component: BudgetsComponent},
-        {path: 'accounts', component: AccountsComponent}
+        {path: 'accounts', component: AccountsComponent},
+        {path: 'categories', component: CategoriesComponent}
       ]},
     ]},
   {path: '**', redirectTo: '/welcome-page'}

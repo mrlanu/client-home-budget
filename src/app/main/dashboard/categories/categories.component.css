@@ -1,0 +1,22 @@
+mat-expansion-panel{
+  width: 95%;
+  margin: 5px auto auto;
+}
+
+.container{
+  max-width: 480px;
+  height: 100%;
+  margin: auto;
+  background-color: #F6F6FF;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+  height: 680px;
+  overflow-y: auto;
+}
+
+.button-container {
+  padding: 10px;
+}

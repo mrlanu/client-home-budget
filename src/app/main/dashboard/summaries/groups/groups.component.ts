@@ -30,7 +30,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
           });
         });
       }));
-    // this.summaryService.getSummaryByCategories(new Date(), this.typeOfTransactions);
   }
 
   onMonthChange(date: Date) {
