@@ -5,8 +5,6 @@ import {HttpService} from '../../../http.service';
 import {UiService} from '../../../shared/ui.service';
 import {Subcategory} from '../../../models/subcategory.model';
 import {Subscription} from 'rxjs';
-import {AccountDialogComponent} from '../operations/account-dialog/account-dialog.component';
-import {Account} from '../../../models/account.model';
 import {CategoryDialogComponent} from '../operations/category-dialog/category-dialog.component';
 import {Category} from '../../../models/category.model';
 
@@ -23,7 +21,7 @@ export interface ListSubCategoryByCategory {
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
 
-  listSubCategoryByCategory: ListSubCategoryByCategory[] = [];
+  listCategories: Category[] = [];
   componentSubs: Subscription[] = [];
 
   constructor(private summaryService: SummaryService,
@@ -32,11 +30,11 @@ export class CategoriesComponent implements OnInit, OnDestroy {
               private uiService: UiService) { }
 
   ngOnInit() {
-    this.componentSubs.push(this.httpService.listSubcategoriesByCategoryChange
-      .subscribe((response: ListSubCategoryByCategory[]) => {
-      this.listSubCategoryByCategory = response;
+    this.componentSubs.push(this.httpService.categoryChange
+      .subscribe((response: Category[]) => {
+      this.listCategories = response;
     }));
-    this.httpService.getSubCategoriesGroupedByCategory();
+    this.httpService.getAllCategories();
   }
 
   onNewCategory() {
@@ -52,7 +50,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         if (category) {
           this.componentSubs.push(this.httpService.createCategory(category)
             .subscribe((newCategory: Category) => {
-              this.httpService.getSubCategoriesGroupedByCategory();
+              this.httpService.getAllCategories();
             }));
         }
       });

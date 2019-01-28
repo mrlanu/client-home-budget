@@ -51,10 +51,12 @@ export class CategoryDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    const type = this.types.find(t => {
-      return t.value === this.categoryForm.value.type;
-    }).name;
-    this.categoryForm.patchValue({type: type});
+    if (this.passedData.kind === 'category') {
+      const type = this.types.find(t => {
+        return t.value === this.categoryForm.value.type;
+      }).name;
+      this.categoryForm.patchValue({type: type});
+    }
     this.dialogRef.close(this.categoryForm.value);
   }
 
