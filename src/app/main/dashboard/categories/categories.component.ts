@@ -5,6 +5,10 @@ import {HttpService} from '../../../http.service';
 import {UiService} from '../../../shared/ui.service';
 import {Subcategory} from '../../../models/subcategory.model';
 import {Subscription} from 'rxjs';
+import {AccountDialogComponent} from '../operations/account-dialog/account-dialog.component';
+import {Account} from '../../../models/account.model';
+import {CategoryDialogComponent} from '../operations/category-dialog/category-dialog.component';
+import {Category} from '../../../models/category.model';
 
 export interface ListSubCategoryByCategory {
   id: number;
@@ -33,6 +37,25 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       this.listSubCategoryByCategory = response;
     }));
     this.httpService.getSubCategoriesGroupedByCategory();
+  }
+
+  onNewCategory() {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: {
+        'kind': 'category',
+        'openedFrom': 'categories'
+      }
+    });
+    dialogRef.afterClosed()
+      .subscribe(category => {
+        if (category) {
+          this.componentSubs.push(this.httpService.createCategory(category)
+            .subscribe((newCategory: Category) => {
+              this.httpService.getSubCategoriesGroupedByCategory();
+            }));
+        }
+      });
   }
 
   ngOnDestroy(): void {

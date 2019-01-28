@@ -1,13 +1,20 @@
 <div>
-  <form [formGroup]="categoryForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
     <mat-form-field>
       <input type="text" [placeholder]="placeholder" formControlName="name" matInput required>
+    </mat-form-field>
+    <mat-form-field *ngIf="!isHidden">
+      <mat-select placeholder="Type" formControlName="type" [disabled]="isDisabled">
+        <mat-option *ngFor="let type of types" [value]="type.value">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <div fxLayout="row" fxLayoutGap="20px">
       <button mat-mini-fab color="primary" (click)="onCancel()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <button type="submit" [mat-dialog-close]="categoryForm.value"
+      <button type="submit"
               mat-mini-fab color="primary"
               [disabled]="categoryForm.invalid || categoryForm.untouched">
           <mat-icon>save_alt</mat-icon>

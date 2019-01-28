@@ -13,9 +13,10 @@
           <mat-divider></mat-divider>
           <mat-nav-list>
             <a mat-list-item *ngFor="let subcategory of category.subCategoryList"
+               matTooltip="EDIT SUBCATEGORY"
                (click)="onEditAccount(acc.id)">
               <div fxFlex fxLayout fxLayoutGap="10px">
-                <button mat-icon-button matTooltip="DELETE"
+                <button mat-icon-button matTooltip="DELETE SUBCATEGORY"
                         (click)="onDeleteAccount(acc.id)"
                         color="warn">
                   <mat-icon>highlight_off</mat-icon>
@@ -24,11 +25,26 @@
               </div>
             </a>
           </mat-nav-list>
+          <mat-divider></mat-divider>
+          <div fxLayout="row" fxLayoutAlign="end" style="padding-top: 8px">
+            <button mat-icon-button color="primary" matTooltip="ADD SUBCATEGORY"
+                    (click)="onAddUser(budget.id)">
+              <mat-icon>add_circle_outline</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="EDIT CATEGORY"
+                    (click)="onEditBudget(budget.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="DELETE CATEGORY"
+                    (click)="onDeleteBudget(budget.id)" color="warn">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
       <div class="button-container" fxLayout="row" fxLayoutAlign="end">
-        <button mat-icon-button color="primary" matTooltip="NEW ACCOUNT" (click)="onNewAccount()">
-          <mat-icon>account_balance</mat-icon>
+        <button mat-icon-button color="primary" matTooltip="NEW CATEGORY" (click)="onNewCategory()">
+          <mat-icon>category</mat-icon>
         </button>
       </div>
     </div>

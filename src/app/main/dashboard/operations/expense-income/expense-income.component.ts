@@ -89,7 +89,8 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
       width: '400px',
       data: {
         'kind': 'category',
-        'type': this.type
+        'type': this.type,
+        'openedFrom': 'expenseIncome'
       }
     });
     dialogRef.afterClosed()
