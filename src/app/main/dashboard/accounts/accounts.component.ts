@@ -33,7 +33,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
         this.groupsAccount.forEach(group => {
           this.accounts.push(...group.accountList);
         });
-        console.log(this.accounts);
       }));
     this.summaryService.getSummaryByAccount();
   }

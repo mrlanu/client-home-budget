@@ -64,6 +64,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
       category: new FormControl(),
       subCategory: new FormControl()
     });
+    this.expenseForm.controls['subCategory'].disable();
   }
 
   onAddAccount() {
@@ -130,6 +131,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
     if (categoryId) {
       this.selectedCategoryId = categoryId;
       this.httpService.getAllSubcategories(categoryId);
+      this.expenseForm.controls['subCategory'].enable();
     }
   }
 

@@ -27,26 +27,25 @@ export class CategoryDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public passedData: any) { }
 
   ngOnInit() {
-    let typeCategory: number;
-    if (this.passedData.openedFrom === 'expenseIncome') {
-      this.isDisabled = true;
-      typeCategory = this.types.find((t) => t.name === this.passedData.type).value;
-    }
     if (this.passedData.kind === 'category') {
       this.isHidden = false;
       this.placeholder = 'New Category';
       this.categoryForm = new FormGroup({
         'name': new FormControl('', Validators.required),
-        'type': new FormControl(typeCategory)
+        'type': new FormControl()
       });
-    }
-    if (this.passedData.kind === 'subcategory') {
+    } else if (this.passedData.kind === 'subcategory') {
       this.isHidden = true;
       this.placeholder = 'New Subcategory';
       this.categoryForm = new FormGroup({
         'name': new FormControl('', Validators.required),
         'type': new FormControl()
       });
+    }
+    // checking from where the Dialog was opened
+    if (this.passedData.openedFrom === 'expenseIncome') {
+      this.categoryForm.patchValue({type: this.types.find((t) => t.name === this.passedData.type).value});
+      this.categoryForm.controls['type'].disable();
     }
   }
 
