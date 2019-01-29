@@ -74,6 +74,26 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       });
   }
 
+  onEditCategory(categoryId: number) {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: {
+        'kind': 'category',
+        'openedFrom': 'categories',
+        'categoryForEdit': this.listCategories.find(c => c.id === categoryId)
+      }
+    });
+    dialogRef.afterClosed()
+      .subscribe(category => {
+        if (category) {
+          this.componentSubs.push(this.httpService.editCategory(category)
+            .subscribe((editedCategory: Category) => {
+              this.httpService.getAllCategories();
+            }));
+        }
+      });
+  }
+
   ngOnDestroy(): void {
     this.componentSubs.forEach(sub => {
       sub.unsubscribe();

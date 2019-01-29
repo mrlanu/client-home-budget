@@ -31,6 +31,7 @@ export class CategoryDialogComponent implements OnInit {
       this.isHidden = false;
       this.placeholder = 'New Category';
       this.categoryForm = new FormGroup({
+        'id': new FormControl(),
         'name': new FormControl('', Validators.required),
         'type': new FormControl('', Validators.required)
       });
@@ -38,6 +39,7 @@ export class CategoryDialogComponent implements OnInit {
       this.isHidden = true;
       this.placeholder = 'New Subcategory';
       this.categoryForm = new FormGroup({
+        'id': new FormControl(),
         'name': new FormControl('', Validators.required),
         'type': new FormControl()
       });
@@ -46,6 +48,13 @@ export class CategoryDialogComponent implements OnInit {
     if (this.passedData.openedFrom === 'expenseIncome') {
       this.categoryForm.patchValue({type: this.types.find((t) => t.name === this.passedData.type).value});
       this.categoryForm.controls['type'].disable();
+    }
+    if (this.passedData.categoryForEdit) {
+      this.categoryForm.patchValue({
+        id: this.passedData.categoryForEdit.id,
+        name: this.passedData.categoryForEdit.name,
+        type: this.types.find(t => t.name === this.passedData.categoryForEdit.type).value
+      });
     }
   }
 

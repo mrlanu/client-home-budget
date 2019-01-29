@@ -116,11 +116,9 @@ export class HttpService {
     return this.httpClient.post(url, category);
   }
 
-  getSubCategoriesGroupedByCategory() {
-    const url = `${this.baseUrl}/categories/getGroups`;
-    this.httpClient.get(url).subscribe((response: ListSubCategoryByCategory[]) => {
-      this.listSubcategoriesByCategoryChange.next(response);
-    });
+  editCategory(category: Category) {
+    const url = `${this.baseUrl}/categories`;
+    return this.httpClient.put(url, category);
   }
 
   createSubcategory(categoryId: number, subcategory: Subcategory) {
