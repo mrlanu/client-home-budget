@@ -4,7 +4,7 @@
       <input type="text" [placeholder]="placeholder" formControlName="name" matInput required>
     </mat-form-field>
     <mat-form-field *ngIf="!isHidden">
-      <mat-select placeholder="Type" formControlName="type">
+      <mat-select placeholder="Type" formControlName="type" required>
         <mat-option *ngFor="let type of types" [value]="type.value">
           {{type.name}}
         </mat-option>

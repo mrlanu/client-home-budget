@@ -56,6 +56,24 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       });
   }
 
+  onNewSubcategory(categoryId: number) {
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: {
+        'kind': 'subcategory'
+      }
+    });
+    dialogRef.afterClosed()
+      .subscribe(subcategory => {
+        if (subcategory) {
+          this.componentSubs.push(this.httpService.createSubcategory(categoryId, subcategory)
+            .subscribe((newSubcategory: Subcategory) => {
+              this.httpService.getAllCategories();
+            }));
+        }
+      });
+  }
+
   ngOnDestroy(): void {
     this.componentSubs.forEach(sub => {
       sub.unsubscribe();

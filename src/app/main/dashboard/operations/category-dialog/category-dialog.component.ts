@@ -32,7 +32,7 @@ export class CategoryDialogComponent implements OnInit {
       this.placeholder = 'New Category';
       this.categoryForm = new FormGroup({
         'name': new FormControl('', Validators.required),
-        'type': new FormControl()
+        'type': new FormControl('', Validators.required)
       });
     } else if (this.passedData.kind === 'subcategory') {
       this.isHidden = true;
