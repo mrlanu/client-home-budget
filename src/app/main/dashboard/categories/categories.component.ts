@@ -7,6 +7,7 @@ import {Subcategory} from '../../../models/subcategory.model';
 import {Subscription} from 'rxjs';
 import {CategoryDialogComponent} from '../operations/category-dialog/category-dialog.component';
 import {Category} from '../../../models/category.model';
+import {DeleteConfirmComponent} from '../../../shared/delete-confirm.component';
 
 export interface ListSubCategoryByCategory {
   id: number;
@@ -90,6 +91,23 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             .subscribe((editedCategory: Category) => {
               this.httpService.getAllCategories();
             }));
+        }
+      });
+  }
+
+  onDeleteCategory(categoryId: number) {
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px'
+    });
+    dialogRef.afterClosed()
+      .subscribe(decision => {
+        if (decision) {
+          this.componentSubs.push(this.httpService.deleteCategory(categoryId).subscribe(response => {
+            this.httpService.getAllCategories();
+            this.uiService.openSnackBar(`The Category has been deleted`, null, 5000);
+          }, error1 => {
+            this.uiService.openSnackBar(`Unavailable to delete this Category. The Category has transactions.`, null, 5000);
+          }));
         }
       });
   }
