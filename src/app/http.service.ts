@@ -131,6 +131,11 @@ export class HttpService {
     return this.httpClient.post(url, subcategory);
   }
 
+  editSubCategory(subcategory: Subcategory) {
+    const url = `${this.baseUrl}/subcategories`;
+    return this.httpClient.put(url, subcategory);
+  }
+
   deleteSubCategory(subCategoryId: number) {
     const url = `${this.baseUrl}/subcategories/${subCategoryId}`;
     return this.httpClient.delete(url);

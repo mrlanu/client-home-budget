@@ -40,8 +40,7 @@ export class CategoryDialogComponent implements OnInit {
       this.placeholder = 'New Subcategory';
       this.categoryForm = new FormGroup({
         'id': new FormControl(),
-        'name': new FormControl('', Validators.required),
-        'type': new FormControl()
+        'name': new FormControl('', Validators.required)
       });
     }
     // checking from where the Dialog was opened
@@ -54,6 +53,12 @@ export class CategoryDialogComponent implements OnInit {
         id: this.passedData.categoryForEdit.id,
         name: this.passedData.categoryForEdit.name,
         type: this.types.find(t => t.name === this.passedData.categoryForEdit.type).value
+      });
+    }
+    if (this.passedData.subCategoryForEdit) {
+      this.categoryForm.patchValue({
+        id: this.passedData.subCategoryForEdit.id,
+        name: this.passedData.subCategoryForEdit.name,
       });
     }
   }

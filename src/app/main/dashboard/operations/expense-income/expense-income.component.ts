@@ -10,6 +10,7 @@ import {CategoryDialogComponent} from '../category-dialog/category-dialog.compon
 import {AccountDialogComponent} from '../account-dialog/account-dialog.component';
 import {UiService} from '../../../../shared/ui.service';
 import {SummaryService} from '../../summaries/summary.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-expense-income',
@@ -29,7 +30,8 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
   constructor(private httpService: HttpService,
               private summaryService: SummaryService,
               private dialog: MatDialog,
-              private uiService: UiService) { }
+              private uiService: UiService,
+              private router: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -58,7 +60,8 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
       description: new FormControl(),
       amount: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/)
+        Validators.pattern(/^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/)
+        /*Validators.pattern(/^[1-9]+[0-9]*$/)*/
       ]),
       account: new FormControl(),
       category: new FormControl(),
@@ -158,6 +161,7 @@ export class ExpenseIncomeComponent implements OnInit, OnDestroy {
           this.uiService.openSnackBar('Income has been created', null, 5000);
         }
         this.summaryService.getBrief();
+        this.router.navigate(['main', 'dashboard', 'summaries']);
       }));
   }
 

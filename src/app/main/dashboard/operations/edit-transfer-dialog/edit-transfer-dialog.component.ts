@@ -37,7 +37,7 @@ export class EditTransferDialogComponent implements OnInit, OnDestroy {
       toAccount: new FormControl(this.passedData.toAccount.id, [Validators.required]),
       amount: new FormControl(this.passedData.amount, [
         Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/)
+        Validators.pattern(/^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/)
       ]),
     });
   }

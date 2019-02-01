@@ -24,6 +24,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
 
   isDeleteButtonClicked = false;
   listCategories: Category[] = [];
+  listSubCategories: Subcategory[] = [];
   componentSubs: Subscription[] = [];
 
   constructor(private summaryService: SummaryService,
@@ -35,6 +36,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.componentSubs.push(this.httpService.categoryChange
       .subscribe((response: Category[]) => {
       this.listCategories = response;
+      response.forEach(c => {
+        this.listSubCategories = [...this.listSubCategories, ...c.subCategoryList];
+      });
     }));
     this.httpService.getAllCategories();
   }
@@ -118,7 +122,23 @@ export class CategoriesComponent implements OnInit, OnDestroy {
       this.isDeleteButtonClicked = false;
       return;
     }
-    console.log('edit');
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '400px',
+      data: {
+        'kind': 'subcategory',
+        'openedFrom': 'categories',
+        'subCategoryForEdit': this.listSubCategories.find(c => c.id === subCategoryId)
+      }
+    });
+    dialogRef.afterClosed()
+      .subscribe(subcategory => {
+        if (subcategory) {
+          this.componentSubs.push(this.httpService.editSubCategory(subcategory)
+            .subscribe((editedSubCategory: Subcategory) => {
+              this.httpService.getAllCategories();
+            }));
+        }
+      });
   }
 
   onDeleteSubCategory(subCategoryId: number) {

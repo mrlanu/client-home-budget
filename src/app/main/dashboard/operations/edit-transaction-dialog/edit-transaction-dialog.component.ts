@@ -58,7 +58,7 @@ export class EditTransactionDialogComponent implements OnInit, OnDestroy {
         (this.passedData.amount < 0) ? this.passedData.amount * -1 : this.passedData.amount,
         [
           Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)
+          Validators.pattern(/^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/)
         ]),
       account: new FormControl(this.passedData.account.id),
       category: new FormControl(this.passedData.category.id),

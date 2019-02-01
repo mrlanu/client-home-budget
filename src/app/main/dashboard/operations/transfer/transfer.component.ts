@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Account} from '../../../../models/account.model';
 import {HttpService} from '../../../../http.service';
 import {UiService} from '../../../../shared/ui.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-transfer',
@@ -17,7 +18,8 @@ export class TransferComponent implements OnInit, OnDestroy {
   accounts: Account[] = [];
 
   constructor(private httpService: HttpService,
-              private uiService: UiService) { }
+              private uiService: UiService,
+              private router: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -35,7 +37,7 @@ export class TransferComponent implements OnInit, OnDestroy {
       toAccount: new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/)
+        Validators.pattern(/^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/)
       ]),
     });
   }
@@ -53,6 +55,7 @@ export class TransferComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.uiService.openSnackBar('Transfer has been done', null, 5000);
         this.transferForm.reset({'date': new Date()});
+        this.router.navigate(['main', 'dashboard', 'summaries']);
       }));
   }
 
