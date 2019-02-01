@@ -14,10 +14,10 @@
           <mat-nav-list>
             <a mat-list-item *ngFor="let subcategory of category.subCategoryList"
                matTooltip="EDIT SUBCATEGORY"
-               (click)="onEditAccount(acc.id)">
+               (click)="onEditSubCategory(subcategory.id)">
               <div fxFlex fxLayout fxLayoutGap="10px">
                 <button mat-icon-button matTooltip="DELETE SUBCATEGORY"
-                        (click)="onDeleteAccount(acc.id)"
+                        (click)="onDeleteSubCategory(subcategory.id)"
                         color="warn">
                   <mat-icon>highlight_off</mat-icon>
                 </button>
