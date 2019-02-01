@@ -10,7 +10,6 @@ import {YearMonthSum} from './models/year-month-sum';
 import {Transfer} from './models/transfer.model';
 import {UserInfo} from './models/user-info.model';
 import {Budget} from './models/budget.model';
-import {ListSubCategoryByCategory} from './main/dashboard/categories/categories.component';
 
 @Injectable()
 export class HttpService {
@@ -20,7 +19,6 @@ export class HttpService {
   subcategoryChange = new Subject<Subcategory[]>();
   budgetUsersChange = new Subject<UserInfo[]>();
   budgetsChange = new Subject<Budget[]>();
-  listSubcategoriesByCategoryChange = new Subject<ListSubCategoryByCategory[]>();
   budgets: Budget[];
   spentMonthToMonthByCategoryChange = new Subject<YearMonthSum>();
 
@@ -71,27 +69,9 @@ export class HttpService {
     return this.httpClient.get(url, {params});
   }
 
-  getSumsOfIncomesExpensesForYearByMonth() {
-    const url = `${this.baseUrl}/charts/sumsOfIncomesExpensesForYearByMonth`;
-    return this.httpClient.get(url);
-  }
-
-  getSpentMonthToMonthByCategory(categoryId: number) {
-    const url = `${this.baseUrl}/charts/spentMonthToMonthByCategory`;
-    const params = new HttpParams().set('categoryId', categoryId.toString());
-    this.httpClient.get(url, {params}).subscribe((res: YearMonthSum) => {
-      this.spentMonthToMonthByCategoryChange.next(res);
-    });
-  }
-
   createTransaction(transaction: Transaction) {
     const url = `${this.baseUrl}/transactions`;
     return this.httpClient.post(url, transaction);
-  }
-
-  getTransaction(transactionId: number) {
-    const url = `${this.baseUrl}/transactions/${transactionId}`;
-    return this.httpClient.get(url);
   }
 
   editTransaction(transaction: Transaction) {
@@ -105,10 +85,36 @@ export class HttpService {
     return this.httpClient.delete(url, {params});
   }
 
+  getTransaction(transactionId: number) {
+    const url = `${this.baseUrl}/transactions/${transactionId}`;
+    return this.httpClient.get(url);
+  }
+
+  getAllTransactions(date: Date) {
+    const url = `${this.baseUrl}/transactions`;
+    const params = new HttpParams().set('date', date.toString());
+    return this.httpClient.get(url, { params });
+  }
+
+  createTransfer(transfer: Transfer) {
+    const url = `${this.baseUrl}/transfers`;
+    return this.httpClient.post(url, transfer);
+  }
+
+  editTransfer(transfer: Transfer) {
+    const url = `${this.baseUrl}/transfers`;
+    return this.httpClient.put(url, transfer);
+  }
+
   deleteTransfer(transferId: number) {
     const url = `${this.baseUrl}/transfers`;
     const params = new HttpParams().set('transferId', transferId.toString());
     return this.httpClient.delete(url, {params});
+  }
+
+  getTransfer(transferId: number) {
+    const url = `${this.baseUrl}/transfers/${transferId}`;
+    return this.httpClient.get(url);
   }
 
   createCategory(category: Category) {
@@ -126,6 +132,14 @@ export class HttpService {
     return this.httpClient.delete(url);
   }
 
+  getAllCategories() {
+    const url = `${this.baseUrl}/categories`;
+    this.httpClient.get(url)
+      .subscribe((categories: Category[]) => {
+        this.categoryChange.next(categories);
+      });
+  }
+
   createSubcategory(categoryId: number, subcategory: Subcategory) {
     const url = `${this.baseUrl}/categories/${categoryId}/subcategories`;
     return this.httpClient.post(url, subcategory);
@@ -139,6 +153,14 @@ export class HttpService {
   deleteSubCategory(subCategoryId: number) {
     const url = `${this.baseUrl}/subcategories/${subCategoryId}`;
     return this.httpClient.delete(url);
+  }
+
+  getAllSubcategories(categoryId: number) {
+    const url = `${this.baseUrl}/categories/${categoryId}/subcategories`;
+    this.httpClient.get(url)
+      .subscribe((subcategories: Subcategory[]) => {
+        this.subcategoryChange.next(subcategories);
+      });
   }
 
   createAccount(account: Account) {
@@ -163,20 +185,17 @@ export class HttpService {
     });
   }
 
-  getAllCategories() {
-    const url = `${this.baseUrl}/categories`;
-    this.httpClient.get(url)
-      .subscribe((categories: Category[]) => {
-        this.categoryChange.next(categories);
-      });
+  getSumsOfIncomesExpensesForYearByMonth() {
+    const url = `${this.baseUrl}/charts/sumsOfIncomesExpensesForYearByMonth`;
+    return this.httpClient.get(url);
   }
 
-  getAllSubcategories(categoryId: number) {
-    const url = `${this.baseUrl}/categories/${categoryId}/subcategories`;
-    this.httpClient.get(url)
-      .subscribe((subcategories: Subcategory[]) => {
-        this.subcategoryChange.next(subcategories);
-      });
+  getSpentMonthToMonthByCategory(categoryId: number) {
+    const url = `${this.baseUrl}/charts/spentMonthToMonthByCategory`;
+    const params = new HttpParams().set('categoryId', categoryId.toString());
+    this.httpClient.get(url, {params}).subscribe((res: YearMonthSum) => {
+      this.spentMonthToMonthByCategoryChange.next(res);
+    });
   }
 
   getSummaryByCategories(date: Date, type: string) {
@@ -190,29 +209,8 @@ export class HttpService {
     return this.httpClient.get(url);
   }
 
-  getAllTransactions(date: Date) {
-    const url = `${this.baseUrl}/transactions`;
-    const params = new HttpParams().set('date', date.toString());
-    return this.httpClient.get(url, { params });
-  }
-
   getBrief() {
     const url = `${this.baseUrl}/summaries/brief`;
-    return this.httpClient.get(url);
-  }
-
-  createTransfer(transfer: Transfer) {
-    const url = `${this.baseUrl}/transfers`;
-    return this.httpClient.post(url, transfer);
-  }
-
-  editTransfer(transfer: Transfer) {
-    const url = `${this.baseUrl}/transfers`;
-    return this.httpClient.put(url, transfer);
-  }
-
-  getTransfer(transferId: number) {
-    const url = `${this.baseUrl}/transfers/${transferId}`;
     return this.httpClient.get(url);
   }
 }
