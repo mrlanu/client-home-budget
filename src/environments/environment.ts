@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080',
+  // baseUrl: 'https://lanu-home-budget.herokuapp.com',
   budgetId: 0
 };
 
