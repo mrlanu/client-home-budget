@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../auth.service';
@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoading = result;
       }));
     this.loginForm = new FormGroup({
-      username: new FormControl('mrlanu',
+      username: new FormControl('',
         {validators: [Validators.required]}),
-      password: new FormControl('12345',
+      password: new FormControl('',
         {validators: [Validators.required]})
     });
   }
