@@ -17,11 +17,11 @@ export class CategoryDialogComponent implements OnInit {
   categoryForm: FormGroup;
   placeholder: string;
   isHidden = false;
-  isDisabled = false;
   types: TypeOfCategory[] = [
     {value: 0, name: 'INCOME'},
     {value: 1, name: 'EXPENSE'}
   ];
+  typeForDisabledField: number;
 
   constructor(public dialogRef: MatDialogRef<CategoryDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public passedData: any) { }
@@ -45,7 +45,8 @@ export class CategoryDialogComponent implements OnInit {
     }
     // checking from where the Dialog was opened
     if (this.passedData.openedFrom === 'expenseIncome') {
-      this.categoryForm.patchValue({type: this.types.find((t) => t.name === this.passedData.type).value});
+      this.typeForDisabledField = this.types.find((t) => t.name === this.passedData.type).value;
+      this.categoryForm.patchValue({type: this.typeForDisabledField});
       this.categoryForm.controls['type'].disable();
     }
     if (this.passedData.categoryForEdit) {
@@ -65,12 +66,13 @@ export class CategoryDialogComponent implements OnInit {
 
   onSubmit() {
     if (this.passedData.kind === 'category') {
-      const type = this.types.find(t => {
-        return t.value === this.categoryForm.value.type;
-      }).name;
-      this.categoryForm.patchValue({type: type});
+       this.dialogRef.close({
+         ...this.categoryForm.value,
+         type: this.types.find(t => t.value === this.typeForDisabledField).name
+       });
+    } else {
+      this.dialogRef.close(this.categoryForm.value);
     }
-    this.dialogRef.close(this.categoryForm.value);
   }
 
   onCancel() {
