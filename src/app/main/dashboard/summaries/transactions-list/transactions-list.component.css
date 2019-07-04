@@ -17,6 +17,7 @@ th.mat-header-cell {
 }
 
 .container{
+  min-width: 600px;
   height: 100%;
   padding-top: 10px;
   border-radius: 10px;
