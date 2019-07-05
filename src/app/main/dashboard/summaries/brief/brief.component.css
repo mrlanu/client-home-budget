@@ -1,12 +1,12 @@
 .container {
   background: #FFA726;
-  color: #004D40;
+  color: #263238;
   font-weight: bold;
   height: 100%;
   width: 600px;
   font-size: 18px;
   margin-left: 150px;
-  border: 1px solid #004F43;
+  border: 1px solid #263238;
 }
 
 .item:hover {
