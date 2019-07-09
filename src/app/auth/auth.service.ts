@@ -28,10 +28,14 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
-    this.httpClient.post(this.baseUrl + '/signup', authData).subscribe(user => {
-      this.uiService.isLoadingChanged.next(false);
-      this.uiService.openSnackBar('Register successfully, please Login', null, 5000);
-      this.uiService.isLoginChanged.next(true);
+    // first register on auth server
+    this.httpClient.post(environment.authUrl + '/signup', authData).subscribe(user => {
+      // second adding initial budgets & categories on resource server
+      this.httpClient.post(this.baseUrl + '/signup', authData).subscribe(us => {
+        this.uiService.isLoadingChanged.next(false);
+        this.uiService.openSnackBar('Register successfully, please Login', null, 5000);
+        this.uiService.isLoginChanged.next(true);
+      });
     }, err => {
       this.uiService.openSnackBar(err.error.message, null, 5000);
       this.uiService.isLoadingChanged.next(false);
@@ -74,7 +78,7 @@ export class AuthService {
       })
     };
 
-    this.httpClient.post(this.baseUrl + '/oauth/token', params.toString(), httpOptions)
+    this.httpClient.post(environment.authUrl + '/oauth/token', params.toString(), httpOptions)
       .subscribe(token => {
         AuthService.saveToken(token);
         this.authSuccessfully();
