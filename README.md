@@ -1,4 +1,4 @@
-Deployed example at https://home-budget-lanu.firebaseapp.com
+Deployed example at https://home-budget.lanu.io
 
 # ClientHomeBudget
 
